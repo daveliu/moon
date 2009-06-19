@@ -11,26 +11,9 @@
 
     <%= javascript_include_tag 'jquery' %>
   </head>
-  <body class="projects dashboard unprintable">
-		<div id="Header" class="global">
-			<h3>
-				<%= current_user.login %>
-				<span class="pipe">|</span>
-				<%= link_to "我的信息", edit_account_path %>
-				<span class="pipe">|</span>
-				<%= link_to "退出", '/logout' %>
-			</h3>
-			<h1>liageren</h1>
-			<div id="Tabs">
-				<ul id="MainTabs">
-					<%= yield(:tab) || render(:partial => 'shared/tabs') %> 
-				</ul>	
-			</div>         
+	<body class="login">
+		<div class="login">
+			<%= yield %>
 		</div>
-		<div id="Wrapper" style="position: relative;">
-			<%= render :partial => 'layouts/flashes' -%>
-	    <%= yield %>
-		</div>	
-
-  </body>
+	</body>
 </html>

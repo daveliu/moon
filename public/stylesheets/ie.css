@@ -1,0 +1,99 @@
+div#Header {
+  z-index: 400;
+}
+
+div#open_bar {
+  z-index: 500;
+}
+
+div#Header,
+div#screen_body,
+div.Full,
+div.Left,
+div.col,
+div.col div.innercol,
+body.message div.Comments,
+body.overview span.event_type span,
+div#LockBar,
+div#CategoryList div.category,
+div.color_picker div.submit,
+body.companies div.company h1,
+body.administrators div.candidates_nav_indent,
+body.candidates div.candidates_nav_indent {
+  zoom: 100%;
+}
+
+div.color_picker div.submit {
+  font-family: tahoma, sans-serif;
+}
+
+div.Right {
+  width: 29%;
+}
+
+div.button_to_add_new a {
+  display: block;
+}
+
+div.button_to_add_new div.other_ways_to_add a {
+  display: inline;
+}
+
+body.overview span.event_type span.completed {
+  background-image: none;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/events/check.png',sizingMethod='crop');
+}
+
+.commentable div.comments a.comments_link {
+  padding: 0;
+}
+
+/* Color scheme */
+
+body.appearance .Preview {
+  zoom: 1;
+}
+
+body.appearance .Preview ul a span.pointer {
+  background-image: none;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/pointer.png',sizingMethod='crop');
+}
+
+/* Legacy elements needing layout */
+
+div.showhide,
+div.popup_add_dialog,
+div#new_time_report,
+div#new_list,
+div#choose_company {
+  height: 1%;
+}
+
+span.switch div.menu {
+  top: 0;
+}
+
+span.switch div.menu div.shadow {
+  background: url(/images/project_switcher-shadow-top.gif) 0 0 no-repeat;
+  height: 1%;
+}
+
+span.switch div.menu div.bottom_shadow {
+  background: url(/images/project_switcher-shadow-bottom.gif) 0 0 no-repeat;
+  height: 1%;
+}
+
+span.switch div.menu div.projects div.inner {
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: #ccc;
+}
+
+body.companies div.page_header div.button_to_add_new a {
+  display: inline;
+}
+
+body.companies div.page_header div.button_to_add_new a, 
+body.companies div.page_header div.button_to_add_new span {
+  vertical-align: middle;
+}

@@ -1,0 +1,110 @@
+
+  a:link, a:visited {
+    color: #03c;
+  }
+
+  a:hover {
+    color: #fff;
+    background-color: #03c;
+  }
+
+  #Header {
+    background-color: #195D00;
+  }
+
+  #Header h1 {
+    color: #fff;
+  }
+
+  #P2P_selector {
+    border: 1px solid #D1EEFF;
+    color: #fff;
+  }
+
+  #Header h3, #Header h3 a:link, #Header h3 a:visited {
+    color: #D1EEFF;
+  }
+
+  #Header h3 a:hover {
+    color: #fff;
+    background-color: #054700;
+  }
+
+  #Header h3 a.current:link, #Header h3 a.current:visited {
+    color: #fff;
+  }
+
+  #Header h3 a.current:hover {
+    color: #fff;
+    background-color: #195D00;
+  }
+
+  #Header h1 a:link, #Header h1 a:visited {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  #Header h1 a:hover {
+    color: #fff;
+    background-color: #195D00;
+    text-decoration: underline;
+  }
+
+  #Header h1 span {
+    color: #D1EEFF;
+  }
+
+  #Tabs a:link, #Tabs a:visited {
+    background-color: #217A00;
+    color: #D1EEFF;
+    border: 1px solid #195D00;
+    border-bottom: 1px solid #217A00;
+  }
+
+  #Tabs ul#MainTabs a:link.current, #Tabs ul#MainTabs a:visited.current,
+  div#CategoryList a.current:link, div#CategoryList a.current:visited {
+    color: #000;
+  }
+
+  #Tabs a:hover {
+    color: #fff;
+    background-color: #054700;
+    border-bottom: 1px solid #054700;
+  }
+
+  #Tabs li#AdminTab a:link, #Tabs li#AdminTab a:visited {
+    color: #D1EEFF;
+    background-color: #195D00;
+    border-bottom: 1px solid #195D00;
+    text-decoration: underline;
+  }
+
+  #Tabs li#AdminTab a:hover {
+    color: #fff;
+  }
+
+  #Tabs li#AdminTab a.current {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  span.switch div.menu a.hover,
+  span.switch div.menu a.hover span {
+    background: #ecefeb !important;
+  }
+
+  span.switch div.menu a:active,
+  span.switch div.menu a:active span {
+    background: #ffa !important;
+  }
+
+
+  table.forum_view td.message a:hover {
+    color: #03c;
+  }
+
+  table.forum_view td.message a span.title:hover {
+    color: #fff;
+    background: #03c;
+  }
+
