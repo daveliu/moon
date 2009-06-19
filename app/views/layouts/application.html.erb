@@ -11,7 +11,7 @@
 
     <%= javascript_include_tag 'jquery' %>
   </head>
-  <body class="projects dashboard unprintable">
+  <body class="<%= body_class %>">
 		<div id="Header" class="global">
 			<h3>
 				<%= current_user.login %>
@@ -28,8 +28,30 @@
 			</div>         
 		</div>
 		<div id="Wrapper" style="position: relative;">
-			<%= render :partial => 'layouts/flashes' -%>
-	    <%= yield %>
+			<div id="swap_to">  </div>
+			<div id="swap_from">
+				<div id="screen_body" class="container">
+					<table class="layout">
+						<tr>
+							<td class="left">
+								<div class="Left">  
+									<%= render :partial => 'layouts/flashes' -%>
+									<div class="col">
+									  <%= yield %>
+									</div>
+								</div>
+							</td>
+							<td class="right">
+								<div class="Right">
+									<div class="col">
+										<%= yield :side %>
+									</div>
+								</div>
+							</td>
+						</tr>  
+					</table>  
+				</div> 
+			</div>
 		</div>	
 
   </body>

@@ -1,0 +1,29 @@
+<div class="page_header">
+	<div class="page_header_links">
+		<%= link_to "new", new_message_path, :class => "admin"  %> |
+		<%= link_to "edit", edit_message_path(@message), :class => "admin"  %> | 
+		<%= link_to "delete", message_path(@message), :class => "admin", :method => "delete", :confirm => "sure?"  %>
+	</div>
+	<p class="link_back">
+		<%= link_to "« All messages", collection_url %>
+	</p> 
+</div>
+<div class="innercol">   
+	<div class="message_header">
+		<h2><%= @message.title %></h2>
+		<p>
+		<span class="label">From:</span>
+		<%= @message.creator.login %>
+		</p>
+		<p>
+		<span class="label">Date:</span>
+		<%= @message.created_at %>
+		</p>
+	</div>
+	<div id="OriginalPost" class="message">
+		<div class="formatted_text_body">
+			<%= @message.body %>
+		</div>
+	</div>             
+	<%= render :partial => 'comments/comments', :locals => {:commentable => @message} %>    
+</div>	

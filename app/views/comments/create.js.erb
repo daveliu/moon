@@ -1,0 +1,6 @@
+var html = ''   
+html += "<%= escape_javascript(render_to_string(:partial => "comments/comment", :locals => {:comment => @comment})) %>"  
+
+	$(html).appendTo($("#comment_list"))
+//  $(html).hide().appendTo($("#comment_list")).show("slow");
+

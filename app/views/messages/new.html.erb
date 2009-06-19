@@ -1,0 +1,33 @@
+<div class="page_header">
+	<h1>Post a new message</h1>
+</div>
+<div class="innercol">
+	<% form_for @message, :html => {:id => 'message_form'} do |f| -%>
+		<div id="post_form_container">
+			<div class="main_attributes">
+				<div class="inner">
+					<div class="input">
+						<h2 class="text_input">Title</h2>
+	  				<%= f.text_field :title, :class => "message_title", :size => "50", :style => "width:920px;" %>
+					</div>
+					<div class="input">
+						<h2 class="text_input">
+							Category
+							<%= f.select :category_id, Category.all.collect {|c| [c.name, c.id] } %>
+						</h2>
+					</div>
+					<%= f.text_area :body, :style => "height: 150px; width: 920px;", :cols => "40"  %>
+				</div>
+			</div>	
+		</div>	
+	<% end -%>
+</div>
+<div class="page_footer">                                                              
+	<div class="submit">
+		<div id="buttons">
+			<input type="button" value="Post this message" onclick="$('#message_form').submit();"/>
+			or
+			<a class="admin" onclick="return confirm('Are you sure? Any changes to this message will be lost.');" href="">Cancel</a>
+		</div>
+	</div>
+</div>	

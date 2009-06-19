@@ -4,6 +4,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.connect 'logout', :controller => "user_sessions", :action => "destroy"
   
+  map.resources :messages
+  map.resources :todo_lists       
+  map.resources :comments, :path_prefix => '/:commentable_type/:commentable_id', :shallow => true
+  
   map.root :controller => "user_sessions", :action => "new"
   
   # The priority is based upon order of creation: first created -> highest priority.

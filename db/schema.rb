@@ -9,7 +9,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090619060548) do
+ActiveRecord::Schema.define(:version => 20090619091846) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.text     "body"
+    t.integer  "creator_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "body"
+    t.string   "title"
+    t.integer  "category_id"
+    t.integer  "milestone_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comments_count", :default => 0
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -20,6 +46,27 @@ ActiveRecord::Schema.define(:version => 20090619060548) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "todo_lists", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "milestone_id"
+    t.integer  "creator_id"
+    t.integer  "todos_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "todos", :force => true do |t|
+    t.text     "body"
+    t.integer  "todo_list_id"
+    t.integer  "creator_id"
+    t.integer  "receiver_id"
+    t.integer  "comments_count"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.datetime "created_at"

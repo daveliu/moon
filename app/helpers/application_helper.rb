@@ -1,6 +1,7 @@
 module ApplicationHelper
   def body_class
-    "#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}"
+   # "#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}"
+     @body_class || ""
   end
   
   def tab_fu(name, path='', right=false)

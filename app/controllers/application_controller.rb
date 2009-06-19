@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   filter_parameter_logging :password, :password_confirmation
   
+  before_filter :set_body_class
+  
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
@@ -42,6 +44,14 @@ class ApplicationController < ActionController::Base
     def redirect_back_or_default(default)
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
+    end    
+    
+    def to_model(type)  #like post
+      ActiveSupport::Inflector.constantize(ActiveSupport::Inflector.camelize(type)) 
+    end
+
+    def to_controller(type)
+      ActiveSupport::Inflector.underscore(type).pluralize 
     end
   
 end
