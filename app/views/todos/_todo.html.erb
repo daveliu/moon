@@ -1,0 +1,24 @@
+<div id="item_<%= todo.id %>" class="widget list_widget item_wrapper commentable" style="position: relative;">
+	<div  class="item widget_content hover_container show">
+		<div id="item_<%= todo.id %>_nubbin" class="nubbin hover_target">
+			<div class="wrapper">
+				<ul>
+					<li class="edit">
+						<a onclick="$(this).parents('.nubbin').addClass('busy'); 
+						$.ajax({
+					    type:'GET', url: '<%= edit_todo_path(todo) %>', dataType: 'script'});return false;" href="#">Edit</a>
+					</li>
+				</ul> 
+			</div>
+		</div>
+		<div  class="controls hover_target">
+			<input  type="checkbox" onclick="$(this).parents('div.item_wrapper').addClass('busy');$.ajax({
+		    type:'PUT', url: '<%= complete_todo_path(todo) %>', dataType: 'script'});return false;"/>
+		</div>
+		<div id="item_<%= todo.id %>_content" class="content">                               
+			<span  class="content hover_target">
+				<span><%= todo.body %></span>
+			</span>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<% form_for @todo,  :html => {
+	:onsubmit => "$.ajax({
+    type:'POST', url: $(this).attr('action'), dataType: 'script', data: $(this).serialize()});return false;"
+} do |todo_form| -%>
+	<textarea id="item_<%= todo.id %>_content_field" rows="5" name="todo[body]" cols="40"><%= @todo.body %></textarea>
+	<p>
+		Who's responsible?<br/>
+		<%= todo_form.select :receiver_id, User.all.collect {|u| [u.login, u.id]} %>
+	</p>   
+	<p class="submit">
+		<input type="submit" value="Save this item"/>
+		<span>or</span>
+		<a class="admin" onclick="$('#item_<%= @todo.id %>').addClass('busy');
+			$.ajax({
+	    type:'GET', url: '<%= todo_path(todo) %>', dataType: 'script'});return false;" href="#">Cancel</a>
+	</p>
+<% end -%>

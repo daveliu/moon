@@ -1,0 +1,14 @@
+<div id="item_<%= todo.id %>" class="widget list_widget item_wrapper commentable" style="position: relative;">
+	<div  class="item widget_content hover_container show">
+		<div  class="controls">
+			<input id="item_37472856_checkbox" type="checkbox" onclick="$(this).parents('div.item_wrapper').addClass('busy');$.ajax({
+		    type:'PUT', url: '<%= reopen_todo_path(todo) %>', dataType: 'script'});return false;"/>
+		</div>
+		<div class="content">                               
+			<span id="list_6347262_item_37472856_text" class="content hover_target">
+				<strong class="date"><%= todo.updated_at %></strong>
+				<span><%= todo.body %></span>
+			</span>
+		</div>
+	</div>
+</div>

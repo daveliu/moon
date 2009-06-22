@@ -1,0 +1,6 @@
+$("#item_<%= @todo.id %>").remove();
+
+function results(html){ 
+	  $(html).prependTo("#list_<%= @todo_list.id %>_completed_items")
+}
+results("<%=escape_javascript render_to_string(:partial => 'todos/completed_todo', :locals => {:todo => @todo}) %>")
