@@ -3,12 +3,17 @@
 
 class ApplicationController < ActionController::Base
   helper :all
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, 
+                :render_to_string, :controller_name, :action_name  
   filter_parameter_logging :password, :password_confirmation
   
   before_filter :set_body_class
   
-  private
+  private                      
+    def set_body_class
+      @body_class = ""
+    end
+  
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
