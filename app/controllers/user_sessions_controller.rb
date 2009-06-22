@@ -21,5 +21,10 @@ class UserSessionsController < ApplicationController
     current_user_session.destroy
     flash[:notice] = "Logout successful!"
     redirect_back_or_default new_user_session_url
+  end        
+  
+  private
+  def set_body_class
+    @body_class = "login"
   end
 end

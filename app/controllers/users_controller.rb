@@ -33,4 +33,9 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
+  
+  private
+  def set_body_class
+    @body_class = "login"
+  end
 end

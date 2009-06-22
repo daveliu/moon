@@ -14,7 +14,7 @@
   <body class="<%= body_class %>">
 		<div id="Header" class="global">
 			<h3>
-				<%= current_user.login %>
+				<%= current_user.login if current_user %>
 				<span class="pipe">|</span>
 				<%= link_to "我的信息", edit_account_path %>
 				<span class="pipe">|</span>
