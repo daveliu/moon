@@ -1,0 +1,50 @@
+<% content_for :head do %>
+   <%= stylesheet_link_tag('jquery-date')  %>
+   <%= javascript_include_tag( 'jquery-date') %>     
+   <% javascript_tag do %>                                      
+			$(window).load(function () {
+				$('#datepicker').datepicker({
+					onSelect: function(dateText, inst) { 
+						$("#milestone_deadline").val(dateText)
+					}
+				}); 
+			});
+	 <% end -%>
+<% end  %>
+
+<div class="sheet_form container sheet">
+	<div class="col">
+		<div class="page_header">
+			<h1>Add a new milestone</h1>
+		</div>
+		<div class="innercol clearfix">
+			<% form_for @milestone, :html => {:class => "clearfix"} do |f| -%>
+		 		<div class="datepicker">
+					<h2>When's it due?</h2>
+					<p>
+						<input id="milestone_deadline" type="hidden" value="2009-06-21" name="milestone[due]" map="milestoneMap"/>
+					</p>   
+					<div id="datepicker"></div>
+			
+				</div>
+				<h2>
+					Enter a title<span>(eg. Design review 2)</span>
+				</h2>
+				<p>
+					<input id="milestone_title" class="text sheet_autofocus" type="text" name="milestone[title]"/>
+				</p>
+				<h2>Who's responsible?</h2>
+				<p>
+					<%= f.select :receiver_id, User.all.collect {|u| [u.login, u.id]} %>
+				</p>
+				<div class="submit">   
+					<p>
+					<input type="submit" value="Create this milestone"/>
+					<span>or</span>
+					<a class="admin"  href="#">Cancel</a>
+					</p>
+				</div>	
+			<% end -%>
+		</div>
+	</div>	
+</div>	

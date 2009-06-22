@@ -5,7 +5,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'logout', :controller => "user_sessions", :action => "destroy"
   
   map.resources :messages
-  map.resources :todo_lists       
+  map.resources :todo_lists                                
+  map.resources :todos
+  map.resources :milestones                                                                
   map.resources :comments, :path_prefix => '/:commentable_type/:commentable_id', :shallow => true
   
   map.root :controller => "user_sessions", :action => "new"
