@@ -1,0 +1,51 @@
+<div class="page_header">
+	<div class="page_header_links">
+	</div>
+	<h1>Messages</h1>
+</div>
+<div class="innercol">
+	<% @messages.each do |message| %>
+		<h2 class="date">
+			<span class="today">Today</span>
+		</h2>
+		<div class="message">
+			<h1 class="title">
+				<%= link_to message.title, message_url(message) %>
+			</h1>
+			<div class="post_comment_stats">       
+				<h2>
+					<%= message.comments_count %> comments
+				</h2>	
+			</div>
+			<div class="formatted_text_body">
+				<%= message.body %>
+			</div>
+			<h3>
+				 Posted by <%= message.creator.login %>
+				<span class="pipe">|</span>
+				<%= message.comments_count %> comments
+			</h3>	
+		</div>	                     
+	<% end -%>
+</div>
+
+<% content_for :side do  %>
+	<div class="button_to_add_new">
+		<a class="image" href="messages/new">
+			<img src="http://asset1.projectpath.com/images/post_a_new_message.gif?1245405582" alt="Post a new message"/>
+		</a>
+	</div>
+	<h1> 
+		<a id="edit_categories_link" class="admin" style="float: right;" onclick="categories.toggleEdit(); return false;" href="#" bc:active_text="Done editing" bc:active_class="showing">Edit</a>
+		Categories
+	</h1>
+	<div id="CategoryList" class="indent"> 
+		<% Category.all.each do |category| %>
+			<div class="category">
+				<a class="category_link current" href="http://liageren.basecamphq.com/projects/3380838/posts">
+					<span>All Messages</span>
+				</a>
+			</div>
+		<% end -%>
+	</div>		
+<% end -%>

@@ -2,7 +2,7 @@
 	<h1>Post a new message</h1>
 </div>
 <div class="innercol">
-	<% form_for @message, :html => {:id => 'message_form'} do |f| -%>
+	<% form_for @message, :html => {:id => 'message_form', :multipart => true} do |f| -%>
 		<div id="post_form_container">
 			<div class="main_attributes">
 				<div class="inner">
@@ -20,6 +20,23 @@
 				</div>
 			</div>	
 		</div>	
+		<div class="attachments_option message_option">
+			<img class="paperclip" src="http://asset3.projectpath.com/images/attachment_block_icon.gif?1245405582" alt="Attachment_block_icon"/>
+			<div class="indented">
+			<div class="cannot_upload_files">
+				<h3>Want to upload and share documents, images, and files?</h3>
+				<% f.fields_for :assets do |asset_form| %>
+					<%= asset_form.file_field :data %>
+				<% end -%>
+			</div>
+			</div>
+		</div>                                         
+		<div class="milestone_option message_option">
+		<h2>Does this message relate to a milestone?</h2>
+		<p>
+			<%= f.select :milestone_id, Milestone.all.collect {|milestone|[milestone.title, milestone.id]} %>
+		</p>
+		</div>
 	<% end -%>
 </div>
 <div class="page_footer">                                                              

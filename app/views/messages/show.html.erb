@@ -16,13 +16,22 @@
 		<%= @message.creator.login %>
 		</p>
 		<p>
-		<span class="label">Date:</span>
-		<%= @message.created_at %>
+			<span class="label">Date:</span>
+			<%= @message.created_at %>
+		</p>
+		<p>
+			<span class="label" style="margin: 0pt; float: none; width: auto;">Category:</span>
+			<a href="/projects/3380838/cat/34054384/posts"><%= @message.category.name %></a>
 		</p>
 	</div>
 	<div id="OriginalPost" class="message">
 		<div class="formatted_text_body">
 			<%= @message.body %>
+		</div>  
+		<div class="attachments">
+			<% @message.assets.each do |asset| %>
+				<p><%= link_to asset.data_file_name, asset.data.url %></p>
+			<% end -%>
 		</div>
 	</div>             
 	<%= render :partial => 'comments/comments', :locals => {:commentable => @message} %>    

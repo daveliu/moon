@@ -1,6 +1,14 @@
 class MessagesController < ApplicationController
-  resource_controller
+  resource_controller   
   
+  index.before do
+    @body_class = "messages forum"
+  end  
+  
+  def new
+    @message = Message.new
+    @message.assets.build
+  end
   
   def create
     @message = current_user.messages.build(params[:message])
