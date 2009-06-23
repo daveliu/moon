@@ -1,0 +1,4 @@
+function results(html){ 
+	  $("#milestones").replaceWith(html)
+}
+results("<%=escape_javascript render_to_string(:partial => 'milestones') %>")

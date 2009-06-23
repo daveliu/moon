@@ -1,0 +1,38 @@
+<div id="milestone_<%= @milestone.id %>" class="Milestone widget">
+  <% form_for @milestone, :html => {:class => "clearfix", :onsubmit => "$(this).parents('.Milestone').addClass('busy');
+	$.ajax({
+    type:'POST', url: $(this).attr('action'), dataType: 'script', data: $(this).serialize()});return false;"} do |f| -%>
+		<div class="form sheet_form clearfix">
+ 			<div class="datepicker">
+				<p>
+					<input id="milestone_deadline_<%= @milestone.id %>" type="hidden" value="2009-06-21" name="milestone[due]" map="milestoneMap"/>
+				</p>   
+				<div id="datepicker_<%= @milestone.id %>"></div>
+				<div class="footer">
+					<span>Due: </span>
+					<span><%= @milestone.due %></span>
+				</div>
+			</div>
+			<div class="fields">
+				<h2>
+					Enter a title<span>(eg. Design review 2)</span>
+				</h2>
+				<p>
+					<input id="milestone_title" class="text sheet_autofocus" type="text" name="milestone[title]" value="<%= @milestone.title  %>" />
+				</p>
+				<h2>Who's responsible?</h2>
+				<p>
+					<%= f.select :receiver_id, User.all.collect {|u| [u.login, u.id]} %>
+				</p>
+				<div class="submit buttons">   
+					<input type="submit" value="Save changes"/>
+					<span>or</span>
+					<a class="admin" onclick="$('#milestone_<%= @milestone.id %>').parents('.widget').addClass('busy');
+						$.ajax({
+				    type:'GET', url: '<%= milestone_path(@milestone) %>', dataType: 'script'});return false;" href="#">Cancel</a>
+				</div>
+			</div>	
+		</div>	
+	<% end -%>   
+</div>
+

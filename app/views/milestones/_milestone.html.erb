@@ -1,0 +1,33 @@
+<div id="milestone_<%= milestone.id %>" class="Milestone widget commentable">
+	<div class="widget_content hover_container hover_target">
+		<div class="nubbin">
+			<div class="wrapper">
+				<ul>
+					<li class="edit">
+						<a onclick="$(this).parents('.widget').addClass('busy'); 
+						$.ajax({
+					    type:'GET', url: '<%= edit_milestone_path(milestone) %>', dataType: 'script'});return false;" href="#">Edit</a>
+					</li>
+				</ul> 
+			</div>
+		</div>
+		<h2 class="<%= milestone.state %>">
+			<%= milestone.due %>
+			<span class="light">
+				<%= milestone.due %>
+			</span>
+			<span class="responsibility"> <%= milestone.receiver.login %> </span>
+		</h2>
+		<h3>      
+			<input  <%= "checked='checked'" if(milestone.completed?) %>  type="checkbox" onclick="$(this).parents('div.Milestone').addClass('busy');
+			$.ajax({
+		    type:'POST', url: '<%= state_path(milestone) %>', dataType: 'script'});return false;"/>
+			<span class="title"><%= milestone.title %></span>
+		</h3>
+		<ul class="attached_to">
+			<% milestone.todo_lists.each do |todo_list| %>
+				<li><%= link_to todo_list.title, todo_list_path(todo_list) %></li>
+			<% end -%>
+		</ul> 
+	</div>
+</div>

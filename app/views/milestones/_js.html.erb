@@ -1,0 +1,13 @@
+<% content_for :head do %>
+   <%= stylesheet_link_tag('jquery-date')  %>
+   <%= javascript_include_tag( 'jquery-date') %>     
+   <% javascript_tag do %>                                      
+			$(window).load(function () {
+				$('#datepicker').datepicker({
+					onSelect: function(dateText, inst) { 
+						$("#milestone_deadline").val(dateText)
+					}
+				}); 
+			});
+	 <% end -%>
+<% end  %>

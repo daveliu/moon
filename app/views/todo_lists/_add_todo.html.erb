@@ -1,0 +1,25 @@
+<div class="add_item">      
+	<div id="list_<%= list.id %>_new_item" class="widget list_widget item_wrapper" style="display: none;">       
+		<% form_for Todo.new, :url => todo_list_todos_path(list), :html => {
+			:onsubmit => "$.ajax({
+		    type:'POST', url: $(this).attr('action'), dataType: 'script', data: $(this).serialize()});return false;"
+		} do |todo_form| -%>
+		  <p>
+				Enter a to-do item<br/>
+				<textarea id="new_content_<%= list.id %>" class="new_item_field" rows="3" name="todo[body]" cols="40"></textarea>
+			</p>                                                       
+			<p>
+				Who's responsible?<br/>
+				<%= todo_form.select :receiver_id, User.all.collect {|u| [u.login, u.id]}, { :include_blank => '任何人' } %>
+			</p>   
+			<p class="submit">
+				<input type="submit" value="Add this item"/>
+				<span>or</span>
+				<a class="admin" onclick="$('#list_<%= list.id %>_new_item').hide();$('#link_to_add_child_list_<%= list.id %>').show(); return false;" href="#">I'm done adding items</a>
+			</p>
+		<% end -%>
+	</div>	
+	<div id="link_to_add_child_list_<%= list.id %>" style="">
+		<a  class="admin" onclick="$('#list_<%= list.id %>_new_item').show();$('#link_to_add_child_list_<%= list.id %>').hide();return false;" href="#">Add an item</a>
+	</div>
+</div>

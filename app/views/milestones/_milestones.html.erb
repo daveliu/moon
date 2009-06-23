@@ -1,0 +1,20 @@
+<div id="milestones">
+	<div class="LateBlock">
+		<h1 class="LateMilestones">Late</h1>
+		<% @lates.each do |milestone| %>
+			<%= render :partial => "milestone", :locals => { :milestone => milestone } %>	
+		<% end -%>	
+	</div>	                         	
+	<div class="UpcomingBlock">
+		<h1 class="UpcomingMilestones">Upcoming</h1>
+		<% @upcomings.each do |milestone| %>
+			<%= render :partial => "milestone", :locals => { :milestone => milestone } %>	
+		<% end -%>
+	</div>	                         	
+	<div class="CompletedBlock">
+		<h1 class="CompletedMilestones">Completed</h1>
+		<% @completes.each do |milestone| %>
+			<%= render :partial => "milestone", :locals => { :milestone => milestone } %>	
+		<% end -%>
+	</div>
+</div>

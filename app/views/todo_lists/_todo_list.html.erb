@@ -1,0 +1,7 @@
+<div class="items_wrapper">  
+	<div id="list_<%= list.id %>_items" class="items widget_parent" style="position: relative;">        
+		<% list.todos.uncompleted.each do |todo| %>
+			<%= render :partial => "todos/todo", :locals => {:todo => todo} %>
+	  <% end -%>	
+	</div>	
+</div>

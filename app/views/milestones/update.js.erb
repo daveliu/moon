@@ -1,0 +1,4 @@
+function results(html){                 
+	$("#milestone_<%= @milestone.id %>").replaceWith(html)    
+}
+results("<%=escape_javascript render_to_string(:partial => 'milestone', :locals => {:milestone => @milestone}) %>")

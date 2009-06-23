@@ -1,0 +1,12 @@
+function results(html){                 
+	$("#milestone_<%= @milestone.id %>").replaceWith(html)             
+	$('#datepicker_<%= @milestone.id %>').datepicker({
+		onSelect: function(dateText, inst) { 
+			$("#milestone_deadline_<%= @milestone.id %>").val(dateText)
+		},                    
+		minDate: -20, 
+		maxDate: '+5M +10D',
+		changeMonth: true
+	});
+}
+results("<%=escape_javascript render_to_string(:partial => 'edit_form', :locals => {:milestone => @milestone}) %>")
