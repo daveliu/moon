@@ -1,32 +1,12 @@
+<%= render :partial => "js" %>
+
 <div class="page_header">
 	<div class="page_header_links">
 	</div>
 	<h1>MileStones</h1>
 </div>
 <div class="innercol">
-	<div id="milestones">
-		<% @milestones.each do |milestone| %>
-			<div class="LateBlock">
-				<h1 class="LateMilestones">Late</h1>
-				<div class="Milestone widget commentable">
-					<div class="widget_content hover_container hover_target">
-						<h2 class="late">
-							 <%= milestone.created_at %>
-							<span class="responsibility"> <%= milestone.receiver.login %> </span>
-						</h2>
-						<h3>
-							<span class="title"><%= milestone.title %></span>
-						</h3>
-						<ul class="attached_to">
-							<% milestone.todo_lists.each do |todo_list| %>
-								<li><%= link_to todo_list.title, todo_list_path(todo_list) %></li>
-							<% end -%>
-						</ul> 
-					</div>
-				</div>	
-			</div>	                         
-		<% end -%>	
-	</div>	
+	<%= render :partial => "milestones" %>
 </div>
 
 <% content_for :side do  %>

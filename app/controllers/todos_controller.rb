@@ -5,8 +5,10 @@ class TodosController < ApplicationController
     create.wants.js
     edit.wants.js
     show.wants.js
-    update.wants.js
+    update.wants.js  
     
+    create.flash ""
+    update.flash ""
     
     
     def complete
@@ -21,6 +23,7 @@ class TodosController < ApplicationController
     
     def reopen
       @todo = Todo.find(params[:id])
+      @todo_list = @todo.todo_list
       @todo.reopen!
       respond_to do |wants|
         wants.js

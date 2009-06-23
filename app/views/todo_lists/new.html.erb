@@ -1,27 +1,43 @@
-<div class="page_header">
-	<h1>New to-do list</h1>
-</div>
-<div class="innercol">
-	<% form_for @todo_list, :html => {:id => 'message_form'} do |f| -%>
-		<div id="post_form_container">
-			<div class="main_attributes">
-				<div class="inner">
-					<div class="input">
-						<h2 class="text_input">Title</h2>
-	  				<%= f.text_field :title, :class => "message_title", :size => "50", :style => "width:920px;" %>
+<div id="new_list" class="sheet" style="">
+	<div class="sheet_form container">
+		<div style="text-align:left;">
+			<div class="page_header">
+				<h1>New to-do list</h1>
+			</div>
+			<div class="innercol">
+				<% form_for @todo_list, :html => {:id => 'message_form'} do |f| -%>
+					<div id="use_title_block">
+					<h2>
+						First give the list a name<span>(eg. "Things for the meeting")</span>
+					</h2>
+					<p>              
+						<input id="todo_list_name" class="text sheet_autofocus" type="text" size="30" name="todo_list[title]"/>
+					</p>
 					</div>
-					<%= f.text_area :description, :style => "height: 150px; width: 920px;", :cols => "40"  %>
-				</div>
-			</div>	
+					<div id="new_list_options">
+						<h2>Optional features</h2>
+						<div id="new_list_description">
+							<p>List description or notes about this list
+								<span style="color: rgb(136, 136, 136);"/>
+								<br/>
+								<textarea id="todo_list_description" rows="3" name="todo_list[description]" cols="40"></textarea>
+							</p>
+						</div>
+						<p class="attach_milestone">
+							Does this list relate to a milestone?
+							<br/>
+							<%= f.select :milestone_id, Milestone.all.collect {|milestone|[milestone.title, milestone.id]}, :include_blank => "没有" %>               
+						</p>
+					</div>
+					<div class="submit">
+						<p>
+						<input type="submit" value="Create this list"/>
+						<span>or</span>
+						<a class="admin" href="#">Cancel</a>
+						</p>
+					</div>	
+				<% end -%>
+			</div>
 		</div>	
-	<% end -%>
-</div>
-<div class="page_footer">                                                              
-	<div class="submit">
-		<div id="buttons">
-			<input type="button" value="Post this message" onclick="$('#message_form').submit();"/>
-			or
-			<a class="admin" onclick="return confirm('Are you sure? Any changes to this message will be lost.');" href="">Cancel</a>
-		</div>
-	</div>
-</div>
+	</div> 
+</div>	

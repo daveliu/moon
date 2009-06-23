@@ -17,7 +17,12 @@
 		</div>
 		<div id="item_<%= todo.id %>_content" class="content">                               
 			<span  class="content hover_target">
-				<span><%= todo.body %></span>
+				<span>                           
+					<% if todo.receiver %>
+						<strong><%= todo.receiver.login %>:</strong>
+					<% end -%>	
+					<%= todo.body %>
+				</span>
 			</span>
 		</div>
 	</div>

@@ -14,8 +14,8 @@
 					<div class="hover_container widget_content list">
 						<div class="list_title">    
 							<h2>
-								<span id="list_6347262_name" class="hover_target">
-									<a href="/projects/3380838/todo_lists/6347262">miao</a>
+								<span  class="hover_target">
+									<%= link_to list.title, todo_list_path(list) %>
 								</span>
 							</h2>
 						</div>    
@@ -25,38 +25,8 @@
 								<%= link_to "#{list.milestone.title} - #{list.milestone.due}", milestone_path(list.milestone), :class => "attached_milestone" %>
 							</p>
 						<% end -%>	
-						<div class="items_wrapper">  
-							<div id="list_<%= list.id %>_items" class="items widget_parent" style="position: relative;">        
-								<% list.todos.by_state("pending").each do |todo| %>
-									<%= render :partial => "todos/todo", :locals => {:todo => todo} %>
-							  <% end -%>	
-							</div>	
-						</div>
-						<div class="add_item">      
-							<div id="list_<%= list.id %>_new_item" class="widget list_widget item_wrapper" style="display: none;">       
-								<% form_for Todo.new, :url => todo_list_todos_path(list), :html => {
-									:onsubmit => "$.ajax({
-								    type:'POST', url: $(this).attr('action'), dataType: 'script', data: $(this).serialize()});return false;"
-								} do |todo_form| -%>
-								  <p>
-										Enter a to-do item<br/>
-										<textarea id="new_content_<%= list.id %>" class="new_item_field" rows="3" name="todo[body]" cols="40"></textarea>
-									</p>                                                       
-									<p>
-										Who's responsible?<br/>
-										<%= todo_form.select :receiver_id, User.all.collect {|u| [u.login, u.id]} %>
-									</p>   
-									<p class="submit">
-										<input type="submit" value="Add this item"/>
-										<span>or</span>
-										<a class="admin" onclick="$('#list_<%= list.id %>_new_item').hide();$('#link_to_add_child_list_<%= list.id %>').show(); return false;" href="#">I'm done adding items</a>
-									</p>
-								<% end -%>
-							</div>	
-							<div id="link_to_add_child_list_<%= list.id %>" style="">
-								<a  class="admin" onclick="$('#list_<%= list.id %>_new_item').show();$('#link_to_add_child_list_<%= list.id %>').hide();return false;" href="#">Add an item</a>
-							</div>
-						</div>
+						<%= render :partial => "todo_list", :locals => { :list => list } %>
+						<%= render :partial => "add_todo", :locals => { :list	 => list } %>
 						<div id="list_<%= list.id %>_completed_items" class="done">
 							<% list.todos.by_state("completed").each do |todo| %>
 								<%= render :partial => "todos/completed_todo", :locals => {:todo => todo} %>
@@ -77,14 +47,18 @@
 	</div>
 	<div id="sidebar">
 		<div class="indent">
-			<form style="margin: 0pt; padding: 0pt;" method="get" action="/projects/3380838/todo_lists">
+			<% form_tag todo_lists_path, :method => "GET", :html => {:style=>"margin: 0pt; padding: 0pt;"} do %>
 				<p>
 					Show to-dos assigned to:
 					<br/>
-					<select id="responsible_party" onchange="this.up('form').submit()" name="responsible_party">
+					<select id="responsible_party" onchange="$(this).parents('form').submit()	" name="responsible_party">      
+						<option value=''>任何人</option> 
+						<% User.all.each do |u| %>
+							<option value='<%= u.id %>' <%= "selected='selected'" if(u.id.to_s==params[:responsible_party]) %>><%= u.login %></option>
+						<% end -%>	
 					</select>
 				</p>
-			</form>
+			<% end -%>
 		</div>
 		<div class="indent">    
 			<h2>Current to-do lists</h2>

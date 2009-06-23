@@ -5,14 +5,10 @@ function log() {
 }
 
 $(document).ready(function(){
-	$("div.items_wrapper div.hover_container").hover(
-		function() {        
-			if(!$(this).hasClass("hover")){
-		  	$(this).addClass("hover");
-		  }
-	  },                                         
-		function() {
-		  $(this).removeClass("hover");
-	  }
-	)
+	$("div.hover_container").live("mouseover", function(){
+		$(this).addClass('hover'); 
+	}).live("mouseout", function(){ 
+    $(this).removeClass('hover'); 
+ 	});   
+
 }) 

@@ -3943,19 +3943,19 @@ input#search_terms {
   border-padding: 0;
 }
 
-.calendar_date_select .header {
+.datepicker .header {
   background-color: #fff;
   text-align: center;
 	font-weight: bold;
 	padding: 3px;
 }
 
-.calendar_date_select .body {
+.datepicker .body {
   background-color: #fff;
   padding: 0 0 5px 0;
 }
 
-.calendar_date_select .footer {
+.datepicker .footer {
   background-color: #fff;
   color: #000;
 	font-weight: bold;
@@ -9918,7 +9918,7 @@ LEGACY
     text-align: right;
   }
 
-  .Milestone h2.complete {
+  .Milestone h2.completed {
     color: #090;
   }
 

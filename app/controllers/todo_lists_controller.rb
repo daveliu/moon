@@ -1,15 +1,27 @@
 class TodoListsController < ApplicationController
   resource_controller           
+  
+  def index
+    if params[:responsible_party]  && !params[:responsible_party].blank?                     
+      @user = User.find(params[:responsible_party])
+      @todo_lists = TodoList.find(:all, :joins => :todos, 
+                    :conditions => ["todos.receiver_id = ?", params[:responsible_party]],
+                    :group => "todo_lists.id"
+                    )
+    else
+      @todo_lists = TodoList.all
+    end    
+  end
 
-  new_action.before do
-    @body_class = "message_form"
-  end  
   
   create.after do
     object.creator = current_user
   end
   create.wants.html { redirect_to collection_url }
-  create.flash ""
+  create.flash "" 
+  
+  update.flash ""
+  destroy.flash ""
   
   private
   def set_body_class
