@@ -1,11 +1,18 @@
 class Todo < ActiveRecord::Base
+  belongs_to :creator, :class_name => "User", :foreign_key => "creator_id"
   belongs_to :todo_list                              
   belongs_to :receiver, :class_name => "User", :foreign_key => "receiver_id"
 
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at ASC'
   
+  fires :new_todo,      :on                 => :create,
+                        :actor              => :creator
+  fires_manually        :complete,      
+                        :actor              => :creator
+  
   state_machine :initial => :pending do
-
+    after_transition :on => :complete, :do => :fire_complete              
+        
     event :complete do
       transition  all => :completed
     end

@@ -5,7 +5,13 @@ class Milestone < ActiveRecord::Base
   has_many :todo_lists, :dependent => :destroy, :order => 'created_at ASC'
   has_many :messages
   
+  fires :new_milestone, :on                 => :create,
+                        :actor              => :creator
+  fires_manually        :complete,      
+                        :actor              => :creator                      
+  
   state_machine :initial => :upcoming do
+    after_transition :on => :complete, :do => :fire_complete
 
     event :out_date do
       transition  all => :late

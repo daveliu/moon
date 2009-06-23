@@ -1,0 +1,14 @@
+<td class="what">
+	<span class="todo">Todo</span>
+</td>
+<td class="item">                     
+	<span <%= "style='text-decoration: line-through;'" if(event.event_type=='complete') %>><%= link_to event.subject.body, polymorphic_path(event.subject) %>(<%= event.subject.todo_list.title %>)</span>
+</td>
+<td class="action">
+	<% if(event.event_type=='complete') %>
+		Completed by
+	<% else %>
+		Posted by
+	<% end -%>
+</td>
+<td class="name"><%= event.actor.try(:login) %></td>

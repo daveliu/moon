@@ -1,0 +1,8 @@
+<td class="what">
+	<span class="post">Message</span>
+</td>
+<td class="item">                     
+	<%= link_to event.subject.title, polymorphic_path(event.subject) %>
+</td>
+<td class="action">Posted by</td>
+<td class="name"><%= event.actor.login %></td>

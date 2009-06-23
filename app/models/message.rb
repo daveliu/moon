@@ -7,5 +7,8 @@ class Message < ActiveRecord::Base
   
   accepts_nested_attributes_for :assets
   
-  validates_presence_of :title, :body
+  validates_presence_of :title, :body                                                        
+  
+  fires :new_message, :on                 => :create,
+                      :actor              => :creator
 end

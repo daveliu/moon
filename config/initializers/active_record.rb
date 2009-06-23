@@ -10,4 +10,8 @@ class ActiveRecord::ConnectionAdapters::AbstractAdapter
   log_info_without_trace(sql, name, runtime) 
   end 
   alias_method_chain :log_info, :trace    
-end
+end        
+
+require 'timeline_fu_additions'
+
+ActiveRecord::Base.send :include, TimelineFu::Fires

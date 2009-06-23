@@ -11,7 +11,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :milestones, :member => {:complete => :post, :reopen => :post}                                                                
   map.resources :comments, :path_prefix => '/:commentable_type/:commentable_id', :shallow => true
   
-  map.root :controller => "user_sessions", :action => "new"
+  map.home 'home', :controller => "home"
+  map.root :controller => "home"     
   
   # The priority is based upon order of creation: first created -> highest priority.
 

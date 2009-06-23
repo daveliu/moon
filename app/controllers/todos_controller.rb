@@ -10,6 +10,10 @@ class TodosController < ApplicationController
     create.flash ""
     update.flash ""
     
+    create.before do
+      object.creator = current_user
+    end
+    
     show.before do
       @body_class = "comments commentable todo_item"
       @todo_list = @todo.todo_list

@@ -1,0 +1,7 @@
+<li>
+	<strong><%= milestone.due %></strong>:
+	<%= link_to milestone.title, milestone_path(milestone) %>
+	<% if milestone.receiver %>
+		(<%= milestone.receiver.login %> is responsible)
+	<% end -%>		
+</li>

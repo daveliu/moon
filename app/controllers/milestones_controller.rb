@@ -5,7 +5,7 @@ class MilestonesController < ApplicationController
       get_milestones
     end
     
-    create.after do
+    create.before do
       object.creator = current_user
     end
     create.wants.html { redirect_to collection_url }
