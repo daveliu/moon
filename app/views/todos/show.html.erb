@@ -1,0 +1,20 @@
+<div class="innercol">
+	<div id="item_37611841" class="page_header">
+		<h1>                                                                         
+			Comments on this to-do from
+			<%= link_to @todo_list.title, todo_list_path(@todo_list) %>
+		</h1>
+		<div class="check_box_commentable">
+			<div class="controls">
+				<input id="todo_item" type="checkbox" value="completed" onclick="$(this).parents('div.page_header').addClass('busy'); return false;" name="todo_item" checked="checked"/>
+			</div>
+			<div class="content">
+				<p>
+				<span class="completed_on"><%= @todo.updated_at %></span>
+				<span class="item"> <%= @todo.body %> </span>
+				</p>
+			</div>	
+		</div>                                                                       
+	</div>
+	<%= render :partial => 'comments/comments', :locals => {:commentable => @todo} %>    
+</div>

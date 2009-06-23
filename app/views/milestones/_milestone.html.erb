@@ -25,8 +25,11 @@
 			<span class="title"><%= milestone.title %></span>
 		</h3>
 		<ul class="attached_to">
+			<% milestone.messages.each do |message| %>
+				<li>Message: <%= link_to message.title, message_path(message) %></li>
+			<% end -%>
 			<% milestone.todo_lists.each do |todo_list| %>
-				<li><%= link_to todo_list.title, todo_list_path(todo_list) %></li>
+				<li>Todo: <%= link_to todo_list.title, todo_list_path(todo_list) %></li>
 			<% end -%>
 		</ul> 
 	</div>

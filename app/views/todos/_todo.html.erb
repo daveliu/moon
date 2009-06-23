@@ -23,7 +23,8 @@
 					<% end -%>	
 					<%= todo.body %>
 				</span>
-			</span>
-		</div>
+			</span>                           
+			<%= render :partial => "comments/comments_count", :locals => { :commentable => todo } %>
+		</div>              
 	</div>
 </div>

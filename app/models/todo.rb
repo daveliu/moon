@@ -1,6 +1,8 @@
 class Todo < ActiveRecord::Base
   belongs_to :todo_list                              
   belongs_to :receiver, :class_name => "User", :foreign_key => "receiver_id"
+
+  has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at ASC'
   
   state_machine :initial => :pending do
 

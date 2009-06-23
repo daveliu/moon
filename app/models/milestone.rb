@@ -3,6 +3,7 @@ class Milestone < ActiveRecord::Base
   belongs_to :receiver, :class_name => "User", :foreign_key => "receiver_id"
   
   has_many :todo_lists, :dependent => :destroy, :order => 'created_at ASC'
+  has_many :messages
   
   state_machine :initial => :upcoming do
 

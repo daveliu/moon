@@ -10,6 +10,11 @@ class TodosController < ApplicationController
     create.flash ""
     update.flash ""
     
+    show.before do
+      @body_class = "comments commentable todo_item"
+      @todo_list = @todo.todo_list
+    end  
+    
     
     def complete
       @todo = Todo.find(params[:id])
