@@ -1,0 +1,24 @@
+<div class="innercol">
+	<div id="milestone_10401126" class="page_header">
+		<h1>
+			<span><%= link_to "返回", milestones_path %></span>
+		</h1>
+		<div class="check_box_commentable">
+			<h3 class="<%= @milestone.state %>">      
+				<strong><%= @milestone.state %>:</strong>
+				<%= @milestone.due.to_date %> (<%= time_ago_in_words(@milestone.due) %>)
+			</h3>
+			<div class="controls">
+			</div>
+			<div class="content ">
+				<p><strong><%= @milestone.receiver.login %>:</strong><%= @milestone.title %></p>
+				<ul class="attached_to">                
+					<% @milestone.todo_lists.each do |todo_list| %>
+						<li>Todo List: <%= link_to todo_list.title, todo_list_path(todo_list) %></li>
+					<% end -%>
+				</ul>
+			</div>
+		</div>  
+	</div>
+	<%= render :partial => 'comments/comments', :locals => {:commentable => @milestone} %>    
+</div>
