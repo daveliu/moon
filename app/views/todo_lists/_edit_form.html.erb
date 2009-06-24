@@ -1,0 +1,27 @@
+<div id="list_<%= @todo_list.id %>" class="widget page_widget list_wrapper">
+	<div class="widget_content list list_with_time_tracking edit_list">
+		<% form_for @todo_list, :html => {:onsubmit => "$.ajax({
+	    type:'POST', url: $(this).attr('action'), dataType: 'script', data: $(this).serialize()});return false;"} do |f| %>   
+		  <p>
+				<%= f.text_field :title, :class => "list_title", :size => "30" %>
+			</p>
+			<p>
+				描述:
+				<br/>
+			  <%= f.text_area :description, :rows => "6", :cols => "40" %>
+			</p>
+			<p class="attach_milestone">
+				 和某个milestone关联吗?
+  			 <br/>
+				 <%= f.select :milestone_id, Milestone.all.collect {|milestone|[milestone.title, milestone.id]}, :include_blank => "没有" %>                
+			</p>
+			<p class="submit"> 
+				<input type="submit" value="Save changes"/>
+				<span>or</span>
+				<a class="admin" onclick="$('#list_<%= @todo_list.id %>').addClass('busy'); 
+					$.ajax({
+			    type:'GET', url: '<%= todo_list_path(@todo_list) %>', dataType: 'script'});return false;" href="#">Cancel</a>
+			</p>
+		<% end -%>
+	</div>	
+</div>	

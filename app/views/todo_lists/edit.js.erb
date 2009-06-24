@@ -1,0 +1,5 @@
+function results(html){                 
+	$("#list_<%= @todo_list.id %>").replaceWith(html)
+}
+results("<%=escape_javascript render_to_string(:partial => 'todo_lists/edit_form') %>")
+

@@ -1,0 +1,38 @@
+<div id="list_<%= list.id %>" class="widget page_widget list_wrapper" record="6347244">
+	<div id="show_list_6347244" class="hover_container widget_content list">
+		<div id="list_<%= list.id %>_nubbin" class="nubbin hover_target">
+			<div class="wrapper">
+				<ul>
+					<li class="edit">
+						<a onclick="$('#list_<%= list.id %>_nubbin').addClass('busy'); 
+							$.ajax({
+					    type:'GET', url: '<%= edit_todo_list_path(list) %>', dataType: 'script'});return false;" href="#">Edit</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div  class="list_title">
+			<h2>  
+				<span  class="hover_target">
+					<span class="title_text">about test</span>
+				</span>
+			</h2>
+		</div> 
+		<p  class="listdesc">
+			<span class="hover_target"><%= list.description %></span>
+		</p>
+		<% if list.milestone %>
+		<p class="listdesc">
+			Related milestone:
+			<%= link_to list.milestone.title, milestone_path(list.milestone) %>
+		</p>                                                                         
+		<% end -%> 
+		<%= render :partial => "todo_list", :locals => { :list => list } %>
+		<%= render :partial => "add_todo", :locals => { :list	 => list } %>
+		<div id="list_<%= list.id %>_completed_items" class="done">
+			<% list.todos.by_state("completed").each do |todo| %>
+				<%= render :partial => "todos/completed_todo", :locals => {:todo => todo} %>
+		  <% end -%>
+		</div>
+	</div>
+</div>

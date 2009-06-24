@@ -20,6 +20,10 @@ class TodoListsController < ApplicationController
   create.wants.html { redirect_to collection_url }
   create.flash "" 
   
+  edit.wants.js    
+  show.wants.js
+  update.wants.js
+  
   update.flash ""
   destroy.flash ""
   

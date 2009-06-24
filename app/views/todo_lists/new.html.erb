@@ -24,7 +24,7 @@
 							</p>
 						</div>
 						<p class="attach_milestone">
-							Does this list relate to a milestone?
+							和某个milestone关联吗?
 							<br/>
 							<%= f.select :milestone_id, Milestone.all.collect {|milestone|[milestone.title, milestone.id]}, :include_blank => "没有" %>               
 						</p>

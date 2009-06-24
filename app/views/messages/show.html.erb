@@ -19,10 +19,12 @@
 			<span class="label">Date:</span>
 			<%= @message.created_at %>
 		</p>
+		<% if @message.category %>
 		<p>
 			<span class="label" style="margin: 0pt; float: none; width: auto;">Category:</span>
 			<%= link_to @message.category.name, messages_path(:category_id => @message.category) %>
-		</p>
+		</p>                   
+		<% end -%>
 	</div>
 	<div id="OriginalPost" class="message">
 		<div class="formatted_text_body">
