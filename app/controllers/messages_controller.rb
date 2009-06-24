@@ -1,14 +1,15 @@
 class MessagesController < ApplicationController
   resource_controller   
   
-  index.before do
+  def index
     @body_class = "messages forum"
-  end  
-  
-  def new
-    @message = Message.new
-    @message.assets.build
+    if params[:category_id]  && !params[:category_id].blank?                     
+      @messages = Message.find(:all, :conditions => ["category_id = ?", params[:category_id]])
+    else
+      @messages = Message.all
+    end
   end
+  
   
   def create
     @message = current_user.messages.build(params[:message])

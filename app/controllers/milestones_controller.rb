@@ -9,7 +9,11 @@ class MilestonesController < ApplicationController
       object.creator = current_user
     end
     create.wants.html { redirect_to collection_url }
-    create.flash ""                             
+    create.flash ""   
+    
+    show.before do
+      @body_class = "comments commentable milestone"
+    end                            
     
     show.wants.js
     edit.wants.js

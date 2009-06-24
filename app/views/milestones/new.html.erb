@@ -7,12 +7,15 @@
 		<div class="innercol clearfix">
 			<% form_for @milestone, :html => {:class => "clearfix"} do |f| -%>
 		 		<div class="datepicker">
-					<h2>When's it due?</h2>
+					<h2>什么时候截止?</h2>
 					<p>
 						<input id="milestone_deadline" type="hidden" value="2009-06-21" name="milestone[due]" map="milestoneMap"/>
 					</p>   
 					<div id="datepicker"></div>
-			
+					<div class="footer">
+						<span>截止时间: </span>
+						<span class="date"><%= Time.now.to_date %></span>
+					</div>
 				</div>
 				<h2>
 					Enter a title<span>(eg. Design review 2)</span>
@@ -28,7 +31,7 @@
 					<p>
 					<input type="submit" value="Create this milestone"/>
 					<span>or</span>
-					<a class="admin"  href="#">Cancel</a>
+					<a class="admin"  href="<%= milestones_path %>">Cancel</a>
 					</p>
 				</div>	
 			<% end -%>

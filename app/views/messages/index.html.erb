@@ -12,18 +12,18 @@
 			<h1 class="title">
 				<%= link_to message.title, message_url(message) %>
 			</h1>
-			<div class="post_comment_stats">       
+			<!-- <div class="post_comment_stats">       
 				<h2>
-					<%= message.comments_count %> comments
+					<%#= message.comments_count %> comments
 				</h2>	
-			</div>
+			</div>  -->
 			<div class="formatted_text_body">
 				<%= message.body %>
 			</div>
 			<h3>
 				 Posted by <%= message.creator.login %>
 				<span class="pipe">|</span>
-				<%= message.comments_count %> comments
+				<%= link_to "#{message.comments_count} comments", message_url(message) %>
 			</h3>	
 		</div>	                     
 	<% end -%>
@@ -32,20 +32,25 @@
 <% content_for :side do  %>
 	<div class="button_to_add_new">
 		<a class="image" href="messages/new">
-			<img src="http://asset1.projectpath.com/images/post_a_new_message.gif?1245405582" alt="Post a new message"/>
+			<img src="/images/post_a_new_message.gif" alt="Post a new message"/>
 		</a>
 	</div>
 	<h1> 
-		<a id="edit_categories_link" class="admin" style="float: right;" onclick="categories.toggleEdit(); return false;" href="#" bc:active_text="Done editing" bc:active_class="showing">Edit</a>
-		Categories
+		<a id="edit_categories_link" class="admin" style="float: right;" onclick="categories.toggleEdit(); return false;" href="#">Edit</a>
+		分类
 	</h1>
 	<div id="CategoryList" class="indent"> 
+		<div class="category">
+			<a class="category_link <%= "current" if(params[:category_id].nil?) %>" href="<%= messages_path %>">
+				<span>All</span>
+			</a>
+		</div>
 		<% Category.all.each do |category| %>
-			<div class="category">
-				<a class="category_link current" href="http://liageren.basecamphq.com/projects/3380838/posts">
-					<span>All Messages</span>
-				</a>
-			</div>
+      <div class="category">
+			  <a class="category_link <%= "current" if(params[:category_id] && params[:category_id].to_i==category.id) %>" href="<%= messages_path(:category_id => category) %>">
+				  <span><%= category.name %></span>
+			  </a>
+		  </div>
 		<% end -%>
 	</div>		
 <% end -%>

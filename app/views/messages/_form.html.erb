@@ -8,8 +8,8 @@
 				</div>
 				<div class="input">
 					<h2 class="text_input">
-						Category
-						<%= f.select :category_id, Category.all.collect {|c| [c.name, c.id] } %>
+						分类
+						<%= f.select :category_id, Category.all.collect {|c| [c.name, c.id] }, {:include_blank => "没有分类"} %>
 					</h2>
 				</div>
 				<%= f.text_area :body, :style => "height: 150px; width: 920px;", :cols => "40"  %>
@@ -40,9 +40,9 @@
 		</div>
 	</div>                                         
 	<div class="milestone_option message_option">
-	<h2>Does this message relate to a milestone?</h2>
+	<h2>和某个milestone关联吗?</h2>
 	<p>
-		<%= f.select :milestone_id, Milestone.all.collect {|milestone|[milestone.title, milestone.id]} %>
+		<%= f.select :milestone_id, Milestone.all.collect {|milestone|[milestone.title, milestone.id]},  {:include_blank => "没有milestone"} %>
 	</p>
 	</div>
 <% end -%>

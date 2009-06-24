@@ -1,6 +1,6 @@
 <div id="<%= dom_id(comment) %>" class="comment"> 
 	<div class="float_liner">
-		<img class="avatar" width="48" height="48" src="http://asset0.projectpath.com/images/person_avatar.gif?1245383866" alt="Person_avatar"/>
+		<img class="avatar" width="48" height="48" src="/images/person_avatar.gif" alt="Person_avatar"/>
 		<div class="indented">
 			<div class="comment_header">
 				<h3 class="highlight">
@@ -8,7 +8,7 @@
 					</span>
 					<a class="permalink" name="38892721" href="#comment_38892721">
 						<strong><%= comment.creator.login %></strong>
-						<%= comment.created_at %>
+						<%= time_ago_in_words comment.created_at %>
 					</a>
 				</h3>
 			</div>

@@ -22,7 +22,7 @@
 				<span class="pipe">|</span>
 				<%= link_to "退出", '/logout' %>
 			</h3>
-			<h1>liageren</h1>
+			<h1>beibeigan</h1>
 			<div id="Tabs">
 				<ul id="MainTabs">
 					<%= yield(:tab) || render(:partial => 'shared/tabs') %> 
@@ -37,7 +37,7 @@
 						<tr>
 							<td class="left">
 								<div class="Left">  
-									<%= render :partial => 'layouts/flashes' -%>
+									<%#= render :partial => 'layouts/flashes' -%>
 									<div class="col">
 									  <%= yield %>
 									</div>         

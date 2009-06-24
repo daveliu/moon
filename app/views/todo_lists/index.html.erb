@@ -19,10 +19,13 @@
 								</span>
 							</h2>
 						</div>    
+						<p id="list_desc_6378767" class="listdesc">
+							<span class="hover_target"><%= list.description %></span>
+						</p>
 						<% if list.milestone %>
 							<p class="listdesc">
-								Related milestone:
-								<%= link_to "#{list.milestone.title} - #{list.milestone.due}", milestone_path(list.milestone), :class => "attached_milestone" %>
+								相关milestone:
+								<%= link_to "#{list.milestone.title} - #{list.milestone.due.to_date}", milestone_path(list.milestone), :class => "attached_milestone" %>
 							</p>
 						<% end -%>	
 						<%= render :partial => "todo_list", :locals => { :list => list } %>

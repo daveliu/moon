@@ -21,7 +21,7 @@
 		</p>
 		<p>
 			<span class="label" style="margin: 0pt; float: none; width: auto;">Category:</span>
-			<a href="/projects/3380838/cat/34054384/posts"><%= @message.category.name %></a>
+			<%= link_to @message.category.name, messages_path(:category_id => @message.category) %>
 		</p>
 	</div>
 	<div id="OriginalPost" class="message">

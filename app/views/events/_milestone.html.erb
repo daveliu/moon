@@ -11,4 +11,4 @@
 		Posted by
 	<% end -%>
 </td>
-<td class="name"><%= event.actor.login %></td>
+<td class="name"><%= event.actor.try(:login) %></td>

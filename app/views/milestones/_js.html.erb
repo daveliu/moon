@@ -6,6 +6,7 @@
 				$('#datepicker').datepicker({
 					onSelect: function(dateText, inst) { 
 						$("#milestone_deadline").val(dateText)
+						$(".footer .date").text(dateText)
 					}
 				}); 
 			});

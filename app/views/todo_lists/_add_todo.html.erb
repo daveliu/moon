@@ -15,11 +15,11 @@
 			<p class="submit">
 				<input type="submit" value="Add this item"/>
 				<span>or</span>
-				<a class="admin" onclick="$('#list_<%= list.id %>_new_item').hide();$('#link_to_add_child_list_<%= list.id %>').show(); return false;" href="#">I'm done adding items</a>
+				<a class="admin" onclick="$('#list_<%= list.id %>_new_item').hide();$('#link_to_add_child_list_<%= list.id %>').show(); return false;" href="#">添加完成</a>
 			</p>
 		<% end -%>
 	</div>	
 	<div id="link_to_add_child_list_<%= list.id %>" style="">
-		<a  class="admin" onclick="$('#list_<%= list.id %>_new_item').show();$('#link_to_add_child_list_<%= list.id %>').hide();return false;" href="#">Add an item</a>
+		<a  class="admin" onclick="$('#list_<%= list.id %>_new_item').show();$('#link_to_add_child_list_<%= list.id %>').hide();return false;" href="#">添加todo</a>
 	</div>
 </div>

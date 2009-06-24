@@ -12,9 +12,9 @@
 			</div>
 		</div>
 		<h2 class="<%= milestone.state %>">
-			<%= milestone.due %>
+			<%= time_ago_in_words milestone.due %>
 			<span class="light">
-				<%= milestone.due %>
+				(<%= milestone.due.to_date %>)
 			</span>
 			<span class="responsibility"> <%= milestone.receiver.login %> </span>
 		</h2>
