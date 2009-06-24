@@ -6,7 +6,7 @@
 <div class="innercol">
 	<% @messages.each do |message| %>
 		<h2 class="date">
-			<span class="today">Today</span>
+			<span class="today"><%=  time_ago_in_words(message.created_at) %></span>
 		</h2>
 		<div class="message">
 			<h1 class="title">

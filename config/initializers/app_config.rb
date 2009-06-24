@@ -5,3 +5,6 @@ ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(
   :date => "%Y-%m-%d",
   :time => "%I:%M %p"
 )
+
+I18n.default_locale = 'zh-CN'
+I18n.locale         = 'zh-CN'

@@ -23,7 +23,13 @@ class MessagesController < ApplicationController
     @message = Message.find params[:id]
     #this is bad----------------
     @body_class  =  "comments commentable message"
-  end
+  end    
+  
+  # edit.after do
+  #   @message.assets
+  # end  
+  update.flash ""
+  destroy.flash ""
   
   private
   def set_body_class

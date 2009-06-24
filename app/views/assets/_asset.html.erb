@@ -1,0 +1,11 @@
+<p id="attachment_31306931">
+	<img src="http://asset3.projectpath.com/images/icons/icon_PDF_small.gif?1245728830" alt="Icon_pdf_small"/>
+	<span id="controls_for_31306931">
+		<%= asset.data_file_name %>
+		<span class="remove">
+			<a class="admin" onclick="$(this).parents('p').remove();
+			$.ajax({
+		    type:'DELETE', url: '<%= asset_path(asset) %>', dataType: 'script'}); return false;" href="#">删除</a>
+		</span>
+	</span>
+</p>

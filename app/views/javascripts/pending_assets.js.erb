@@ -1,0 +1,9 @@
+function results(html){                 
+	$("#<%= @id %>").find(".pending_attachments").html(html)
+}                                   
+<% sum = "" %>
+<% @asset_names.each do |asset_name| %>
+	<% sum += render_to_string(:partial => 'assets/pending_asset', :locals => {:asset_name => asset_name}) %>           
+<% end -%>	  
+
+results("<%= escape_javascript(sum) %>")

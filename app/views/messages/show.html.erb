@@ -28,8 +28,13 @@
 		<div class="formatted_text_body">
 			<%= @message.body %>
 		</div>  
+		<div class="uploaded_images">                     
+			<% @message.assets.images.each do |asset| %>
+				<%= link_to image_tag(asset.data.url(:thumb)), asset.data.url, :class => "image" %>
+			<% end -%>
+		</div>
 		<div class="attachments">
-			<% @message.assets.each do |asset| %>
+			<% @message.assets.not_images.each do |asset| %>
 				<p><%= link_to asset.data_file_name, asset.data.url %></p>
 			<% end -%>
 		</div>

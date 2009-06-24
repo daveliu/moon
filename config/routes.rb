@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.complete_todo 'todos/:id/complete', :controller => "todos", :action => "complete"
   map.reopen_todo 'todos/:id/reopen', :controller => "todos", :action => "reopen"
   map.resources :milestones, :member => {:complete => :post, :reopen => :post}                                                                
+  map.resources :assets
   map.resources :comments, :path_prefix => '/:commentable_type/:commentable_id', :shallow => true
   
   map.home 'home', :controller => "home"
