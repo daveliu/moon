@@ -1,0 +1,24 @@
+<td class="date"> 
+	<%= date_select :time_entry, :done_date %>
+</td>
+<td class="person">                      
+	<%= select :time_entry, :receiver_id, User.all.collect {|u|[u.login, u.id]} %>
+</td>
+<td class="hours">                    
+	<%= text_field :time_entry, :hours, :size => "4" %>
+</td>
+<td class="desc">
+	<%= text_field :time_entry, :description, :size => "35" %>
+</td>
+<td class="form action">                      
+	<div class="spinner_target">
+		<div class="hide_while_busy">
+			<input type="submit" value="Save" name="commit"/>
+			or
+			<a class="admin" onclick="$(this).parents('div.spinner_target').addClass('busy');
+			$.ajax({
+	    type:'GET', url: '<%= time_entry_path(@time_entry) %>', dataType: 'script'});
+			return false;" href="#">Cancel</a>
+		</div>
+	</div>
+</td>

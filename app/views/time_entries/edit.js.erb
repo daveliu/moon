@@ -1,0 +1,10 @@
+TimeHandler.action = {"url":"/time_entries/<%= @time_entry.id %>","method":"put","before":"$('#time_entry_<%= @time_entry.id %>').addClass('busy')"};
+
+
+function results(html){                 
+	$("#time_entry_<%= @time_entry.id %>").replaceWith(html)
+}                                                           
+var html = "<tr id='time_entry_<%= @time_entry.id %>' class='AddTimeTrack'>"
+	html += "<%=escape_javascript render_to_string(:partial => 'edit_form') %>"  
+html += "</tr>"
+results(html)

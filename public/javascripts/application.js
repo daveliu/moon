@@ -4,6 +4,13 @@ function log() {
       console.log(arguments[i]);
 }
 
+function resetForm(id) {
+	$('#'+id).each(function(){
+		this.reset();
+	});
+}	
+
+
 $(document).ready(function(){
 	$("div.hover_container").live("mouseover", function(){
 		$(this).addClass('hover'); 
@@ -58,24 +65,6 @@ var PendingAttachments = {
     $(this.findFileSelector(path, div_id)).remove();
   },
 
-  hasPendingAttachments: function(id) {
-    if ($(id).down('.pending_attachments')) {
-      var pending_attachments = $(id).down('.pending_attachments').down();
-      return pending_attachments && pending_attachments.down();
-    } else {
-      return false;
-    }
-  },
-
-  hasExistingAttachments: function(id) {
-    if ($(id).getElementsBySelector('.attachments li')) {
-      var existing_attachments = $(id).getElementsBySelector('.attachments li');
-      return existing_attachments.detect(function(item) { return item.visible(); });
-    } else {
-      return false;
-    }
-  },
-
   findFileSelector: function(path, div_id) {
 	  id = "#" + div_id
 		var files = $.map($(id).find("input.file_selectors"), function(input){
@@ -85,5 +74,87 @@ var PendingAttachments = {
 		})
 		return files[0]
   }
-
 }
+
+
+var TimeHandler = {
+  HIGHLIGHT_CLASS: "donelink",
+  CANCEL_REPORT_CREATION: "Cancel report creation",
+
+  submit: function() {
+  	if(TimeHandler.action.before) eval(TimeHandler.action.before);
+		$.ajax({
+	    type: TimeHandler.action.method, 
+			url: TimeHandler.action.url, 
+			dataType: 'script',
+			data: $('#entry_adder').serialize()
+		});
+
+    return false;
+  },
+
+  toggleReport: function() {
+    var link = $('report_link')
+    $('inner_page_header').transition(function() {
+      if(link.className.indexOf(this.HIGHLIGHT_CLASS) < 0) {
+        this.original_text = link.innerHTML
+        this.original_class = link.className
+        link.innerHTML = this.CANCEL_REPORT_CREATION
+        link.className += " " + this.HIGHLIGHT_CLASS
+        $('original_title').hide();
+        $('new_time_report').show();
+      } else {
+        $('original_title').show();
+        $('new_time_report').hide();
+        link.innerHTML = TimeHandler.original_text
+        link.className = TimeHandler.original_class
+      }
+    }.bind(this));
+  },
+
+  updateTotals: function(by) {
+    this.updateField('hours_subtotal', by);
+    this.updateField('hours_total', by);
+  },
+
+  updateField: function(field, by) {
+    field = $(field);
+    if(field) {
+      var amount = parseFloat(field.innerHTML) + by;
+      field.innerHTML = amount.toFixed(2);
+    }
+  },
+
+  checkBlankSlate: function() {
+    if(this.isBlank()) {
+      $('total').hide();
+      if($('report_link_block')) Element.hide('report_link_block');
+      if($('blank_slate')) {
+        $('blank_slate').show();
+      }
+    } else {
+      $('total').show();
+      if($('report_link_block')) Element.show('report_link_block')
+      if($('blank_slate')) {
+        $('blank_slate').hide();
+      }
+    }
+  },
+
+  isBlank: function() {
+    return $$("#entries tr.entry").length == 0;
+  },
+
+  disableForm: function() {
+    if($('#new_time_entry')) {
+      Form.disable('new_time_entry');
+    }
+  },
+
+  enableForm: function() {
+    if($('new_time_entry')) {
+      Form.enable('new_time_entry');
+    }
+  }
+}
+

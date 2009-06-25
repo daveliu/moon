@@ -1,0 +1,50 @@
+<div id="list_6378767_item_37733702_time" class="item_time_tracker">
+	<span id="list_6378767_item_37733702_text" class="content"> <%= @todo.body %></span>
+	<% if !@todo.time_entries.blank? %>
+	  <div class="total">
+			<strong><%= @todo.total_hours %></strong>hours total
+			<span>
+				<a href="/projects/3391997/time_entries/report?todo_item_id=37675871">See the time log</a>for this to-do item
+			</span>
+		</div>
+	<% end -%>
+	<div class="form">
+		<% form_for TimeEntry.new, :url => add_time_entry_todo_path(todo), :html => {:onsubmit => "$('#list_item_#{todo.id}_time').addClass('busy');		$.ajax({type:'POST', url: $(this).attr('action'), dataType: 'script', data: $(this).serialize()});                                                   return false;"} do |f| -%>
+			<table>
+				<tr>
+					<th>Date</th>
+					<td>
+						<%= date_select :time_entry, :done_date %>  
+					</td>
+				</tr>
+				<tr>
+					<th>Person</th>
+					<td><%= select :time_entry, :receiver_id, User.all.collect {|u|[u.login, u.id]} %></td>
+				</tr>
+				<tr>  
+					<th>Hours</th>
+					<td>
+						<%= text_field :time_entry, :hours, :size => "4" %> (eg. 2.5, or 2:30)
+					</td>
+				</tr>
+				<tr>                                                    
+					<th>Notes</th>
+					<td>
+						<%= text_field :time_entry, :description, :size => "35" %>
+					</td>
+				</tr>
+				<tr>
+					<th> </th>
+					<td>
+					<p class="submit">
+						<input type="submit" value="Add to log" name="commit"/>
+						<span>or</span>
+						<a class="admin" onclick="$('#list_item_<%= todo.id %>_time').addClass('busy'); 			  $.ajax({
+					type:'GET', url: '<%= todo_path(todo) %>', dataType: 'script'});return false;" href="#">Cancel</a>
+					</p>
+					</td> 
+				</tr>	
+			</table>
+		<% end -%>	      
+	</div>
+</div>

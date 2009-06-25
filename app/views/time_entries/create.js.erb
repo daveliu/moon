@@ -1,0 +1,7 @@
+$("#new_time_entry").removeClass("busy");
+resetForm('entry_adder')
+
+function results(html){                 
+	$("#new_time_entry").after(html) 
+}
+results("<%=escape_javascript render_to_string(:partial => 'time_entry', :locals => {:entry => @time_entry}) %>")

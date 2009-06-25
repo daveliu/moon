@@ -1,0 +1,23 @@
+<tr id="time_entry_<%= entry.id %>" class="entry">
+	<td class="date">
+		<a title="See all hours on this date" href="/projects/3391997/time_entries/report?from=20090625"><%= entry.done_date.to_date %></a>
+	</td>
+	<td class="person">                                                
+		<a title="See hours for this person" href="/projects/3391997/time_entries/report?subject_id=3926628"><%= entry.receiver.login %></a>
+	</td>
+	<td class="hours"><%= entry.hours %></td>
+	<td class="desc"><%= entry.description %></td>
+	<td class="action">                   
+		<div class="spinner_target">
+			<div class="hide_while_busy">
+				<a class="admin" onclick="$(this).parents('div.spinner_target').addClass('busy');
+				$.ajax({
+			    type:'GET', url: '<%= edit_time_entry_path(entry) %>', dataType: 'script'});return false;" href="#">Edit</a>
+				<a class="image" onclick="if(confirm('确定删除吗?')){$.ajax({type:'DELETE', url: '<%= time_entry_path(entry) %>', dataType: 'script'});
+				  };return false;" href="#">
+					<img src="/images/trash.gif" alt="Delete"/>
+				</a>                       
+			</div>
+		</div>
+	</td> 
+</tr>

@@ -37,6 +37,17 @@ class TodosController < ApplicationController
       respond_to do |wants|
         wants.js
       end
+    end          
+    
+    def add_time_entry
+      @todo = Todo.find(params[:id])
+      @time_entry = @todo.time_entries.build(params[:time_entry])
+      if @time_entry.save
+        respond_to do |wants|
+          wants.js
+        end
+      else
+      end    
     end
     
 end

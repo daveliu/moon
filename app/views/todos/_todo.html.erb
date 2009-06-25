@@ -14,6 +14,14 @@
 		<div  class="controls hover_target">
 			<input  type="checkbox" onclick="$(this).parents('div.item_wrapper').addClass('busy');$.ajax({
 		    type:'PUT', url: '<%= complete_todo_path(todo) %>', dataType: 'script'});return false;"/>
+			<a id="item_<%= todo.id %>_time_tracking_control" class="image time_tracking_control" onclick="$(this).parents('div.item_wrapper').addClass('busy'); $.ajax({
+		    type:'GET', url: '<%= new_todo_time_entry_path(todo) %>', dataType: 'script'}); return false;" href="#">
+				<% if todo.time_entries.blank? %>
+					<img width="17" height="17" src="/images/timeclock-off.gif" alt="Timeclock-off"/>
+				<% else	%>	
+					<img width="17" height="17" src="/images/timeclock-on.gif" alt="Timeclock-off"/>
+				<% end -%>
+			</a>
 		</div>
 		<div id="item_<%= todo.id %>_content" class="content">                               
 			<span  class="content hover_target">

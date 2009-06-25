@@ -1239,10 +1239,12 @@ div.new_time_report p.submit {
 TIME TRACKING TODO WIDGET
 -------------------------------------------------*/
 
-body.todos div.list div.busy div.item_time_tracker div.total,
+/*body.todos div.list div.busy div.item_time_tracker div.total,
 body.todos div.list div.busy div.item_time_tracker div.form {
   display: none;
-}
+}*/
+   
+
 
 body.todos div.list div.item_time_tracker {
   border: 2px solid #090;
@@ -8147,6 +8149,9 @@ body.todos div.list div.item div.content {
   font-size: 12px;
   line-height: 18px;
   color: #333;
+}
+body.todos div.list_with_time_tracking div.item div.content {
+margin-left:46px;
 }
 
 body.todos div.list div.item div.content form {

@@ -1,0 +1,9 @@
+$("#entry_list").removeClass("busy");
+
+TimeHandler.action = {"before":"$(\"#new_time_entry\").addClass(\"busy\")","method":"post","url":"/time_entries"};
+
+function results(html){                 
+	$("#time_entry_<%= @time_entry.id %>").replaceWith(html)
+}                                                           
+html = "<%=escape_javascript render_to_string(:partial => 'time_entry', :locals => {:entry => @time_entry}) %>"  
+results(html)

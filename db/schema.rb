@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090624084214) do
+ActiveRecord::Schema.define(:version => 20090625041430) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -68,6 +68,17 @@ ActiveRecord::Schema.define(:version => 20090624084214) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "time_entries", :force => true do |t|
+    t.datetime "done_date"
+    t.float    "hours"
+    t.text     "description"
+    t.integer  "todo_id"
+    t.integer  "receiver_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "timeline_events", :force => true do |t|
     t.string   "event_type"

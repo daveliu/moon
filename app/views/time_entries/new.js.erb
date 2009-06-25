@@ -1,0 +1,8 @@
+$('div.item_wrapper').removeClass('busy'); 
+
+function results(html){                 
+	$("#item_<%= @todo.id %>_content").html(html)
+}                                                           
+html = "<%= escape_javascript render_to_string(:partial => 'new_todo_time_entry', :locals => {:entry => @time_entry, :todo => @todo}) %>"  
+
+results(html)
