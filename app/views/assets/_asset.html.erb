@@ -1,5 +1,5 @@
-<p id="attachment_31306931">
-	<img src="http://asset3.projectpath.com/images/icons/icon_PDF_small.gif?1245728830" alt="Icon_pdf_small"/>                                                              
+<p id="attachment_31306931">                  
+	<%= image_tag "icons/#{Asset.file_icon(asset.data_file_name)}" %>
 	<span id="controls_for_31306931">
 		<%= asset.data_file_name %>
 		<span class="remove">
