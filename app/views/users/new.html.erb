@@ -1,7 +1,12 @@
-<h1>Register</h1>
-
-<% form_for @user, :url => account_path do |f| %>
-  <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
-  <%= f.submit "Register" %>
-<% end %>
+<div class="page_header">
+	<h1>Add a person</h1>
+</div>
+<div class="innercol">
+	<% form_for @user, :url => account_path do |f| %>
+		<div id="basic_form">
+			<%= f.error_messages %>
+		  <%= render :partial => "form", :object => f %>
+		  <%= f.submit "add this person" %>
+		</div>
+	<% end %>
+</div>	

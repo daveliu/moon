@@ -12,5 +12,9 @@ class Message < ActiveRecord::Base
   validates_presence_of :title, :body                                                        
   
   fires :new_message, :on                 => :create,
-                      :actor              => :creator
+                      :actor              => :creator    
+                      
+  def day
+    self.created_at.to_date
+  end                    
 end

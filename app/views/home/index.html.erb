@@ -35,11 +35,24 @@
 		</table>
 	</div>
 	<table class="overview">   
-		<% @events.each do |event| %>      
-			<% next if event.subject.nil? %>
-			<tr class="event">
-				<%= render :partial => "events/#{event.subject_type.downcase}", :locals => {:event => event} %>
-			</tr>
+		<% @events.group_by(&:day).each do |day, events| %>
+			<tr class="date">
+				<td colspan="4">
+				<h2 class="date">
+					<% if today?(day) %>
+						<span class="today"><%=  day %></span>
+					<% else %>	                            
+						<span><%=  day %></span>
+					<% end -%>
+				</h2>
+				</td>
+			</tr>	
+			<% events.each do |event| %>      
+				<% next if event.subject.nil? %>
+				<tr class="event">
+					<%= render :partial => "events/#{event.subject_type.downcase}", :locals => {:event => event} %>
+				</tr>     
+			<% end -%>	
 		<% end -%>	
 	</table>	
 </div>	

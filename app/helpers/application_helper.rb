@@ -19,4 +19,8 @@ module ApplicationHelper
   def state_path(milestone)           
     milestone.completed? ? reopen_milestone_path(milestone) : complete_milestone_path(milestone)
   end
+  
+  def today?(date)
+    Time.now.to_date == date
+  end
 end

@@ -1,9 +1,31 @@
-<h1>Edit My Account</h1>
+<div class="page_header">
+	<h1>Edit this person</h1>
+</div>
+<div class="innercol">
+	<% form_for @user, :url => account_path, :html => {:multipart => true} do |f| %>
+		<div id="basic_form">
+			<%= f.error_messages %>
+			<div class="block">
+		  	<%= render :partial => "form", :object => f %>
+		  </div>
+		  <%= f.submit "update" %>
+		</div>
+	<% end %>
+</div>
 
-<% form_for @user, :url => account_path do |f| %>
-  <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
-  <%= f.submit "Update" %>
-<% end %>
 
-<br /><%= link_to "My Profile", account_path %>
+<% content_for :side do  %>
+	<div class="people">
+	<div id="firm_employee_3926628" class="contact">
+		<div class="avatar">
+			<%= image_tag @user.avatar.url(:thumb), :class => "avatar" %>
+		</div>
+		<div class="body">  
+				<h3><%= @user.login %></h3>
+				<%= @user.email %>
+			<br/>
+			<div class="edit"> </div>
+		</div>                     
+	</div>
+	</div>	
+<% end -%>

@@ -1,0 +1,26 @@
+<div class="page_header">
+	<h1>
+		People on this project<a class="change_perms" href="/users/new">添加成员</a>
+	</h1>
+</div>
+<div class="innercol">
+	<div id="firm_1424193" class="company">
+		<h1>beibeigan</h1>
+		<% @accounts.each do |account| %>
+			<div class="people_column">
+				<div id="company_1424193" class="contact">
+					<div class="avatar">
+					 	<img src="http://asset1.projectpath.com/images/company_avatar.gif?1245899448" alt="Company_avatar"/>
+					</div>
+					<div class="body">
+						<h3><%= account.login %></h3>
+						<div class="edit">
+							<%= link_to "edit", edit_user_path(account) %>
+						</div>
+					</div>
+				</div>
+			</div>    
+		<% end -%>
+		<div style="clear: both;"> </div>
+	</div>
+</div>	
