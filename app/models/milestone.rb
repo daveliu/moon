@@ -1,4 +1,6 @@
 class Milestone < ActiveRecord::Base
+  default_scope :order => 'due ASC'
+    
   belongs_to :creator, :class_name => "User", :foreign_key => "creator_id"
   belongs_to :receiver, :class_name => "User", :foreign_key => "receiver_id"
   belongs_to :project
@@ -30,15 +32,24 @@ class Milestone < ActiveRecord::Base
   
   named_scope :by_state, lambda {|state| {:conditions => ["state = ?", state]}}
   
-  before_save :set_state
+  before_save :set_due  # 00:00 to 23:59     
+  
+  def self.set_late
+    update_all("state = 'late'", "due < '#{Time.now}' AND state = 'upcoming'")
+  end
   
   def is_late?
     (Time.now > self.due) && upcoming?
+  end       
+  
+  def time_ago                              
+      "超过了#{Time.now.to_date - due.to_date}天"
   end
   
   
-  private
-   def set_state
-     out_date! if(is_late?)
-   end
+  private                               
+  def set_due
+    self.due = due + 23.hours + 59.minutes
+  end
+
 end

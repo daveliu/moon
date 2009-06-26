@@ -3,7 +3,8 @@ class MilestonesController < ApplicationController
     belongs_to :project
     
     index.before do
-      get_milestones
+      get_milestones      
+      Milestone.set_late # upcoming to late
     end
     
     create.before do

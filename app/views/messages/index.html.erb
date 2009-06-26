@@ -52,11 +52,10 @@
 			</a>
 		</div>
 		<% Category.all.each do |category| %>
-      <div class="category">
-			  <a class="category_link <%= "current" if(params[:category_id] && params[:category_id].to_i==category.id) %>" href="<%= project_messages_path(@project, :category_id => category.id) %>">
-				  <span><%= category.name %></span>
-			  </a>
-		  </div>
+			<%= render :partial => "categories/category", :locals => { :category => category } %>
 		<% end -%>
+		<div id="add_new_category" class="category" style="display: none;">
+			<a id="add_new_category_link" class="category_link admin" onclick="categories.addNew(); return false;" href="<%= project_categories_path(@project) %>">Add another category</a>
+		</div>
 	</div>		
 <% end -%>

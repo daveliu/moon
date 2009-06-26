@@ -1,0 +1,5 @@
+function results(html){                 
+	$("#category_menu_item_<%= @category.id %>").replaceWith(html)
+}
+results("<%= escape_javascript render_to_string(:partial => 'category', :locals => {:category => @category}) %>")
+

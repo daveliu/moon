@@ -1,0 +1,12 @@
+<div class="page_header">
+	<h1>Add a person <%= "to <strong>#{@project.name}</strong>" %></h1>
+</div>
+<div class="innercol">
+	<% form_for @project, :url => add_user_project_path(@project) do |f| %>
+		<div id="basic_form">
+			<%= f.error_messages %>
+		  <%= render :partial => "users/form", :object => f %>
+		  <%= f.submit "add this person" %>
+		</div>
+	<% end %>
+</div>

@@ -1,7 +1,7 @@
 <div class="innercol">
 	<div id="milestone_10401126" class="page_header">
 		<h1>
-			<span><%= link_to "返回", milestones_path %></span>
+			<span><%= link_to "查看所有milestone", milestones_path(@milestone.project) %></span>
 		</h1>
 		<div class="check_box_commentable">
 			<h3 class="<%= @milestone.state %>">      

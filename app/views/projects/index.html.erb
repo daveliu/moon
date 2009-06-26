@@ -1,58 +1,30 @@
 <div class="page_header">
-	<div class="page_header_links">
-		<a class="admin" href="/messages/new">New message</a>
-		|
-		<a class="admin" href="/todo_lists/new">New to-do list</a>
-		|
-		<a class="admin" href="/milestones/new">New milestone</a>
-	</div>
-	<h1>概览</h1>
+	<h1>你的全部项目</h1>
 </div>
 <div class="innercol">
-	<div id="dashboard_calendar" class="dashboard_calendar">
-		<table class="milestones">
-		<tr>
-			<th> Late & Upcoming Milestones </th>
-		</tr>
-		<tr>
-			<td>
-				<div class="latemilestones">
-					<ul>   
-						<% @lates.each do |milestone| %>
-							<%= render :partial => "milestone", :locals => { :milestone => milestone } %>
-						<% end -%>
-					</ul>
-				</div>  
-				<div class="upcomingmilestones">
-					<ul>   
-						<% @upcomings.each do |milestone| %>
-							<%= render :partial => "milestone", :locals => { :milestone => milestone } %>
-						<% end -%>
-					</ul>
-				</div>
-			</td>
-		</tr>
-		</table>
+	<% @projects.each do |project| %>
+		<div class="dashboard_calendar">
+			<table class="milestones">
+			  <tr>    
+					<th><%= link_to project.name, project_path(project) %></th>
+			  </tr>
+			</table>
+		</div>                       
+	<% end -%>	
+</div> 
+
+
+<% content_for :side do %>
+	<div class="SectionHeader">
+		<div class="button_to_add_new">
+			<a class="image" href="<%= new_project_path %>">
+				<img src="/images/new_project.gif" alt="New project"/>
+			</a>
+		</div>
 	</div>
-	<table class="overview">   
-		<% @events.group_by(&:day).each do |day, events| %>
-			<tr class="date">
-				<td colspan="4">
-				<h2 class="date">
-					<% if today?(day) %>
-						<span class="today"><%=  day %></span>
-					<% else %>	                            
-						<span><%=  day %></span>
-					<% end -%>
-				</h2>
-				</td>
-			</tr>	
-			<% events.each do |event| %>      
-				<% next if event.subject.nil? %>
-				<tr class="event">
-					<%= render :partial => "events/#{event.subject_type.downcase}", :locals => {:event => event} %>
-				</tr>     
-			<% end -%>	
-		<% end -%>	
-	</table>	
-</div>	
+<% end -%>	
+
+<% content_for :tab do %>
+	<%= tab_fu("项目", projects_path) %>        
+	<%= tab_fu("用户管理", "/users") %>
+<% end -%>	

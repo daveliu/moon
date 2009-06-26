@@ -10,7 +10,6 @@ function resetForm(id) {
 	});
 }	
 
-
 $(document).ready(function(){
 	$("div.hover_container").live("mouseover", function(){
 		$(this).addClass('hover'); 
@@ -158,3 +157,56 @@ var TimeHandler = {
   }
 }
 
+
+categories = {
+  toggleEdit: function() {
+    if($('#edit_categories_link').hasClass('active')) {
+      $('#CategoryList').removeClass("editing")
+      $('#edit_categories_link').removeClass("active")
+    } else {
+      $('#CategoryList').addClass("editing")
+      $('#edit_categories_link').addClass("active")
+    }
+    $('#add_new_category').toggle();
+  },
+
+  cancelEdit: function(id) {
+    $('edit_category_' + id).remove()
+    $('category_menu_item_' + id).show()
+  },
+
+  edit: function(id, name, url) {
+    name = prompt("Rename this category", name);
+    if(name) {
+      $.ajax({
+		    type: 'PUT', 
+				url: url, 
+				dataType: 'script',
+				data: 'category[name]=' + encodeURIComponent(name),
+			});
+    }
+  },
+
+  addNew: function() {
+//    toggle = function() { $('#add_new_category_link').each(Element.toggle); };
+    categories.add({});
+  },
+
+  add: function(options) {
+    options = options || {};
+    var name = prompt("Enter the new category name:", "");
+    if(name && name.length > 1) {    
+	    $.ajax({
+		    type: 'POST', 
+				url: $('#add_new_category_link').attr('href'),
+				dataType: 'script',
+				data: 'category[name]=' + encodeURIComponent(name),
+			});
+    }
+  },
+
+  addFailed: function(request, options) {
+    alert("An error prevented the category from being added. Please try again.")
+    if(options.addFailed) options.addFailed(req);
+  }
+}

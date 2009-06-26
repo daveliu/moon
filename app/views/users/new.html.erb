@@ -1,5 +1,5 @@
 <div class="page_header">
-	<h1>Add a person</h1>
+	<h1>Add a person <%= "to <strong>#{@project.name}</strong>" if(@project) %></h1>
 </div>
 <div class="innercol">
 	<% form_for @user, :url => account_path do |f| %>

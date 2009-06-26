@@ -9,7 +9,7 @@
 		<div id="buttons">
 			<input type="button" value="Post this message" onclick="$('#message_form').submit();"/>
 			or
-			<a class="admin" onclick="return confirm('Are you sure? Any changes to this message will be lost.');" href="">Cancel</a>
+			<a class="admin" onclick="return confirm('Are you sure? Any changes to this message will be lost.');" href="<%= project_messages_path(@project) %>">Cancel</a>
 		</div>
 	</div>
 </div>	

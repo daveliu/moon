@@ -1,0 +1,9 @@
+<div id="category_menu_item_<%= category.id %>" class="category">                                           
+	<div class="operations">
+		<a id="operation_rename_34167934" class="admin" onclick="categories.edit(<%= category.id %>, '<%= category.name %>', '<%= category_path(category) %>'); return false;" href="#">Rename</a>
+	</a>
+	</div>
+  <a class="category_link <%= "current" if(params[:category_id] && params[:category_id].to_i==category.id) %>" href="<%= project_messages_path(current_project, :category_id => category.id) %>">
+	  <span><%= category.name %></span>
+  </a>
+</div>

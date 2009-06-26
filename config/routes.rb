@@ -4,7 +4,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.connect 'logout', :controller => "user_sessions", :action => "destroy"
 
-  map.resources :projects, :has_many => [:messages, :assets, :time_entries, :todo_lists], :shallow => true 
+  map.resources :projects, :has_many => [:messages, :assets, :time_entries, :todo_lists, :categories], 
+   :collection => {:project_users => :get}, 
+   :member => {:add_user => :any, :update_project_user => :post},
+   :shallow => true 
 #  map.resources :todo_lists, :path_prefix => '/projects/:project_id', :has_many => :todos, :shallow => true                                
   map.resources :todos, :path_prefix => "/todo_lists/:todo_list_id", :has_many => :time_entries, :shallow => true, :member => {:add_time_entry => :post}
   map.complete_todo 'todos/:id/complete', :controller => "todos", :action => "complete"

@@ -56,3 +56,16 @@
 		<% end -%>	
 	</table>	
 </div>
+
+
+<% content_for :side do  %>
+	<h1>People on this project</h1>
+	<div class="indent people_on_project">
+	<h2><%= @project.name %></h2>
+	<% @project.users.each do |user| %>
+		<p>       
+			<%= user.login %>
+		</p>      
+	<% end -%>
+	</div>	                  
+<% end -%>

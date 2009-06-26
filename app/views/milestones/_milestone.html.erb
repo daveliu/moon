@@ -12,7 +12,7 @@
 			</div>
 		</div>
 		<h2 class="<%= milestone.state %>">
-			<%= time_ago_in_words milestone.due %>
+			<%= relative_date_in_past milestone.due.to_date %>
 			<span class="light">
 				(<%= milestone.due.to_date %>)
 			</span>

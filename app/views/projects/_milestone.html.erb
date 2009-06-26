@@ -1,5 +1,11 @@
 <li>
-	<strong><%= milestone.due.to_date %></strong>:
+	<strong>
+		<% if milestone.late?   %>
+		  <%= milestone.time_ago %>
+		<% else %>
+		  <%= milestone.due.to_date %>
+		<% end -%>
+	</strong>:
 	<%= link_to milestone.title, milestone_path(milestone) %>
 	<% if milestone.receiver %>
 		(<%= milestone.receiver.login %>负责)

@@ -31,9 +31,9 @@
 					</div>
 					<div class="submit">
 						<p>
-						<input type="submit" value="Create this list"/>
-						<span>or</span>
-						<a class="admin" href="#">Cancel</a>
+							<input type="submit" value="Create this list"/>
+							<span>or</span>
+							<%= link_to "Cancel", project_todo_lists_path(@project), :class => "admin" %>
 						</p>
 					</div>	
 				<% end -%>

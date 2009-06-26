@@ -1,11 +1,16 @@
 <div class="page_header">
-	<h1>
-		People on this project<a class="change_perms" href="/users/new">添加成员</a>
+	<h1>                                                        
+		<% if @project %>
+			People on <%= @project.name %> project           
+		<% else %>
+		  全部成员
+		<% end -%>                               
+		<a class="change_perms" href="/users/new">添加成员</a>         
 	</h1>
 </div>
 <div class="innercol">
 	<div id="firm_1424193" class="company">
-		<h1>beibeigan</h1>
+		<h1>成员列表</h1>
 		<% @accounts.each do |account| %>
 			<div class="people_column">
 				<div id="company_1424193" class="contact">

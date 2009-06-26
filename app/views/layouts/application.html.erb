@@ -23,9 +23,9 @@
 					<span class="pipe">|</span>
 					<%= link_to "退出", '/logout' %>
 				</span>                         
-				<a href="https://beibeigan.basecamphq.com/clients">Back to Dashboard</a>
+				<a href="<%= projects_path %>">全部项目</a>
 			</h3>
-			<h1>beibeigan</h1>
+			<h1><%= current_project ? current_project.name : "全部项目" %></h1>
 			<div id="Tabs">
 				<ul id="MainTabs">
 					<%= yield(:tab) || render(:partial => 'shared/tabs') %> 
