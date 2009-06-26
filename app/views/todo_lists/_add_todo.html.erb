@@ -1,6 +1,6 @@
 <div class="add_item">      
 	<div id="list_<%= list.id %>_new_item" class="widget list_widget item_wrapper" style="display: none;">       
-		<% form_for Todo.new, :url => todo_list_todos_path(list), :html => {
+		<% form_for Todo.new, :url => todos_path(list), :html => {
 			:onsubmit => "$.ajax({
 		    type:'POST', url: $(this).attr('action'), dataType: 'script', data: $(this).serialize()});return false;"
 		} do |todo_form| -%>

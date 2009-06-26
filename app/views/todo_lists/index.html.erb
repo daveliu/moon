@@ -10,7 +10,7 @@
 	<div class="page content">
 		<div id="widgets" class="widget_parent lists" style="position: relative;">
 			<% @todo_lists.each do |list| %>
-				<%= render :partial => "todo_list_show", :locals => {:list => list} %>
+				<%= render :partial => "todo_list_show", :locals => {:list => list, :project => @project} %>
 			<% end -%>
 		</div>
 	</div>
@@ -24,7 +24,7 @@
 	</div>
 	<div id="sidebar">
 		<div class="indent">
-			<% form_tag todo_lists_path, :method => "GET", :html => {:style=>"margin: 0pt; padding: 0pt;"} do %>
+			<% form_tag project_todo_lists_path(@project), :method => "GET", :html => {:style=>"margin: 0pt; padding: 0pt;"} do %>
 				<p>
 					Show to-dos assigned to:
 					<br/>

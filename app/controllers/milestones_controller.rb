@@ -1,14 +1,16 @@
 class MilestonesController < ApplicationController
     resource_controller  
+    belongs_to :project
     
-    def index
+    index.before do
       get_milestones
     end
     
     create.before do
       object.creator = current_user
+      object.project = @project
     end
-    create.wants.html { redirect_to collection_url }
+    create.wants.html { redirect_to milestones_path(@project) }
     create.flash ""   
     
     show.before do

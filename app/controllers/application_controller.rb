@@ -4,12 +4,16 @@
 class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user, 
-                :render_to_string, :controller_name, :action_name  
+                :render_to_string, :controller_name, :action_name, :current_project  
   filter_parameter_logging :password, :password_confirmation
   
   before_filter :set_body_class
   
-  private                      
+  private       
+    def current_project
+      Project.find_by_id(session[:project_id]) || current_user.projects.first || Project.first
+    end                
+    
     def set_body_class
       @body_class = ""
     end

@@ -3,16 +3,16 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :user_session
   map.connect 'logout', :controller => "user_sessions", :action => "destroy"
-  
-  map.resources :messages
-  map.resources :todo_lists, :has_many => :todos, :shallow => true                                
+
+  map.resources :projects, :has_many => [:messages, :assets, :time_entries, :todo_lists], :shallow => true 
+#  map.resources :todo_lists, :path_prefix => '/projects/:project_id', :has_many => :todos, :shallow => true                                
+  map.resources :todos, :path_prefix => "/todo_lists/:todo_list_id", :has_many => :time_entries, :shallow => true, :member => {:add_time_entry => :post}
   map.complete_todo 'todos/:id/complete', :controller => "todos", :action => "complete"
   map.reopen_todo 'todos/:id/reopen', :controller => "todos", :action => "reopen"
-  map.resources :milestones, :member => {:complete => :post, :reopen => :post}                                                                
-  map.resources :assets      
+  map.resources :milestones, :path_prefix => '/projects/:project_id', :shallow => true, :member => {:complete => :post, :reopen => :post}                                                                
+#  map.resources :assets      
 #  map.connect 'todos/:id/time_entries', :controller => "time_entries"
-  map.resources :todos, :has_many => :time_entries, :shallow => true, :member => {:add_time_entry => :post}
-  map.resources :time_entries
+#  map.resources :time_entries
   map.resources :comments, :path_prefix => '/:commentable_type/:commentable_id', :shallow => true
   
   map.home 'home', :controller => "home"

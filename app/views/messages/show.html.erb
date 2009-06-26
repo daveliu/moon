@@ -1,11 +1,11 @@
 <div class="page_header">
 	<div class="page_header_links">
-		<%= link_to "new", new_message_path, :class => "admin"  %> |
+		<%= link_to "new", new_project_message_path(@project), :class => "admin"  %> |
 		<%= link_to "edit", edit_message_path(@message), :class => "admin"  %> | 
 		<%= link_to "delete", message_path(@message), :class => "admin", :method => "delete", :confirm => "sure?"  %>
 	</div>
 	<p class="link_back">
-		<%= link_to "« All messages", collection_url %>
+		<%= link_to "« All messages", project_messages_path(@project) %>
 	</p> 
 </div>
 <div class="innercol">   
@@ -13,7 +13,7 @@
 		<h2><%= @message.title %></h2>
 		<p>
 		<span class="label">From:</span>
-		<%= @message.creator.login %>
+		<%= @message.creator.try(:login) %>
 		</p>
 		<p>
 			<span class="label">Date:</span>
@@ -22,7 +22,7 @@
 		<% if @message.category %>
 		<p>
 			<span class="label" style="margin: 0pt; float: none; width: auto;">Category:</span>
-			<%= link_to @message.category.name, messages_path(:category_id => @message.category) %>
+			<%= link_to @message.category.name, project_messages_path(@project, :category_id => @message.category.id) %>
 		</p>                   
 		<% end -%>
 	</div>

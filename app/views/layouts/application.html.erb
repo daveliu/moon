@@ -14,13 +14,16 @@
   	<%= yield :head %> 
   </head>
   <body class="<%= body_class %>">
-		<div id="Header" class="global">
-			<h3>
-				<%= current_user.login if current_user %>
-				<span class="pipe">|</span>
-				<%= link_to "我的信息", edit_account_path %>
-				<span class="pipe">|</span>
-				<%= link_to "退出", '/logout' %>
+		<div id="Header">
+			<h3>    
+				<span id="floatright">
+					<%= current_user.login if current_user %>
+					<span class="pipe">|</span>
+					<%= link_to "我的信息", edit_account_path %>
+					<span class="pipe">|</span>
+					<%= link_to "退出", '/logout' %>
+				</span>                         
+				<a href="https://beibeigan.basecamphq.com/clients">Back to Dashboard</a>
 			</h3>
 			<h1>beibeigan</h1>
 			<div id="Tabs">

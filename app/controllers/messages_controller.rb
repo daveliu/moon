@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
   resource_controller   
+  belongs_to :project
   
-  def index
+  index.after do
     @body_class = "messages forum"
     if params[:category_id]  && !params[:category_id].blank?                     
       @messages = Message.find(:all, :conditions => ["category_id = ?", params[:category_id]])
@@ -9,31 +10,28 @@ class MessagesController < ApplicationController
       @messages = Message.all
     end
   end
+    
   
+  create.before do
+    @message.creator_id = current_user.id
+    @message.project = @project
+  end                        
+  create.wants.html { redirect_to message_path(@message) }
+         
   
-  def create
-    @message = current_user.messages.build(params[:message])
-    if @message.save
-      redirect_to @message
-    else
-      render :action => "new"
-    end
-  end          
-  
-  def show
-    @message = Message.find params[:id]
-    #this is bad----------------
+  show.before do
     @body_class  =  "comments commentable message"
-  end    
+    @project = @message.project
+  end  
   
-  # edit.after do
-  #   @message.assets
-  # end  
   update.flash ""
-  destroy.flash ""
+  destroy.flash ""             
+  
+  destroy.wants.html { redirect_to project_messages_path(@message.project) }   
   
   private
   def set_body_class
     @body_class = "message_form"
   end
+  
 end

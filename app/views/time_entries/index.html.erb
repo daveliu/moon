@@ -13,10 +13,10 @@
 <div class="innercol">                                         
 	<script type="text/javascript">
 	//<![CDATA[
-	TimeHandler.action = {"before":"$(\"#new_time_entry\").addClass(\"busy\")","method":"post","url":"/time_entries"};
+	TimeHandler.action = {"before":"$(\"#new_time_entry\").addClass(\"busy\")","method":"post","url":"<%= project_time_entries_path(@project) %>"};
 	//]]>
 	</script>
-	<% form_for TimeEntry.new, :html => { :id => "entry_adder", :onsubmit => "return TimeHandler.submit()"} do |f| -%>
+	<% form_for [@project, TimeEntry.new], :html => { :id => "entry_adder", :onsubmit => "return TimeHandler.submit()"} do |f| -%>
 	<!-- <form id="entry_adder" onsubmit="return TimeHandler.submit()"> -->
 		<table id="entries" class="TimeTrack">
 			<tbody>

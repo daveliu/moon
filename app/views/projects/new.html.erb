@@ -1,0 +1,29 @@
+<div class="sheet_form container" style="text-align:left;">
+	<div class="page_header">
+		<h1>Create a new project</h1>
+	</div>
+	<div class="innercol">         
+		<% form_for @project do |f| -%>
+		  <div class="form_section">
+				<h2>               
+					Name the project
+					<span>("Home page redesign" or "Marketing ideas", etc.)</span>
+				</h2>
+				<input id="new_project_name" class="text sheet_autofocus" type="text" name="project[name]"/>
+			</div>
+			<div id="link_to_give_access">
+				<h2>               
+					Description the project
+				</h2>
+				<%= f.text_area :description, :class => "text sheet_autofocus" %>
+			</div>
+			<div class="submit">                                           
+				<p>
+					<%= submit_tag %>
+				or
+				<a class="admin"  href="<%= home_path %>">Cancel</a>
+				</p>
+			</div>	
+		<% end -%>
+	</div>	
+</div>	

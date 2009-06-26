@@ -26,7 +26,7 @@
 					<%= message.body %>
 				</div>
 				<h3>
-					 Posted by <%= message.creator.login %>
+					 Posted by <%= message.creator.try(:login) %>
 					<span class="pipe">|</span>
 					<%= link_to "#{message.comments_count} comments", message_url(message) %>
 				</h3>	
@@ -47,13 +47,13 @@
 	</h1>
 	<div id="CategoryList" class="indent"> 
 		<div class="category">
-			<a class="category_link <%= "current" if(params[:category_id].nil?) %>" href="<%= messages_path %>">
+			<a class="category_link <%= "current" if(params[:category_id].nil?) %>" href="<%= project_messages_path(@project) %>">
 				<span>All</span>
 			</a>
 		</div>
 		<% Category.all.each do |category| %>
       <div class="category">
-			  <a class="category_link <%= "current" if(params[:category_id] && params[:category_id].to_i==category.id) %>" href="<%= messages_path(:category_id => category) %>">
+			  <a class="category_link <%= "current" if(params[:category_id] && params[:category_id].to_i==category.id) %>" href="<%= project_messages_path(@project, :category_id => category.id) %>">
 				  <span><%= category.name %></span>
 			  </a>
 		  </div>

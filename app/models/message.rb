@@ -3,6 +3,7 @@ class Message < ActiveRecord::Base
   
   belongs_to :creator, :class_name => "User", :foreign_key => "creator_id"
   belongs_to :category, :class_name => "Category", :foreign_key => "category_id"
+  belongs_to :project
   
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at ASC'
   has_many :assets, :as => :attachable,    :dependent => :destroy, :order => 'created_at ASC'

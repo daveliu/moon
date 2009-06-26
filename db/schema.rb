@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090625092012) do
+ActiveRecord::Schema.define(:version => 20090626015333) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -20,12 +20,14 @@ ActiveRecord::Schema.define(:version => 20090625092012) do
     t.string   "attachable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "comments", :force => true do |t|
@@ -46,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20090625092012) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "comments_count", :default => 0
+    t.integer  "project_id"
   end
 
   create_table "milestones", :force => true do |t|
@@ -57,6 +60,22 @@ ActiveRecord::Schema.define(:version => 20090625092012) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "comments_count"
+    t.integer  "project_id"
+  end
+
+  create_table "project_users", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name",        :limit => 50
+    t.text     "description"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sessions", :force => true do |t|
@@ -78,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20090625092012) do
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "timeline_events", :force => true do |t|
@@ -90,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20090625092012) do
     t.integer  "secondary_subject_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "todo_lists", :force => true do |t|
@@ -100,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20090625092012) do
     t.integer  "todos_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "todos", :force => true do |t|

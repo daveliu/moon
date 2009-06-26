@@ -3,7 +3,7 @@
 		<%= link_to "Delete this list", todo_list_path(@todo_list), :confirm => "确定删除？", :method => "DELETE", :class => "admin" %>
 	</div>
 	<h1>                                         
-		<a class="back" href="/todo_lists">查看所有 to-do lists</a>
+		<%= link_to "查看所有 to-do lists", project_todo_lists_path(@project), :class => "bach" %>
 	</h1>	
 </div>                                                                         
 
