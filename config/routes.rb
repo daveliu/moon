@@ -13,6 +13,8 @@ ActionController::Routing::Routes.draw do |map|
   map.complete_todo 'todos/:id/complete', :controller => "todos", :action => "complete"
   map.reopen_todo 'todos/:id/reopen', :controller => "todos", :action => "reopen"
   map.resources :milestones, :path_prefix => '/projects/:project_id', :shallow => true, :member => {:complete => :post, :reopen => :post}                                                                
+  
+  map.resources :invitations
 #  map.resources :assets      
 #  map.connect 'todos/:id/time_entries', :controller => "time_entries"
 #  map.resources :time_entries

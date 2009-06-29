@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  skip_before_filter :required_user, :onle => [:add_user]
   resource_controller   
 
   index.after do
@@ -29,20 +30,23 @@ class ProjectsController < ApplicationController
     @body_class = "candidates"
   end              
   
-  def add_user
+  def add_user    
     @project = Project.find params[:id]
     if request.post?
       @user = @project.users.build(params[:user])
       if @user.save
-        redirect_to "/projects/project_users"
+        redirect_to "/user_sessions/new"
+      else
+        render :layout => "simple"  
       end
     else              
-      User.all.each do |user|
-        if !@project.users.include?(user)
-          @project.project_users.build :user => user
-        end  
+      @user = User.new
+      if params[:invitation_token] 
+        invitation = Invitation.find_by_token(params[:invitation_token])     
+        @user = User.new(:email => invitation.recipient_email) if invitation
       end
-    end    
+      render :layout => "simple"
+    end                                                 
   end
   
   def update_project_user

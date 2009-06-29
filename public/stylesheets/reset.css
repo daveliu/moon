@@ -122,3 +122,6 @@
 	* html .clearfix { height: 1%;}
 	.clearfix {display: block;}
 	/* End hide from IE-mac */
+	
+	#flash_error{    position:relative;     background:#FEE none repeat scroll 0 0; border:3px solid #911; color:#311; -moz-border-radius-bottomleft:5px; -moz-border-radius-bottomright:5px; -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; font-size:14px; margin:0 0 15px; padding:6px 8px; text-align:left}
+	#flash_notice{  background:#EFE none repeat scroll 0 0; border:3px solid #191; color:#131;   -moz-border-radius-bottomleft:5px; -moz-border-radius-bottomright:5px; -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; font-size:14px; margin:0 0 15px; padding:6px 8px; text-align:left; position:relative}

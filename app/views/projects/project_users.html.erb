@@ -39,7 +39,7 @@
 				<% end -%>	
 				<tr class="candidate">        
 					<td style="color: rgb(119, 119, 119);" colspan="2">
-						<a class="admin" style="font-size: 12px;" href="<%= add_user_project_path(@project) %>">Add a new person</a>
+						<%= link_to "Add a new person", new_invitation_path, :class => "admin" %>
 					</td>
 				</tr>
 				<tr>
