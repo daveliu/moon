@@ -5,7 +5,7 @@
 		  <% form_for :comment,
 		              :url => comments_path(ActiveSupport::Inflector.underscore(commentable.class), commentable.id),
 		              :html => {:id => "comment_form"} do |c| %>
-				<img class="avatar" width="48" height="48" src="/images/person_avatar.gif" alt="Person_avatar"/>
+				<%= image_tag current_user.avatar.url(:thumb), :width => 48, :height => 48, :class => "avatar" %>  
 				<div class="indented">
 					<div class="comment_header">
 						<h3>

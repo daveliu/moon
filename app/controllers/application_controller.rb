@@ -10,13 +10,10 @@ class ApplicationController < ActionController::Base
   before_filter :set_body_class
   
   private       
-    def current_project
-      Project.find_by_id(session[:project_id]) || current_user.projects.first || Project.first
+    def current_project            
+      return @current_project if defined?(@current_project)
+      @current_project = Project.find_by_id(session[:project_id]) || current_user.projects.first || Project.first
     end                                                                            
-    
-    def current_project=(project)
-      session[:project_id] = (project ? project.id : nil)
-    end
     
     def set_body_class
       @body_class = ""

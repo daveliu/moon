@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     @events = @project.timeline_events
 
     @body_class = "overview"
-    current_project = @project
+    session[:project_id] = @project.id
   end            
   
   def project_users

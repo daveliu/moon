@@ -5,4 +5,5 @@ class TimeEntry < ActiveRecord::Base
   belongs_to :receiver, :class_name => "User", :foreign_key => "receiver_id"
   belongs_to :todo                         
   belongs_to :project
+  
 end

@@ -17,5 +17,9 @@ class Message < ActiveRecord::Base
                       
   def day
     self.created_at.to_date
-  end                    
+  end                                      
+  
+  def last_comment
+    comments.last
+  end
 end

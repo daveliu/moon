@@ -1,6 +1,6 @@
 <div id="<%= dom_id(comment) %>" class="comment"> 
 	<div class="float_liner">
-		<img class="avatar" width="48" height="48" src="/images/person_avatar.gif" alt="Person_avatar"/>
+		<%= image_tag(comment.creator.avatar.url(:thumb), :class => "avatar") %>
 		<div class="indented">
 			<div class="comment_header">
 				<h3 class="highlight">

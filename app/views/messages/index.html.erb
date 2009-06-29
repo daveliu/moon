@@ -4,35 +4,33 @@
 	<h1>Messages</h1>
 </div>
 <div class="innercol">
-	<% @messages.group_by(&:day).each do |day, messages| %>
-		<h2 class="date">  
-			<% if today?(day) %>
-				<span class="today"><%=  day %></span>
-			<% else %>	                            
-				<span><%=  day %></span>
-			<% end -%>
-		</h2>
-		<% messages.each do |message| %>
-			<div class="message">
-				<h1 class="title">
-					<%= link_to message.title, message_url(message) %>
-				</h1>
-				<!-- <div class="post_comment_stats">       
-					<h2>
-						<%#= message.comments_count %> comments
-					</h2>	
-				</div>  -->
-				<div class="formatted_text_body">
-					<%= message.body %>
-				</div>
-				<h3>
-					 Posted by <%= message.creator.try(:login) %>
-					<span class="pipe">|</span>
-					<%= link_to "#{message.comments_count} comments", message_url(message) %>
-				</h3>	
-			</div>	                     
+	<table class="forum_view">
+	<tbody>
+		<% @messages.each do |message| %>
+			<tr>
+				<td class="message">
+					<div style="margin-left: 40px;">
+						<a class="visited" href="<%= message_path(message) %>"> 
+							<span class="comments no_comments">
+								<span class="icon"> </span>                  
+								<span class="size"><%= message.comments_count %></span>
+							</span>     
+							<span class="title"><%= message.title %></span>
+						</a>                           
+					<br/>
+					<span class="meta"> <%= message.creator.try(:login) %> <%= message.created_at %> </span>
+					</div>                           
+				</td>
+				<td class="last_comment">
+					<% if message.last_comment %>
+						Last comment by <%= message.last_comment.creator.login %>
+						<%= relative_date(message.last_comment.created_at) %>
+					<% end -%>	  
+				</td>
+			</tr>                        
 		<% end -%>
-	<% end -%>	
+	</tbody>
+	</table>
 </div>
 
 <% content_for :side do  %>
