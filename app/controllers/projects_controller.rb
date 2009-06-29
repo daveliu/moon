@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  skip_before_filter :required_user, :only => [:add_user]
+#  before_filter :require_no_user, :only => [:add_user]
+  skip_before_filter :require_user, :only => [:add_user]
   resource_controller   
 
   index.after do
