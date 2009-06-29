@@ -10,3 +10,8 @@
 		</div>
 	<% end %>
 </div>	
+
+<% content_for :tab do %>
+	<%= tab_fu("项目", projects_path) %>        
+	<%= tab_fu("用户管理", "/users") %>
+<% end -%>
