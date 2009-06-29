@@ -1,0 +1,29 @@
+<% @messages.group_by(&:day).each do |day, messages| %>
+	<h2 class="date">  
+		<% if today?(day) %>
+			<span class="today"><%=  day %></span>
+		<% else %>	                            
+			<span><%=  day %></span>
+		<% end -%>
+	</h2>
+	<% messages.each do |message| %>
+		<div class="message">
+			<h1 class="title">
+				<%= link_to message.title, message_url(message) %>
+			</h1>
+			<!-- <div class="post_comment_stats">       
+				<h2>
+					<%#= message.comments_count %> comments
+				</h2>	
+			</div>  -->
+			<div class="formatted_text_body">
+				<%= message.body %>
+			</div>
+			<h3>
+				 Posted by <%= message.creator.try(:login) %>
+				<span class="pipe">|</span>
+				<%= link_to "#{message.comments_count} comments", message_url(message) %>
+			</h3>	
+		</div>	                     
+	<% end -%>
+<% end -%>
