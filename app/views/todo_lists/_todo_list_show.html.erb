@@ -24,7 +24,7 @@
 		<% if list.milestone %>
 		<p class="listdesc">
 			Related milestone:
-			<%= link_to list.milestone.title, milestone_path(project, list.milestone) %>
+			<%= link_to list.milestone.title, milestone_path(list.milestone) %>
 		</p>                                                                         
 		<% end -%> 
 		<%= render :partial => "todo_list", :locals => { :list => list } %>
