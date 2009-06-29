@@ -1,6 +1,6 @@
 class UserSessionsController < ApplicationController
-  before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => :destroy
+#  before_filter :require_no_user, :only => [:new, :create]
+  skip_before_filter :require_user, :only => [:destroy, :new, :create]
   
   def new
     @user_session = UserSession.new
@@ -13,7 +13,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = "Login successful!"
       redirect_back_or_default projects_path
     else
-      render :action => :new
+      render :action => :new, :layout => "simple"
     end
   end
   

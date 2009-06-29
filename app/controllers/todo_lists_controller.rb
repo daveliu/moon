@@ -2,15 +2,15 @@ class TodoListsController < ApplicationController
   resource_controller           
   belongs_to :project
   
-  index.after do
+  index.before do
     if params[:responsible_party]  && !params[:responsible_party].blank?                     
       @user = User.find(params[:responsible_party])
-      @todo_lists = TodoList.find(:all, :joins => :todos, 
+      @todo_lists = current_project.todo_lists.find(:all, :joins => :todos, 
                     :conditions => ["todos.receiver_id = ?", params[:responsible_party]],
                     :group => "todo_lists.id"
                     )
     else
-      @todo_lists = TodoList.all
+      @todo_lists = current_project.todo_lists
     end    
   end
 

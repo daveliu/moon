@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   has_many :projects,  :through => :project_users
   
   has_attached_file :avatar,  
-     :path => ":rails_root/public/avatars/:attachment/:id/:style/:basename.:extension",
-     :url => "/avatars/:attachment/:id/:style/:basename.:extension",
+     :path => ":rails_root/public/attachments/avatars/:attachment/:id/:style/:basename.:extension",
+     :url => "/attachments/avatars/:attachment/:id/:style/:basename.:extension",
      :styles => {
        :thumb=> "48x48#"
      },

@@ -2,12 +2,12 @@ class MessagesController < ApplicationController
   resource_controller   
   belongs_to :project
   
-  index.after do
+  index.before do
     @body_class = "messages forum"
     if params[:category_id]  && !params[:category_id].blank?                     
-      @messages = Message.find(:all, :conditions => ["category_id = ?", params[:category_id]])
+      @messages = current_project.messages.find(:all, :conditions => ["category_id = ?", params[:category_id]])
     else
-      @messages = Message.all
+      @messages = current_project.messages
     end
   end
     

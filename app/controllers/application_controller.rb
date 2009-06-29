@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
                 :render_to_string, :controller_name, :action_name, :current_project  
   filter_parameter_logging :password, :password_confirmation
   
-  before_filter :set_body_class
+  before_filter :require_user, :set_body_class                             
+  
   
   private       
     def current_project            

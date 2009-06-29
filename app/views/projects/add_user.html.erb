@@ -2,7 +2,7 @@
 	<h1>Add a person <%= "to <strong>#{@project.name}</strong>" %></h1>
 </div>
 <div class="innercol">
-	<% form_for @project, :url => add_user_project_path(@project) do |f| %>
+	<% form_for User.new, :url => add_user_project_path(@project) do |f| %>
 		<div id="basic_form">
 			<%= f.error_messages %>
 		  <%= render :partial => "users/form", :object => f %>

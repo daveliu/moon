@@ -51,8 +51,8 @@ class MilestonesController < ApplicationController
     end  
     
     def get_milestones
-      @lates = Milestone.by_state("late")
-      @upcomings = Milestone.by_state("upcoming")
-      @completes = Milestone.by_state("completed")
+      @lates = current_project.milestones.by_state("late")
+      @upcomings = current_project.milestones.by_state("upcoming")
+      @completes = current_project.milestones.by_state("completed")
     end
 end

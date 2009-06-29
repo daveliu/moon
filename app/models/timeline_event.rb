@@ -12,7 +12,11 @@ class TimelineEvent < ActiveRecord::Base
   end              
   
   private
-    def set_project
-      self.project_id = subject.project_id
+    def set_project             
+      if subject_type == "Todo"
+        self.project_id = subject.todo_list.project_id
+      else                                            
+        self.project_id = subject.project_id
+      end    
     end
 end

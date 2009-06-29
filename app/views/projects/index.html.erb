@@ -7,7 +7,10 @@
 			<table class="milestones">
 			  <tr>    
 					<th><%= link_to project.name, project_path(project) %></th>
-			  </tr>
+			  </tr>                                                        
+				<tr>
+					<td><%= project.description %></td>
+				</tr>
 			</table>
 		</div>                       
 	<% end -%>	
