@@ -93,22 +93,20 @@ var TimeHandler = {
   },
 
   toggleReport: function() {
-    var link = $('report_link')
-    $('inner_page_header').transition(function() {
-      if(link.className.indexOf(this.HIGHLIGHT_CLASS) < 0) {
-        this.original_text = link.innerHTML
-        this.original_class = link.className
-        link.innerHTML = this.CANCEL_REPORT_CREATION
-        link.className += " " + this.HIGHLIGHT_CLASS
-        $('original_title').hide();
-        $('new_time_report').show();
-      } else {
-        $('original_title').show();
-        $('new_time_report').hide();
-        link.innerHTML = TimeHandler.original_text
-        link.className = TimeHandler.original_class
-      }
-    }.bind(this));
+    var link = $('#report_link')[0]
+		if(link.className.indexOf(this.HIGHLIGHT_CLASS) < 0) {
+      this.original_text = link.innerHTML
+      this.original_class = link.className
+      link.innerHTML = this.CANCEL_REPORT_CREATION
+      link.className += " " + this.HIGHLIGHT_CLASS
+      $('#original_title').hide();
+      $('#new_time_report').show();
+    } else {
+      $('#original_title').show();
+      $('#new_time_report').hide();
+      link.innerHTML = TimeHandler.original_text
+      link.className = TimeHandler.original_class
+    }
   },
 
   updateTotals: function(by) {

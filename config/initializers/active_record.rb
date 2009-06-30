@@ -1,5 +1,5 @@
 class ActiveRecord::Base     
-  extend Searchable   
+  # extend Searchable   
 end
 class ActiveRecord::ConnectionAdapters::AbstractAdapter 
   @@queries = [] 

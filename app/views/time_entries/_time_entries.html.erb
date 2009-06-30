@@ -1,0 +1,29 @@
+<script type="text/javascript">
+//<![CDATA[
+TimeHandler.action = {"before":"$(\"#new_time_entry\").addClass(\"busy\")","method":"post","url":"<%= project_time_entries_path(@project) %>"};
+//]]>
+</script>
+<% form_for [@project, TimeEntry.new], :html => { :id => "entry_adder", :onsubmit => "return TimeHandler.submit()"} do |f| -%>
+<!-- <form id="entry_adder" onsubmit="return TimeHandler.submit()"> -->
+	<table id="entries" class="TimeTrack">
+		<tbody>
+		<tr id="header_row">
+			<th class="date">Date</th>
+			<th id="person_column" class="person">Person</th>
+			<th class="hours">Hours</th>
+			<th class="desc">Description</th>
+			<th class="action"> </th>
+		</tr>
+		</tbody>
+		<tbody id="entry_list">
+			<tr id="new_time_entry" class="AddTimeTrack">
+				<%= render :partial => "form" %>                  
+			</tr>	
+			<% @time_entries.each do |entry| %>                 
+			  <%= render :partial => "time_entry", :locals => { :entry => entry } %>
+			<% end -%>
+		</tbody>
+	<tbody id="total">
+	</tbody>
+	</table>
+<% end -%>

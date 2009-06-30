@@ -1,0 +1,27 @@
+<div id="new_time_report" class="new_time_report" style="display: none;">
+	<h1>Create a time report</h1>
+	<% form_for @search do |f| %>
+		<div class="box_with_fields">
+			<table>
+				<tr>
+					<th>Show</th>
+					<td> <%= f.select :creator_id_equals, @project.users.collect {|user|[user.login, user.id]}, :include_blank => "所有人" %>
+					</td>           
+				</tr>
+				<tr>   
+					<th>From</th>
+					<td><%= date_select "date", "start_date", :default => 7.days.ago %></td>
+				</tr>
+				<tr>                         
+					<th>To</th>
+					<td><%= date_select "date", "end_date" %></td>                  
+				</tr>
+			</table>
+		</div>
+		<p class="submit">
+			<input type="submit" value="Create report" name="commit"/>
+			or
+			<a class="admin" onclick="TimeHandler.toggleReport(); return false;" href="#">Cancel</a>
+		</p>
+	<% end -%>
+</div>

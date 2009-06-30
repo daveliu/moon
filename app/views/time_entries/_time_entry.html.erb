@@ -1,12 +1,21 @@
 <tr id="time_entry_<%= entry.id %>" class="entry">
 	<td class="date">
-		<a title="See all hours on this date" href="/projects/3391997/time_entries/report?from=20090625"><%= entry.done_date.to_date %></a>
+		<!-- <a title="See all hours on this date" href="/projects/3391997/time_entries/report?from=20090625"></a> -->
+		<%= entry.done_date.to_date %>
 	</td>
 	<td class="person">                                                
-		<a title="See hours for this person" href="/projects/3391997/time_entries/report?subject_id=3926628"><%= entry.receiver.login %></a>
+		<!-- <a title="See hours for this person" href="/projects/3391997/time_entries/report?subject_id=3926628"></a> -->
+		<%= entry.receiver.login %>
 	</td>
 	<td class="hours"><%= entry.hours %></td>
-	<td class="desc"><%= entry.description %></td>
+	<td class="desc">
+		<% if entry.todo %>
+			<img src="/images/todo_bug.gif" alt="Todo_bug"/>
+			<%= link_to entry.todo.body, todo_list_path(entry.todo.todo_list) %>
+			<br/>
+		<% end -%>	
+		<%= entry.description %>
+	</td>
 	<td class="action">                   
 		<div class="spinner_target">
 			<div class="hide_while_busy">

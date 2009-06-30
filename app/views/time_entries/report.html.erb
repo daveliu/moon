@@ -1,16 +1,20 @@
 <div class="page_header">
 	<div id="inner_page_header" class="inner_page_header">
-		<div id="report_link_block" class="page_header_links">
-			<a id="report_link" class="admin" onclick="TimeHandler.toggleReport(); return false;" href="#">Create a report</a>
+		<div class="page_header_links">    
+			<a id="report_link" class="admin" onclick="TimeHandler.toggleReport(); return false;" href="#">Create another report</a>
+			|
+			<%= link_to "Back", project_time_entries_path(@project) %>
+		</div>
+		<div id="original_title" style="">
+			<h1>Time tracking report</h1>
 		</div>
 		<%= render :partial => "report_form" %>
-		<div id="original_title" style="display: block;">
-			<h1>Time tracking</h1>
-		</div>  
 	</div>
-</div>                      
-
-<div class="innercol">                                         
+</div>
+<div class="innercol">                                          
+	<% if @user_name %>
+		<h1 id="reporttitle">  <%= @user_name %>的从<%= @start_date %>到<%= @end_date %>时间记录 </h1>
+	<% end -%>
 	<script type="text/javascript">
 	//<![CDATA[
 	TimeHandler.action = {"before":"$(\"#new_time_entry\").addClass(\"busy\")","method":"post","url":"<%= project_time_entries_path(@project) %>"};
@@ -29,9 +33,6 @@
 			</tr>
 			</tbody>
 			<tbody id="entry_list">
-				<tr id="new_time_entry" class="AddTimeTrack">
-					<%= render :partial => "form" %>                  
-				</tr>	
 				<% @time_entries.each do |entry| %>                 
 				  <%= render :partial => "time_entry", :locals => { :entry => entry } %>
 				<% end -%>
