@@ -1,14 +1,14 @@
 <% if commentable.comments_count? && (commentable.comments_count >  0) %>
 	<div class="comments hover_target">
 		<a class="comments_link read" href="<%= polymorphic_path(commentable) %>">
-			<img src="http://asset3.projectpath.com/images/comments-read.png?1245728830" alt="Comments"/>
+			<img src="/images/comments-read.png" alt="Comments"/>
 			<span><%= commentable.comments_count %></span>
 		</a>                      
 	</div>
 <% else %>	
 	<div class="comments hover_target">
 		<a class="comments_link empty" href="<%= polymorphic_path(commentable) %>">
-			<img src="http://asset2.projectpath.com/images/comments-empty.png" alt="Comments"/>
+			<img src="/images/comments-empty.png" alt="Comments"/>
 		</a>
 	</div>    
 <% end -%>

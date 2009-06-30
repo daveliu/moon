@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 #  before_filter :require_no_user, :only => [:new, :create]
+  resource_controller
   
   
   def index             
@@ -25,12 +26,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = @current_user
+    @user = User.find(params[:id])
     @body_class = "edit_person companies unprintable"
   end
   
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
+    @user = User.find(params[:id]) # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
       redirect_to edit_user_path(@user)
@@ -38,6 +39,8 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
+  
+  
   
   private
   def set_body_class

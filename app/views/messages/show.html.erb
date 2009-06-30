@@ -28,7 +28,7 @@
 	</div>
 	<div id="OriginalPost" class="message">
 		<div class="formatted_text_body">
-			<%= @message.body %>
+			<%= simple_format @message.body %>
 		</div>  
 		<div class="uploaded_images">                     
 			<% @message.assets.images.each do |asset| %>

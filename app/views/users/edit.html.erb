@@ -1,12 +1,18 @@
 <div class="page_header">
+	<div class="page_header_links">
+	 <%= link_to "Delete this person", user_path(@user), :confirm => "are you sure?", :method => "delete", :class => "admin" %>
+	</div>
 	<h1>Edit this person</h1>
 </div>
 <div class="innercol">
-	<% form_for @user, :url => account_path, :html => {:multipart => true} do |f| %>
+	<% form_for @user,  :html => {:multipart => true} do |f| %>
 		<div id="basic_form">
 			<%= f.error_messages %>
-			<div class="block">
-		  	<%= render :partial => "form", :object => f %>
+		  <%= render :partial => "form", :object => f %>
+		  <div class="block">
+		   	<%= f.label :phone, "Phone" %><br/> <%= f.text_field :phone %> <br />
+				<br />
+		   	<%= f.label :skype, "Skype" %><br/> <%= f.text_field :skype %>
 		  </div>
 		  <%= f.submit "update" %>
 		</div>
@@ -21,10 +27,13 @@
 			<%= image_tag @user.avatar.url(:thumb), :class => "avatar" %>
 		</div>
 		<div class="body">  
-				<h3><%= @user.login %></h3>
-				<%= @user.email %>
+			<h3><%= @user.login %></h3>
+			<%= @user.email %>
 			<br/>
-			<div class="edit"> </div>
+			<div class="edit"> 
+				phone: <%= @user.phone %><br />
+				skype: <%= @user.skype %>
+			</div>
 		</div>                     
 	</div>
 	</div>	

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090630061338) do
+ActiveRecord::Schema.define(:version => 20090630090109) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -184,6 +184,10 @@ ActiveRecord::Schema.define(:version => 20090630061338) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "skype"
+    t.string   "phone"
+    t.datetime "birthday"
+    t.string   "title"
   end
 
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"

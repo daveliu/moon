@@ -22,7 +22,8 @@
 			<input  <%= "checked='checked'" if(milestone.completed?) %>  type="checkbox" onclick="$(this).parents('div.Milestone').addClass('busy');
 			$.ajax({
 		    type:'POST', url: '<%= state_path(milestone) %>', dataType: 'script'});return false;"/>
-			<span class="title"><%= milestone.title %></span>
+			<span class="title"><%= milestone.title %></span>   
+		 	<%= render :partial => "comments/comments_count", :locals => { :commentable => milestone } %>
 		</h3>
 		<ul class="attached_to">
 			<% milestone.messages.each do |message| %>
