@@ -9,7 +9,13 @@ class MessagesController < ApplicationController
     else
       @messages = current_project.messages
     end
-  end
+  end   
+  
+  new_action.before do
+    current_project.users.each do |user|
+        @message.notifies.build :user => user
+    end
+  end  
     
   
   create.before do
@@ -22,10 +28,19 @@ class MessagesController < ApplicationController
   show.before do
     @body_class  =  "comments commentable message"
     @project = @message.project
+  end             
+  
+  edit.before do
+    current_project.users.each do |user|
+      if !@message.notify_users.include?(user)
+        @message.notifies.build :user => user
+      end  
+    end
   end  
   
-  update.flash ""
-  destroy.flash ""             
+  create.flash nil
+  update.flash nil
+  destroy.flash nil             
   
   destroy.wants.html { redirect_to project_messages_path(@message.project) }   
   

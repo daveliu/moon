@@ -8,7 +8,11 @@ class Message < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at ASC'
   has_many :assets, :as => :attachable,    :dependent => :destroy, :order => 'created_at ASC'
   
-  accepts_nested_attributes_for :assets
+  has_many :notifies,  :as => :notifiable, :dependent => :destroy
+  has_many :notify_users, :through => :notifies, :source => :user
+  
+  accepts_nested_attributes_for :assets                          
+  accepts_nested_attributes_for :notifies
   
   validates_presence_of :title, :body                                                        
   

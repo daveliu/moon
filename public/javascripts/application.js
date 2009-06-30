@@ -207,4 +207,17 @@ categories = {
     alert("An error prevented the category from being added. Please try again.")
     if(options.addFailed) options.addFailed(req);
   }
-}
+}        
+
+
+var SelectAllCheckbox = {
+  initialize: function(aggregator) {
+	  $("#"+aggregator).click(function(){
+		  if($(this).attr('checked') != true){                                        
+				$(this).parents('form').find(".checkbox_row input[type=checkbox]").attr('checked', false)
+			}else{		
+			 $(this).parents('form').find(".checkbox_row input[type=checkbox]").attr('checked', true)
+			}      
+		})
+  }
+};

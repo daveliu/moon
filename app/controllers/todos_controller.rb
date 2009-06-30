@@ -7,8 +7,8 @@ class TodosController < ApplicationController
     show.wants.js
     update.wants.js  
     
-    create.flash ""
-    update.flash ""
+    create.flash nil
+    update.flash nil
     
     create.before do
       object.creator = current_user

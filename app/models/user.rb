@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :messages, :class_name => "Message", :foreign_key => "creator_id"
   has_many :project_users
   has_many :projects,  :through => :project_users
+  has_many :notifies
   
   has_attached_file :avatar,  
      :path => ":rails_root/public/attachments/avatars/:attachment/:id/:style/:basename.:extension",
