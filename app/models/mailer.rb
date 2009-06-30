@@ -10,7 +10,7 @@ class Mailer < ActionMailer::Base
   def notify(notify)
     @recipients  = notify.user.email
     @from        = SITE_MAIL
-    @subject     = "内网－－#{notify.user.project.name}"
+    @subject     = "内网"
     @body        = {:notify => notify}
   end
 end
