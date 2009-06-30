@@ -1,5 +1,5 @@
-项目： <%= notify.notifiable.project.name %>
-链接： <%= polymorphic_url(notify.notifiable, :host => SITE_DOMAIN) %>
-发送人： <%= notify.user.login %>
+项目： <%= @notify.notifiable.project.name %>
+链接： <%= polymorphic_url(@notify.notifiable, :host => SITE_DOMAIN) %>
+发送人： <%= @notify.user.login %>
 
-内容： <%= notify.notifiable.body %>
+内容： <%= @notify.notifiable.body %>
