@@ -4,7 +4,7 @@ module ApplicationHelper
      @body_class || ""
   end
   
-  def tab_fu(name, path='', right=false)
+  def tab_fu(name, path='',  highlight=false, right=false)
     html = ""   
     if right
       html << "<li style='float:right;'>"
@@ -12,7 +12,11 @@ module ApplicationHelper
       html << "<li>"
     end            
     
-    html << link_to(name, path)
+    if highlight
+      html << link_to(name, path, :class => "current")
+    else
+      html << link_to(name, path)   
+    end  
     html << "</li>"
   end
   

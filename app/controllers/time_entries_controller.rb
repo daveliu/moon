@@ -21,7 +21,7 @@ class TimeEntriesController < ApplicationController
     if params[:search]
       render :template => "time_entries/report"
     end  
-  end
+  end 
   
   new_action.wants.js
   edit.wants.js

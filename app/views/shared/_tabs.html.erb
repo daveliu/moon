@@ -1,8 +1,8 @@
 <% if current_project %>
-	<%= tab_fu("项目首页", project_path(current_project)) %>        
-	<%= tab_fu("Messages", project_messages_path(current_project)) %>        
-	<%= tab_fu("Todos", project_todo_lists_path(current_project)) %>        
-	<%= tab_fu("Milestones", milestones_path(current_project)) %>    
-	<%= tab_fu("Time", project_time_entries_path(current_project)) %>        
-	<%= tab_fu("用户管理", "/projects/project_users", true) %>
+	<%= tab_fu("项目首页", project_path(current_project), controller_name == "projects" && action_name != "project_users")  %>        
+	<%= tab_fu("Messages", project_messages_path(current_project), controller_name == "message") %>        
+	<%= tab_fu("Todos", project_todo_lists_path(current_project), controller_name == "todo_lists") %>        
+	<%= tab_fu("Milestones", milestones_path(current_project), controller_name == "milestones") %>    
+	<%= tab_fu("Time", project_time_entries_path(current_project), controller_name == "time_entries") %>        
+	<%= tab_fu("用户管理", "/projects/project_users", action_name == "project_users", true) %>
 <% end -%>

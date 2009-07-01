@@ -19,13 +19,15 @@
 	<td class="action">                   
 		<div class="spinner_target">
 			<div class="hide_while_busy">
-				<a class="admin" onclick="$(this).parents('div.spinner_target').addClass('busy');
-				$.ajax({
-			    type:'GET', url: '<%= edit_time_entry_path(entry) %>', dataType: 'script'});return false;" href="#">Edit</a>
-				<a class="image" onclick="if(confirm('确定删除吗?')){$.ajax({type:'DELETE', url: '<%= time_entry_path(entry) %>', dataType: 'script'});
-				  };return false;" href="#">
-					<img src="/images/trash.gif" alt="Delete"/>
-				</a>                       
+				<% if entry.changeable_by?(current_user) %>                               
+					<a class="admin" onclick="$(this).parents('div.spinner_target').addClass('busy');
+					$.ajax({
+				    type:'GET', url: '<%= edit_time_entry_path(entry) %>', dataType: 'script'});return false;" href="#">Edit</a>
+					<a class="image" onclick="if(confirm('确定删除吗?')){$.ajax({type:'DELETE', url: '<%= time_entry_path(entry) %>', dataType: 'script'});
+					  };return false;" href="#">
+						<img src="/images/trash.gif" alt="Delete"/>
+					</a>  
+				<% end -%>	                     
 			</div>
 		</div>
 	</td> 

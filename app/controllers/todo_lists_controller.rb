@@ -20,7 +20,7 @@ class TodoListsController < ApplicationController
     object.project = @project
   end                        
   create.wants.html { redirect_to project_todo_lists_path(@project) }
-  create.flash "" 
+  create.flash nil 
   
   edit.wants.js    
   
@@ -30,10 +30,10 @@ class TodoListsController < ApplicationController
   show.wants.js
   update.wants.js
   
-  update.flash ""
+  update.flash nil
   
   destroy.wants.html { redirect_to project_todo_lists_path(@todo_list.project) }   
-  destroy.flash ""       
+  destroy.flash nil       
   
   
   private

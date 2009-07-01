@@ -1,8 +1,11 @@
 <div class="page_header">
 	<div class="page_header_links">
-		<%= link_to "new", new_project_message_path(@project), :class => "admin"  %> |
-		<%= link_to "edit", edit_message_path(@message), :class => "admin"  %> | 
-		<%= link_to "delete", message_path(@message), :class => "admin", :method => "delete", :confirm => "sure?"  %>
+		<%= link_to "new", new_project_message_path(@project), :class => "admin"  %> 
+		<% if @message.changeable_by?(current_user) %>                               
+			|
+			<%= link_to "edit", edit_message_path(@message), :class => "admin"  %> | 
+			<%= link_to "delete", message_path(@message), :class => "admin", :method => "delete", :confirm => "sure?"  %>                           
+		<% end -%>
 	</div>
 	<p class="link_back">
 		<%= link_to "« All messages", project_messages_path(@project) %>

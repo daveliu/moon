@@ -127,21 +127,22 @@ default_run_options[:pty] = true
 ssh_options[:paranoid] = false 
 ssh_options[:keys] = %w(/Path/To/id_rsa)
 
-namespace :passenger do
-  desc "Restart Application"
-  task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-end
+
+#http://railstips.org/2007/2/12/oops-i-did-it-again
+kill -USR2 `cat tmp/pids/server.pid`
+script/server -d -p 3001 -e production
 
 namespace :deploy do
   desc "Restart the Passenger system."
   task :restart do    
   #  run "cd #{current_path}; rake db:migrate RAILS_ENV=production" 
-    passenger.restart  
-#    run "cd #{current_path}; script/daemons restart" 
+#    run "cd #{current_path} && RAILS_ENV=production rake db:migrate"
+#    run "cd #{current_path} && RAILS_ENV=production mongrel_rails cluster::restart"
+    run "cd #{current_path} && rm -r log && mkdir log && kill -USR2 'cat tmp/pids/server.pid'"
+    run 'script/server -d -p 3001 -e production'
+    run "cd #{current_path}; script/daemons restart" 
   end
-end     
+end
 
 after 'deploy:update_code', 'deploy:link_images' 
 namespace(:deploy) do 
@@ -149,8 +150,45 @@ namespace(:deploy) do
     run "rm -rf #{release_path}/public/attachments"
     run "mkdir -p #{shared_path}/system/attachments"
     run "ln -nfs #{shared_path}/system/attachments #{release_path}/public/attachments"                       
+    run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
+#    run "ln -nfs #{shared_path}/config/mongrel_cluster.yml #{current_path}/config/mongrel_cluster.yml"
   end   
 end
+
+
+namespace :deploy do
+  desc "Create database yaml in shared path" 
+  task :after_setup do
+    database_configuration =<<-EOF
+    production:
+      database: #{application}_production
+      adapter: mysql
+      username: root
+      password:  
+      host: localhost 
+      encoding: utf8
+    EOF
+
+    run "mkdir -p #{shared_path}/config" 
+    put database_configuration, "#{shared_path}/config/database.yml" 
+    
+    cluster_configure = <<-EOF
+      --- 
+      cwd: /home/daveliu/public_html/heros/current
+      log_file: log/mongrel.log
+      port: "3001"
+      environment: production
+      address: 127.0.0.1
+      pid_file: tmp/pids/mongrel.pid
+      servers: 1
+    EOF
+    put cluster_configure,"#{shared_path}/config/mongrel_cluster.yml"
+    
+  end
+  
+end
+
+
 
 
 

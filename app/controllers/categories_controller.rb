@@ -7,5 +7,8 @@ class CategoriesController < ApplicationController
   end     
   create.wants.js
   update.wants.js
+  
+  create.flash nil
+  update.flash nil
 
 end

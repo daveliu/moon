@@ -20,7 +20,7 @@
 				<% f.fields_for :project_users do |pu_form| %>     
 					<% user = pu_form.object.user %>	
 					<%# options = (pu_form.object.new_record? ? {:checked => false} : {}) %>
-					<tr id="firm_employee_3926628" class="candidate first shaded">
+					<tr  class="candidate first shaded">
 						<td class="name" colspan="2">
 							<label>
 								<% if user == current_project.creator %>   

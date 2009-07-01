@@ -2,7 +2,7 @@
 	<%= date_select :time_entry, :done_date %>
 </td>
 <td class="person">                      
-	<%= select :time_entry, :receiver_id, User.all.collect {|u|[u.login, u.id]} %>
+	<%= select :time_entry, :receiver_id, User.all.collect {|u|[u.login, u.id]}, :selected => current_user.id %>
 </td>
 <td class="hours">                    
 	<%= text_field :time_entry, :hours, :size => "4" %>
