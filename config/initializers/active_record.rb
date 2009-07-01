@@ -15,3 +15,5 @@ end
 require 'timeline_fu_additions'
 
 ActiveRecord::Base.send :include, TimelineFu::Fires
+
+require "permission"
