@@ -3,9 +3,14 @@
 		<%= image_tag(comment.creator.avatar.url(:thumb), :class => "avatar") %>
 		<div class="indented">
 			<div class="comment_header">
-				<h3 class="highlight">
-					<span class="delete">
-					</span>
+				<h3 class="highlight">    
+					<% if comment.changeable_by?(current_user) %>
+						<span class="delete">  
+							<a id="delete_comment_39663324" class="image" href="<%= comment_path(comment) %>">
+								<img src="/images/trash.gif" alt="Trash"/>
+							</a>
+						</span>                                  
+					<% end -%>	
 					<a class="permalink" name="38892721" href="#comment_38892721">
 						<strong><%= comment.creator.login %></strong>
 						<%= time_ago_in_words comment.created_at %>
@@ -14,6 +19,16 @@
 			</div>
 			<div class="formatted_text_body">
 				<%= simple_format comment.body %>
+			</div>
+			<div class="uploaded_images">                     
+				<% comment.assets.images.each do |asset| %>
+					<%= link_to image_tag(asset.data.url(:thumb)), asset.data.url, :class => "image" %>
+				<% end -%>
+			</div>                 
+			<div class="attachments">
+				<% comment.assets.not_images.each do |asset| %>
+					<p><%= link_to asset.data_file_name, asset.data.url %></p>
+				<% end -%>
 			</div>
 		</div>
 	</div>

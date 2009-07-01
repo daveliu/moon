@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     respond_to do |wants|
       wants.js { render :text => "" }  
     end
-  end                             
+  end 
   
   private
   def set_body_class

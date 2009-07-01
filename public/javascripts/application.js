@@ -15,7 +15,22 @@ $(document).ready(function(){
 		$(this).addClass('hover'); 
 	}).live("mouseout", function(){ 
     $(this).removeClass('hover'); 
- 	});   
+ 	});       
+
+	// for delete comment
+	$("span.delete a").live('click', function(){    
+	    if(confirm('确定删除?')){
+				$(this).parents('.comment').slideUp('slow').remove()
+		    var url = $(this).attr('href') + '.js'
+				$.ajax({ 
+				  type: "DELETE", 
+				  url: url, 
+				  dataType: "script",
+					data: "_method: DELETE"
+				});   
+			}	
+			return false;
+	 })
 
 })      
 

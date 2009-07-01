@@ -16,29 +16,7 @@
 			</div>
 		</div>	
 	</div>	
-	<div class="attachments_option message_option">
-		<img class="paperclip" src="/images/attachment_block_icon.gif" alt="Attachment_block_icon"/>
-		<div class="indented">
-				<h2>Attach files
-				  <span class="filesize_limit">(each file should be under 100MB)</span>
-				</h2>
-				<div class="pending_attachments">                                    
-					<% @message.assets.each do |asset| %>
-						<%=  render :partial => 'assets/asset', :locals => {:asset => asset} %>
-					<% end -%>
-				</div>
-				<div id="attachment_fields">
-					<div class="pending_attachments">
-					</div>                           
-					<div class="file_selectors">
-						<p class="offscreen"></p>
-						<p class="template">            
-							<input id="" class="file_selectors" type="file" size="30" onchange="PendingAttachments.add(this, 'attachment_fields')" name="message[assets_attributes][0][data]"/>
-						</p>  
-					</div>
-				</div>	  
-		</div>
-	</div>                                         
+	<%= render :partial => "assets/form", :locals => {:attachable => @message, :name => "message"} %>
 	<div class="milestone_option message_option">
 		<h2>和某个milestone关联吗?</h2>
 		<p>
