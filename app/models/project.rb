@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   has_many :project_users
   has_many :users,  :through => :project_users
   has_many :categories
+  has_many :forms
   
   accepts_nested_attributes_for :project_users
   

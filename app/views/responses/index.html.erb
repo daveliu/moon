@@ -1,0 +1,26 @@
+<div class="page_header">
+	<div class="page_header_links">
+	</div>
+	<h1>Responses for form <%= link_to @form.name, form_path(@form) %></h1>
+</div>
+<div class="innercol">
+	<table class="forum_view">
+	<tbody>
+		<% @responses.each do |response| %>
+			<tr>
+				<td class="message">
+					<div style="margin-left: 40px;">
+						<a class="visited" href="<%= response_path(response) %>">    
+							<span class="title"><%= response.creator.try(:login) %> 提交于 <%= response.created_at %> </span>
+						</a>                           
+					<br/>
+					</div>                           
+				</td>
+				<td class="last_comment">
+
+				</td>
+			</tr>                        
+		<% end -%>
+	</tbody>
+	</table>
+</div>

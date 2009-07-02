@@ -1,0 +1,51 @@
+<div class="ss-formwidget-container" style="">
+	<div id=":0.fw_e" class="ss-formwidget-div" style="">
+		<table>
+		<tbody>
+			<tr>
+				<td>
+					<span class="ss-formwidget-fieldlabel">Question Title</span>
+				</td>
+				<td>                                                          
+					<%= f.text_field :name, :class => "ss-formwidget-inputfield" %>
+				</td>
+			</tr>
+		<tr>
+			<td>
+				<span class="ss-formwidget-fieldlabel">Help Text</span>
+			</td>
+			<td>                                                       
+				<%= f.text_field :description, :class => "ss-formwidget-inputfield" %>  
+			</td>                                                        
+		</tr>
+		<tr>
+			<td>
+				<span class="ss-formwidget-fieldlabel">Question Type</span>
+			</td>
+			<td>               
+				<%= f.select :field_format, CustomField::FIELD_FORMATS %>
+			</td>
+		</tr>
+		</tbody>
+		</table> 
+		<div id=":0.fw_fp" class="ss-formwidget-fieldpreview">
+		</div>
+		<!-- <div class="ss-formwidget-buttons">
+			<button id=":0.fw_db" class="goog-inline-block">Done</button>
+			<input id=":0.fw_rcb" class="goog-inline-block ss-formwidget-required-cb" type="checkbox"/>
+			<label class="ss-formwidget-fieldlabel" for=":0.fw_rcb">Make this a required question</label>
+		</div>   -->
+	</div>
+	<div class="ss-formwidget-topright-actions ss-formwidget-showonhover ss-formwidget-sticky">
+	</div>   
+	<div class="ss-formwidget-topright-actions ss-formwidget-showonhover">
+		<div id=":g.fw_eal" class="sprited goog-inline-block ss-formwidget-top-button">
+			<%= image_tag "trash.gif", :title => "删除", :onclick => "$(this).parents('.ss-formwidget-container').hide();$(this).siblings('input[type=hidden]').val(1)" %>                                 
+			<%= f.hidden_field(:_delete) %>
+		</div>
+		<!-- <div id=":g.fw_dq" class="sprited goog-inline-block ss-formwidget-top-button">
+		</div>
+		<div id=":g.fw_rmb" class="sprited goog-inline-block ss-formwidget-top-button">
+		</div> -->
+	</div>
+</div>

@@ -23,49 +23,7 @@
 			<%= f.select :milestone_id, current_project.milestones.collect {|milestone|[milestone.title, milestone.id]},  {:include_blank => "没有milestone"} %>
 		</p>
 	</div>
-	<div class="subscribers message_option">
-		<div class="notification_header">
-			<h2>Subscribe people to receive email notifications</h2>
-			<p>  The people you select will get an email when you post this message.
-			<br/>
-			They'll also be notified by email every time a comment is added.
-			</p>
-		</div>
-		<div class="indented">
-			<div id="NotifyBlock" class="notify">
-				<table class="emailnotification">
-					<tbody id="email_notification_block" class="multiple firm">
-						<tr>
-							<td colspan="3">
-								<p>
-									<input id="notify_all" type="checkbox" value="1" name="notify_all"/>
-									<label for="notify_all">
-									<strong>All of beibeigan</strong>    
-								</label>
-								</p>
-							</td>
-						</tr>
-						<tr class='checkbox_row'>  
-							
-							<% f.fields_for :notifies do |notify_form| %>                                                
-								<td>
-									<% user = notify_form.object.user %>	
-									<% options = (notify_form.object.new_record? ? {:checked => false} : {}) %>  
-									<p>
-										<%= notify_form.check_box :user_id, options, user.id  %>
-										<label for="notify-<%= user.id %>"> <%= user.login %> </label>
-									</p>
-								</td>	
-							<% end -%>
-						</tr>      
-					</tbody>
-				</table>                
-				<script type="text/javascript">
-				//<![CDATA[
-				 SelectAllCheckbox.initialize("notify_all");
-				//]]>
-				</script>
-		</div>
-		</div>
-	</div>
+	
+	<%= render :partial => "shared/notify_form", :locals => { :f => f } %>      
+		
 <% end -%>

@@ -125,3 +125,81 @@
 	
 	#flash_error{    position:relative;     background:#FEE none repeat scroll 0 0; border:3px solid #911; color:#311; -moz-border-radius-bottomleft:5px; -moz-border-radius-bottomright:5px; -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; font-size:14px; margin:0 0 15px; padding:6px 8px; text-align:left}
 	#flash_notice{  background:#EFE none repeat scroll 0 0; border:3px solid #191; color:#131;   -moz-border-radius-bottomleft:5px; -moz-border-radius-bottomright:5px; -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; font-size:14px; margin:0 0 15px; padding:6px 8px; text-align:left; position:relative}
+	
+	
+	/*----------------google css----------------*/
+	.ss-formwidget-container{
+		margin-bottom:8px;          
+		position:relative;
+	}
+	.hover .ss-formwidget-div{
+		background-color:#FFF4C2;
+	} 
+	.hover .ss-formwidget-topright-actions{
+		display:block;
+	} 
+	.ss-formwidget-div {
+	padding:0.5em 2em 1.5em;
+	position:relative;
+	}      
+	
+	.ss-formwidget-div table td {
+	padding:0.5em 1em 0.5em 0;
+	vertical-align:middle;
+	}
+	.ss-formwidget-inputfield {
+	width:20em;
+	}
+	.ss-formwidget-fieldlabel {
+	display:inline;
+	font-weight:bold;
+	position:relative;
+	font-size:12px;
+	}
+	html > body .goog-inline-block {
+	display:inline-block;
+	}
+	.ss-formwidget-required-cb {
+	cursor:pointer;
+	margin:0;
+	padding:0;
+	vertical-align:text-top;
+	}              
+	.ss-formwidget-topright-actions {
+	display:none;
+	position:absolute;
+	right:1em;
+	top:0.5em;
+	}
+	.ss-formwidget-top-button {
+	-moz-border-radius-bottomleft:2px;
+	-moz-border-radius-bottomright:2px;
+	-moz-border-radius-topleft:2px;
+	-moz-border-radius-topright:2px;
+	background-position:-5px -96px;
+	cursor:pointer;
+	height:22px;
+	width:24px;
+	}
+	.ss-form-entry {
+	margin-bottom:1.5em;
+	}
+	.ss-q-title {
+	 font-size:13px;
+	display:block;
+	font-weight:bold;
+	}
+	.ss-q-help {
+	color:#666666;
+	display:block;
+	margin:0.1em 0 0.25em;
+	font-size:11px;
+	}
+	.ss-form-entry input {
+	margin-top:0;
+	vertical-align:middle;
+	}
+	
+	
+	
+	

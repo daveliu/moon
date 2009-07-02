@@ -1,0 +1,38 @@
+<% form_for [@project, @form], :html => {:id => 'message_form', :multipart => true} do |f| -%>
+	
+	<% content_for :head do -%>                                      
+    <% javascript_tag do %>  
+			<%= "var task='#{generate_template(f, :custom_fields, :custom_field_form)}'" %>
+		<% end -%>                 
+	<% end -%>
+
+
+	<div id="post_form_container">
+		<div class="main_attributes">
+			<div class="inner">
+				<div class="input">
+					<h2 class="text_input">Name</h2>
+  				<%= f.text_field :name, :class => "message_title", :size => "50", :style => "width:920px;" %>
+				</div>
+				
+				<div class="input">
+					<h2 class="text_input">Description</h2>
+					<%= f.text_area :description, :style => "height: 150px; width: 920px;", :cols => "40"  %>                                                                                            
+				</div>
+
+			</div>
+			<div class="inner" id="fields">
+			  <% f.fields_for :custom_fields do |field_form| %>
+					<%= render :partial => "custom_field_form", :locals => { :f => field_form } %>
+				<% end -%>	
+		  </div>	
+			<p style="padding-left:10px;">
+				<%= link_to 'Add a field', "", :onclick  => "$('#fields').append(replace_ids (task));return false;" %>
+			</p>
+			
+			<div class="indented">
+				<%= render :partial => "shared/notify_form", :locals => { :f => f } %>
+			</div>
+	</div>	
+
+<% end -%>

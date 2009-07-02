@@ -2,4 +2,9 @@
 链接： <%= polymorphic_url(@notify.notifiable, :host => SITE_DOMAIN) %>
 发送人： <%= @notify.notifiable.creator.login %>
 
-内容： <%= @notify.notifiable.body %>
+
+<% if @notify.notifiable == "Message" %>
+	内容： <%= @notify.notifiable.body %>
+<% elsif @notify.notifiable == "Form" %>	
+	这是一个新的表单，请大家按时填写。
+<% end -%>

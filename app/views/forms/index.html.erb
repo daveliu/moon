@@ -1,0 +1,38 @@
+<div class="page_header">
+	<div class="page_header_links">
+	</div>
+	<h1>Forms</h1>
+</div>
+<div class="innercol">
+	<table class="forum_view">
+	<tbody>
+		<% @forms.each do |form| %>
+			<tr>
+				<td class="message">
+					<div style="margin-left: 40px;">
+						<a class="visited" href="<%= form_path(form) %>">    
+							<span class="title"><%= form.name %></span>
+						</a>                           
+					<br/>
+					<span class="meta"> <%= form.creator.try(:login) %> <%= form.created_at %> </span>
+					</div>                           
+				</td>
+				<td class="last_comment">
+					<% if form.responses.by_creator(current_user).last %>
+						你的最近提交时间
+						<%= relative_date(form.responses.by_creator(current_user).last.created_at) %>
+					<% end -%>	  
+				</td>
+			</tr>                        
+		<% end -%>
+	</tbody>
+	</table>
+</div>
+
+<% content_for :side do  %>
+	<div class="button_to_add_new">
+		<a class="image" href="forms/new">
+			<img src="/images/post_a_new_form.gif" alt="Post a new message"/>
+		</a>
+	</div>		
+<% end -%>

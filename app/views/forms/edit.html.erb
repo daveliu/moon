@@ -1,0 +1,18 @@
+<div class="page_header">
+	<div class="page_header_links">
+	  <%= link_to "删除", form_path(@form), :method => :delete, :confirm => "确定删除?", :class => "admin" %>
+	</div>
+	<h1>Edit this form</h1>
+</div>
+<div class="innercol">
+	<%= render :partial => "form" %>
+</div>
+<div class="page_footer">                                                              
+	<div class="submit">
+		<div id="buttons">
+			<input type="button" value="Save Changes" onclick="$('#message_form').submit();"/>
+			or
+			<a class="admin" onclick="return confirm('Are you sure? Any changes to this message will be lost.');" href="<%= form_path(@form) %>">Cancel</a>
+		</div>
+	</div>
+</div>

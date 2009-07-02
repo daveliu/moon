@@ -1,0 +1,28 @@
+<div class="page_header">
+	<div class="page_header_links">
+	</div>
+	<p class="link_back">
+		<%= link_to "« All response", responses_path(@form) %>
+	</p> 
+</div>
+<div class="innercol">   
+	<div class="form_header">
+		<p>
+		<span class="label">提交人:</span>
+		<%= @response.creator.try(:login) %>
+		</p>
+		<p>
+			<span class="label">提交时间:</span>
+			<%= @response.created_at %>
+		</p>
+	</div>
+	<div id="OriginalPost" class="message">
+	 	<% @form.custom_fields.each_with_index do |field, index| %>
+		  <div class="ss-form-entry">
+				<label class="ss-q-title" for="entry_0"><%= field.name %></label>
+				<label class="ss-q-help" for="entry_3"><%= field.description %></label>
+				回答： <%= field.value_for(@response) %>
+			</div>                               
+		<% end -%>
+	</div>	
+</div>

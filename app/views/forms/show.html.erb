@@ -1,0 +1,77 @@
+<div class="page_header">
+	<div class="page_header_links">
+		<%= link_to "new", new_project_form_path(@project), :class => "admin"  %> 
+		<% if @form.changeable_by?(current_user) %>                               
+			|
+			<%= link_to "edit", edit_form_path(@form), :class => "admin"  %> | 
+			<%= link_to "delete", form_path(@form), :class => "admin", :method => "delete", :confirm => "sure?"  %>                           
+		<% end -%>
+	</div>
+	<p class="link_back">
+		<%= link_to "« All forms", project_forms_path(@project) %>
+	</p> 
+</div>
+<div class="innercol">   
+	<div class="form_header">
+		<h2><%= @form.name %></h2>                   
+		<p><%= simple_format @form.description %></p>
+		<p>
+		<span class="label">创建人:</span>
+		<%= @form.creator.try(:login) %>
+		</p>
+		<p>
+			<span class="label">创建时间:</span>
+			<%= @form.created_at %>
+		</p>
+	</div>
+	<div id="OriginalPost" class="message">
+		<% form_for :response, :url => responses_path(@form), :html => {:id => "response_form"} do |f| -%>
+		 	<% @form.custom_fields.each_with_index do |field, index| %>
+			  <div class="ss-form-entry">
+					<label class="ss-q-title" for="entrya_0"><%= field.name %></label>
+					<label class="ss-q-help" for="entry_3"><%= field.description %></label>
+					<% if field.field_format == "string" %>
+						<input  type="text" size="30"  name="response[custom_values_attributes][<%= index %>][value]"/>
+					<% else %>
+						<textarea  type="text" rows="5" cols="40"  name="response[custom_values_attributes][<%= index %>][value]"></textarea>
+					<% end -%>	  
+					<input  type="hidden" name="response[custom_values_attributes][<%= index %>][custom_field_id]" value="<%= field.id %>" />  
+				</div>                               
+			<% end -%>
+		<% end -%>
+	</div>	
+</div>
+<div class="page_footer">                                                              
+	<div class="submit">
+		<div id="buttons">
+			<input type="button" value="提交" onclick="$('#response_form').submit();"/>
+			or
+			<a class="admin" onclick="return confirm('Are you sure? Any changes to this message will be lost.');" href="<%= project_messages_path(@project) %>">Cancel</a>
+		</div>
+	</div>
+</div>
+
+<% content_for :side do  %>
+
+	<p><%= link_to "查看所有responses", responses_path(@form) %></p>
+	
+	<h1>
+		提交过的成员
+	</h1>           
+	<div id="CategoryList" class="indent"> 
+			<% @form.response_users.each do |user| %>
+				<%= user.login %>
+			<% end -%>
+	</div>
+	
+	<br />
+	
+	<h1>
+		你的所有responses
+	</h1>           
+	<div id="CategoryList" class="indent"> 
+			<% @form.responses.each do |response| %>
+				<%= link_to "#{response.creator.try(:login)} 提交于 #{response.created_at}", response_path(response)  %>
+			<% end -%>
+	</div>
+<% end -%>

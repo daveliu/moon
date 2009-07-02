@@ -1,0 +1,15 @@
+<div class="page_header">
+	<h1>Post a new form</h1>
+</div>
+<div class="innercol">
+	<%= render :partial => "form" %>
+</div>
+<div class="page_footer">                                                              
+	<div class="submit">
+		<div id="buttons">
+			<input type="button" value="Post this message" onclick="$('#message_form').submit();"/>
+			or
+			<a class="admin" onclick="return confirm('Are you sure? Any changes to this message will be lost.');" href="<%= project_messages_path(@project) %>">Cancel</a>
+		</div>
+	</div>
+</div>

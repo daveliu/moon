@@ -16,7 +16,7 @@ class Notify < ActiveRecord::Base
   end                   
   
   def send_email
-  #  Mailer.deliver_notify(self)
-    Mailer.send_later(:deliver_notify, self)
+    Mailer.deliver_notify(self)
+  #  Mailer.send_later(:deliver_notify, self)
   end
 end

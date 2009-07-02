@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090630090109) do
+ActiveRecord::Schema.define(:version => 20090701085635) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -39,6 +39,24 @@ ActiveRecord::Schema.define(:version => 20090630090109) do
     t.datetime "updated_at"
   end
 
+  create_table "custom_fields", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "field_format"
+    t.boolean  "is_required",  :default => false
+    t.integer  "form_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "custom_values", :force => true do |t|
+    t.integer  "custom_field_id", :default => 0, :null => false
+    t.text     "value"
+    t.integer  "response_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
     t.integer  "attempts",   :default => 0
@@ -48,6 +66,15 @@ ActiveRecord::Schema.define(:version => 20090630090109) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forms", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "creator_id"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -104,6 +131,13 @@ ActiveRecord::Schema.define(:version => 20090630090109) do
   create_table "projects", :force => true do |t|
     t.string   "name",        :limit => 50
     t.text     "description"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "responses", :force => true do |t|
+    t.integer  "form_id"
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
