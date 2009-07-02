@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   private       
     def current_project            
       return @current_project if defined?(@current_project)
-      @current_project = Project.find_by_id(session[:project_id]) ||  Project.first
+      @current_project = Project.find_by_id(session[:project_id])  #||  Project.first
     end                                                                            
     
     def set_body_class

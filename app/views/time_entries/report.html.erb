@@ -12,15 +12,8 @@
 	</div>
 </div>
 <div class="innercol">                                          
-	<% if @user_name %>
-		<h1 id="reporttitle">  <%= @user_name %>的从<%= @start_date %>到<%= @end_date %>时间记录 </h1>
-	<% end -%>
-	<script type="text/javascript">
-	//<![CDATA[
-	TimeHandler.action = {"before":"$(\"#new_time_entry\").addClass(\"busy\")","method":"post","url":"<%= project_time_entries_path(@project) %>"};
-	//]]>
-	</script>
-	<% form_for [@project, TimeEntry.new], :html => { :id => "entry_adder", :onsubmit => "return TimeHandler.submit()"} do |f| -%>
+	<h1 id="reporttitle"><%= @user_name %> 从<%= @start_date %>到<%= @end_date %>时间记录 </h1>
+
 	<!-- <form id="entry_adder" onsubmit="return TimeHandler.submit()"> -->
 		<table id="entries" class="TimeTrack">
 			<tbody>
@@ -37,8 +30,23 @@
 				  <%= render :partial => "time_entry", :locals => { :entry => entry } %>
 				<% end -%>
 			</tbody>
-		<tbody id="total">
-		</tbody>
+			<tbody id="total">
+				<tr class="total">
+					<td class="total" colspan="2">TOTAL</td>
+					<td id="hours_subtotal" class="hours"><%= @total_hours %></td>
+					<td class="export" colspan="2">
+
+					</td>
+				</tr>
+			</tbody>
 		</table>
+</div>
+
+
+<% if current_project.nil? %>
+	<% content_for :tab do %>
+		<%= tab_fu("DashBoard", projects_path, controller_name == "projects") %>        
+	  <%= tab_fu("Time", {:controller => "time_entries", :action => "report"}, controller_name == "time_entries") %>        
+		<%= tab_fu("用户管理", "/users", controller_name == "users") %>
 	<% end -%>
-</div>	
+<% end -%>

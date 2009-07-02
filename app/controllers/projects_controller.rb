@@ -3,8 +3,13 @@ class ProjectsController < ApplicationController
   skip_before_filter :require_user, :only => [:add_user]
   resource_controller   
 
-  index.after do
-    current_project = nil
+  index.before do
+    session[:project_id] = nil
+    @body_class = "projects dashboard unprintable has_flash_support"
+    
+    @lates = Milestone.by_state("late")
+    @upcomings = Milestone.by_state("upcoming")
+    @events = TimelineEvent.all
   end
       
   create.before do

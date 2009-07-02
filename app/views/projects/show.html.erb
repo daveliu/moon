@@ -11,27 +11,27 @@
 <div class="innercol">
 	<div id="dashboard_calendar" class="dashboard_calendar">
 		<table class="milestones">
-		<tr>
-			<th> Late & Upcoming Milestones </th>
-		</tr>
-		<tr>
-			<td>
-				<div class="latemilestones">
-					<ul>   
-						<% @lates.each do |milestone| %>
-							<%= render :partial => "milestone", :locals => { :milestone => milestone } %>
-						<% end -%>
-					</ul>
-				</div>  
-				<div class="upcomingmilestones">
-					<ul>   
-						<% @upcomings.each do |milestone| %>
-							<%= render :partial => "milestone", :locals => { :milestone => milestone } %>
-						<% end -%>
-					</ul>
-				</div>
-			</td>
-		</tr>
+			<tr>
+				<th> Late & Upcoming Milestones </th>
+			</tr>
+			<tr>
+				<td>
+					<div class="latemilestones">
+						<ul>   
+							<% @lates.each do |milestone| %>
+								<%= render :partial => "milestone", :locals => { :milestone => milestone } %>
+							<% end -%>
+						</ul>
+					</div>  
+					<div class="upcomingmilestones">
+						<ul>   
+							<% @upcomings.each do |milestone| %>
+								<%= render :partial => "milestone", :locals => { :milestone => milestone } %>
+							<% end -%>
+						</ul>
+					</div>
+				</td>
+			</tr>   
 		</table>
 	</div>
 	<table class="overview">   
@@ -50,7 +50,7 @@
 			<% events.each do |event| %>      
 				<% next if event.subject.nil? %>
 				<tr class="event">
-					<%= render :partial => "events/#{event.subject_type.downcase}", :locals => {:event => event} %>
+					<%= render :partial => "events/#{event.subject_type.downcase}", :locals => {:event => event, :date => false} %>
 				</tr>     
 			<% end -%>	
 		<% end -%>	

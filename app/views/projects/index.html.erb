@@ -1,33 +1,81 @@
 <div class="page_header">
-	<h1>你的全部项目</h1>
+	<h1>你的全部项目中的近期动态</h1>
 </div>
-<div class="innercol">
-	<% @projects.each do |project| %>
-		<div class="dashboard_calendar">
-			<table class="milestones">
-			  <tr>    
-					<th><%= link_to project.name, project_path(project) %></th>
-			  </tr>                                                        
+<div class="innercol">   
+	<div id="dashboard_calendar" class="dashboard_calendar">
+		<table class="milestones">
+			<tr>
+				<th> Late & Upcoming Milestones </th>
+			</tr>
+			<tr>
+				<td>
+					<div class="latemilestones">
+						<ul>   
+							<% @lates.each do |milestone| %>
+								<%= render :partial => "milestone", :locals => { :milestone => milestone } %>
+							<% end -%>
+						</ul>
+					</div>  
+					<div class="upcomingmilestones">
+						<ul>   
+							<% @upcomings.each do |milestone| %>
+								<%= render :partial => "milestone", :locals => { :milestone => milestone } %>
+							<% end -%>
+						</ul>
+					</div>
+				</td>
+			</tr>   
+		</table>
+	</div>
+	<div id="dashboard_log">
+		<table class="overview">   
+			<% @events.group_by(&:project).each do |project, events| %>  
+				<% next if project.nil? %>
 				<tr>
-					<td><%= project.description %></td>
+					<th colspan="5"><%= link_to project.name, project_path(project) %></th>
+				</tr>	
+				<% events.each do |event| %>      
+					<% next if event.subject.nil? %>
+					<tr class="<%= today?(event.created_at.to_date) ? 'today' : '' %>">
+						<%= render :partial => "events/#{event.subject_type.downcase}", :locals => {:event => event, :date => true} %>
+					</tr>     
+				<% end -%>	
+				<tr class="rowblank">
+					<td colspan="5">   </td>
 				</tr>
-			</table>
-		</div>                       
-	<% end -%>	
+			<% end -%>	
+		</table>
+	</div>	
 </div> 
 
 
 <% content_for :side do %>
-	<div class="SectionHeader">
-		<div class="button_to_add_new">
-			<a class="image" href="<%= new_project_path %>">
-				<img src="/images/new_project.gif" alt="New project"/>
-			</a>
+  <div class="col">
+		<div class="SectionHeader">
+			<div class="button_to_add_new">
+				<a class="image" href="<%= new_project_path %>">
+					<img src="/images/new_project.gif" alt="New project"/>
+				</a>
+			</div>
+		</div>          
+		<div class="indent">
+		<div class="ActiveClients">
+		<div class="Client">
+			<h1>beibeigan</h1>
+			<div class="Project">
+				<% @projects.each do |project| %>
+					<%= link_to project.name, project_path(project) %>
+				<% end -%>
+			</div>	
+		</div>
+		</div>
+		</div>
 		</div>
 	</div>
 <% end -%>	
 
 <% content_for :tab do %>
-	<%= tab_fu("项目", projects_path) %>        
-	<%= tab_fu("用户管理", "/users") %>
-<% end -%>	
+	<%= tab_fu("DashBoard", projects_path, controller_name == "projects") %>        
+  <%= tab_fu("Time", {:controller => "time_entries", :action => "report"}, controller_name == "time_entries") %>        
+	<%= tab_fu("用户管理", "/users", controller_name == "users") %>
+<% end -%>

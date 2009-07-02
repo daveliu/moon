@@ -22,8 +22,8 @@ class MilestonesController < ApplicationController
     edit.wants.js
     update.wants.js
     
-    update.flash ""
-    create.flash ""
+    update.flash nil
+    create.flash nil
     
     
     def complete

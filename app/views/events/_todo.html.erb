@@ -12,3 +12,7 @@
 	<% end -%>
 </td>
 <td class="name"><%= event.actor.try(:login) %></td>
+
+<% if date %>
+	<td class="date"><%= relative_date event.created_at %></td>
+<% end -%>

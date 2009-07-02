@@ -50,7 +50,7 @@
 			<% events.each do |event| %>      
 				<% next if event.subject.nil? %>
 				<tr class="event">
-					<%= render :partial => "events/#{event.subject_type.downcase}", :locals => {:event => event} %>
+					<%= render :partial => "events/#{event.subject_type.downcase}", :locals => {:event => event, :date => false} %>
 				</tr>     
 			<% end -%>	
 		<% end -%>	
