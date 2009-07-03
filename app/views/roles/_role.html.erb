@@ -1,0 +1,8 @@
+<div id="role_menu_item_<%= role.id %>" class="category">                                           
+	<div class="operations">
+		<a id="operation_rename_34167934" class="admin" onclick="roles.edit(<%= role.id %>, '<%= role.name %>', '<%= role_path(role) %>'); return false;" href="#">Rename</a>            
+		<%= link_to image_tag("trash.gif"), role_path(role), :class=>"image" %>
+	</div>                                                          
+	<a class="category_link"  href="">	<span><%= role.name %></span></a>
+
+</div>

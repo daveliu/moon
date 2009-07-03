@@ -1,0 +1,47 @@
+<div class="page_header">
+	<div class="sidebar">      
+		<div class="inner">
+		<h2>Administrators can...</h2>
+		<p> 
+			• Create and edit projects
+			<br/>
+			• Manage people
+			<br/>
+			• Edit other peoples' messages
+			<br/>
+			• Change project permissions
+		</p>
+		</div>
+	</div>
+	<h1>Set administrators</h1>
+</div>                                     
+
+<div class="innercol">        
+	<div class="candidates_nav">
+		<a class="cancel" href="/users">
+		  <strong>«</strong>
+		  Cancel  
+		  <span>and don't change administrators</span>
+		</a>
+	</div>
+	<div class="candidates_nav_indent" style="padding-top: 0pt;">     
+		<p>Note: The "administrator" setting applies across all projects.</p>
+		<h2>Which people are administrators?</h2>
+		<% form_tag admin_users_path do %>
+			<p>               
+				<% @users.each do |user| %>                
+					<label>
+						<input  type="checkbox" value="<%= user.id %>" name="admins[]"  <%= "checked=checked'" if user.admin? %>/>
+						<%= user.login %>
+					</label>
+					<br/>                  
+				<% end -%>
+			</p>
+			<p>    
+				<%= submit_tag "save the changes" %>
+			</p>
+		<% end -%>
+		
+	</div>
+	<div style="clear: both;"> </div>
+</div>

@@ -1,0 +1,7 @@
+$('#spinning_abilities_for_<%= params[:user_id] %>').hide() 
+
+<% if current_project.users.include?(User.find(params[:user_id])) %>
+ $('#select_role_<%= params[:user_id] %>').show()
+<% else %>               
+ $('#select_role_<%= params[:user_id] %>').hide()
+<% end -%>

@@ -1,0 +1,5 @@
+function results(html){                 
+	$("#role_menu_item_<%= @role.id %>").replaceWith(html)
+}
+results("<%= escape_javascript render_to_string(:partial => 'role', :locals => {:role => @role}) %>")
+
