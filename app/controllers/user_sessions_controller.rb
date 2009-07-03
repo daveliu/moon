@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      redirect_to projects_path
+      redirect_back_or_default projects_path
     else
       render :action => :new, :layout => "simple"
     end
@@ -18,7 +18,7 @@ class UserSessionsController < ApplicationController
   
   def destroy
     current_user_session.destroy
-    flash[:notice] = "Logout successful!"
+#    flash[:notice] = "Logout successful!"
     redirect_back_or_default new_user_session_url
   end        
   
