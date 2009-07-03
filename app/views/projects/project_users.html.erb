@@ -42,7 +42,8 @@
 								<%= pu_form.select :role_id, current_project.roles.collect {|role|[role.name, role.id]}, {}, {:onchange => "$('#spinning_abilities_for_#{pu_form.object.user.id}').show();$.ajax({ type: 'POST', url: '#{update_project_user_project_path(@project, :user_id => pu_form.object.user.id)}', dataType: 'script', data: 'project_user[role_id]: $(this).val()'});", :id => "select_role_#{pu_form.object.user.id}", :style => select_style} %>    
 							</div>
 							<div style="float:right">       
-							<img id="spinning_abilities_for_<%= pu_form.object.user.id %>" class="spinner" height="5" width="21" style="vertical-align: middle;display:none;" src="/images/indicator.gif" alt="Indicator"/>  
+							 <img id="spinning_abilities_for_<%= pu_form.object.user.id %>" class="spinner" height="5" width="21" style="vertical-align: middle;display:none;" src="/images/indicator.gif" alt="Indicator"/>      
+							<div style="clear:both;"></div>
 							</div>
 						</td>
 					</tr>                                                                      

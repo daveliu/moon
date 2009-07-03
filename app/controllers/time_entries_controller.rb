@@ -43,7 +43,7 @@ class TimeEntriesController < ApplicationController
   
   def set_search
     @start_date =   7.days.ago.to_date
-    @end_date = Time.now.to_date
+    @end_date = Time.now.tomorrow.to_date
     @user_name = "所有人"
     if params[:date]
       @start_date = Date.civil(params[:date][:"start_date(1i)"].to_i,params[:date][:"start_date(2i)"].to_i,params[:date][:"start_date(3i)"].to_i)
