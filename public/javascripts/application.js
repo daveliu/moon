@@ -36,9 +36,24 @@ $(document).ready(function(){
 				});   
 			}	
 			return false;
+	 })    
+	
+	//for delete category and role
+	$(".category  a.image").live('click', function(){    
+	    if(confirm('确定删除?')){
+				$(this).parents('.category').slideUp('slow').remove()
+		    var url = $(this).attr('href') + '.js'
+				$.ajax({ 
+				  type: "DELETE", 
+				  url: url, 
+				  dataType: "script",
+					data: "_method: DELETE"
+				});   
+			}	
+			return false;
 	 })
 
-})
+})                     
 
 
 replace_ids = function(s){
@@ -250,7 +265,62 @@ categories = {
     alert("An error prevented the category from being added. Please try again.")
     if(options.addFailed) options.addFailed(req);
   }
-}        
+} 
+
+
+roles = {
+  toggleEdit: function() {
+    if($('#edit_roles_link').hasClass('active')) {
+      $('#CategoryList').removeClass("editing")
+      $('#edit_roles_link').removeClass("active")
+    } else {
+      $('#CategoryList').addClass("editing")
+      $('#edit_roles_link').addClass("active")
+    }
+    $('#add_new_role').toggle();
+  },
+
+  cancelEdit: function(id) {
+    $('edit_role_' + id).remove()
+    $('role_menu_item_' + id).show()
+  },
+
+  edit: function(id, name, url) {
+    name = prompt("Rename this role", name);
+    if(name) {
+      $.ajax({
+		    type: 'PUT', 
+				url: url, 
+				dataType: 'script',
+				data: 'role[name]=' + encodeURIComponent(name),
+			});
+    }
+  },
+
+  addNew: function() {
+//    toggle = function() { $('#add_new_category_link').each(Element.toggle); };
+    roles.add({});
+  },
+
+  add: function(options) {
+    options = options || {};
+    var name = prompt("Enter the new role name:", "");
+    if(name && name.length > 1) {    
+	    $.ajax({
+		    type: 'POST', 
+				url: $('#add_new_role_link').attr('href'),
+				dataType: 'script',
+				data: 'role[name]=' + encodeURIComponent(name),
+			});
+    }
+  },
+
+  addFailed: function(request, options) {
+    alert("An error prevented the category from being added. Please try again.")
+    if(options.addFailed) options.addFailed(req);
+  }
+}
+       
 
 
 var SelectAllCheckbox = {

@@ -27,13 +27,23 @@
 								  <% options = {:disabled => "disabled"} %>
 								<% else %>
 									<% options = (pu_form.object.new_record? ? {:checked => false} : {}) %>  
+									<% select_style = (pu_form.object.new_record? ? "display:none;" : "")  %>
 								<% end -%>
 								<%= pu_form.check_box :user_id, {:onclick => "$('#spinning_abilities_for_#{pu_form.object.user.id}').show();
 									$.ajax({
-							    type:'POST', url: '#{update_project_user_project_path(@project, :user_id => pu_form.object.user.id)}', dataType: 'script'});"}.merge(options), user.id %>
-								<%= user.login %>       
-							</label>
-							<img id="spinning_abilities_for_<%= pu_form.object.user.id %>" class="spinner" height="5" width="21" style="vertical-align: middle;display:none;" src="/images/indicator.gif" alt="Indicator"/>
+							    type:'POST', url: '#{create_project_user_project_path(@project, :user_id => pu_form.object.user.id)}', dataType: 'script'});"}.merge(options), user.id %>
+							</label>  
+						</td>
+						<td>
+							 <%= user.login %>      
+						</td>
+						<td>              
+							<div>
+								<%= pu_form.select :role_id, current_project.roles.collect {|role|[role.name, role.id]}, {}, {:onchange => "$('#spinning_abilities_for_#{pu_form.object.user.id}').show();$.ajax({ type: 'POST', url: '#{update_project_user_project_path(@project, :user_id => pu_form.object.user.id)}', dataType: 'script', data: 'project_user[role_id]: $(this).val()'});", :id => "select_role_#{pu_form.object.user.id}", :style => select_style} %>    
+							</div>
+							<div style="float:right">       
+							<img id="spinning_abilities_for_<%= pu_form.object.user.id %>" class="spinner" height="5" width="21" style="vertical-align: middle;display:none;" src="/images/indicator.gif" alt="Indicator"/>  
+							</div>
 						</td>
 					</tr>                                                                      
 				<% end -%>	
@@ -49,3 +59,18 @@
 	</div>
 	<div style="clear: both;"> </div>
 </div>	
+
+<% content_for :side do  %>
+	<h1> 
+		<a id="edit_roles_link" class="admin" style="float: right;" onclick="roles.toggleEdit(); return false;" href="#">Edit</a>
+		Role
+	</h1>
+	<div id="CategoryList" class="indent"> 
+		<% current_project.roles.each do |role| %>
+			<%= render :partial => "roles/role", :locals => { :role => role } %>
+		<% end -%>
+		<div id="add_new_role" class="category" style="display: none;">
+			<a id="add_new_role_link" class="category_link admin" onclick="roles.addNew(); return false;" href="<%= roles_path %>">Add new role</a>
+		</div>
+	</div>		
+<% end -%>

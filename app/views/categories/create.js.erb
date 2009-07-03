@@ -1,5 +1,5 @@
 function results(html){                 
-	$($('#CategoryList div.category')[<%= @project.categories.count %>]).after(html) 
+	$($('#CategoryList div.category')[<%= @project.categories.count -1 %>]).before(html) 
 }                 
 
 results("<%=escape_javascript render_to_string(:partial => 'category', :locals => {:category => @category}) %>")

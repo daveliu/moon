@@ -5,11 +5,13 @@
 		<% else %>
 		  全部成员
 		<% end -%>                               
-		<a class="change_perms" href="/users/new">添加成员</a>         
+		<a class="admin" href="/users/new">添加成员</a>         
+		
+		<a class="admin" href="/users/admin">管理admin列表</a>         
 	</h1>
 </div>
 <div class="innercol">
-	<div id="firm_1424193" class="company">
+	<div class="company">
 		<h1>成员列表</h1>
 		<% @accounts.each do |account| %>
 			<div class="people_column">

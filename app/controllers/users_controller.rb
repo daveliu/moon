@@ -38,6 +38,22 @@ class UsersController < ApplicationController
     else
       render :action => :edit
     end
+  end                             
+  
+  def admin          
+    @body_class = "candidates administrators new_candidates has_flash_support"
+    @users = User.all
+    
+    if request.post?
+      @users.each do |user|
+        user.has_no_role!("admin")
+      end
+      params[:admins].each do |id|          
+        User.find_by_id(id).has_role!(:admin)
+      end    
+      flash.now[:notice] = "save success"        
+    end    
+
   end
   
   

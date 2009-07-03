@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090701085635) do
+ActiveRecord::Schema.define(:version => 20090703080425) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20090701085635) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -139,6 +140,22 @@ ActiveRecord::Schema.define(:version => 20090701085635) do
   create_table "responses", :force => true do |t|
     t.integer  "form_id"
     t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name",              :limit => 40
+    t.string   "authorizable_type", :limit => 40
+    t.integer  "authorizable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

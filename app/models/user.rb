@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic     
+  acts_as_authorization_subject
+  
   
   has_many :messages, :class_name => "Message", :foreign_key => "creator_id"
   has_many :project_users, :dependent => :destroy
@@ -15,6 +17,10 @@ class User < ActiveRecord::Base
      :default_url => "person_avatar.gif"
      
   def admin?
-    id == 1  #-------for now
+    has_role?("admin")
   end   
+  
+  def manager?
+    has_role?("manager")
+  end
 end

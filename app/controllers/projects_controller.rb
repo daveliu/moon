@@ -10,6 +10,8 @@ class ProjectsController < ApplicationController
     @lates = Milestone.by_state("late")
     @upcomings = Milestone.by_state("upcoming")
     @events = TimelineEvent.all
+    
+    @projects = current_user.projects
   end
       
   create.before do
@@ -55,13 +57,21 @@ class ProjectsController < ApplicationController
     end                                                 
   end
   
-  def update_project_user
+  def create_project_user
     @project_user = ProjectUser.find_by_project_id_and_user_id(params[:id], params[:user_id])
     if @project_user
       @project_user.destroy
     else
       ProjectUser.create!({:project_id => params[:id], :user_id => params[:user_id]})  
     end  
+    respond_to do |wants|
+      wants.js
+    end
+  end                    
+  
+  def update_project_user
+    @project_user = ProjectUser.find_by_project_id_and_user_id(params[:id], params[:user_id])
+    @project_user.update_attributes(params[:project_user])
     respond_to do |wants|
       wants.js
     end

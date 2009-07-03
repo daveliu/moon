@@ -10,5 +10,5 @@ class CategoriesController < ApplicationController
   
   create.flash nil
   update.flash nil
-
+  destroy.flash nil
 end
