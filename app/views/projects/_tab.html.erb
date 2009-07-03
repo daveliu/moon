@@ -1,0 +1,5 @@
+<% content_for :tab do %>
+	<%= tab_fu("DashBoard", projects_path, controller_name == "projects") %>        
+  <%= tab_fu("Time", {:controller => "time_entries", :action => "report"}, controller_name == "time_entries") %>        
+	<%= tab_fu("用户管理", "/users", controller_name == "users", true) %>
+<% end -%>
