@@ -1,18 +1,38 @@
-<div class="page_header">
-	<div id="inner_page_header" class="inner_page_header">
-		<div class="page_header_links">    
-			<a id="report_link" class="admin" onclick="TimeHandler.toggleReport(); return false;" href="#">Create another report</a>
-			|
-			<%= link_to "Back", project_time_entries_path(@project) %>
+
+<% if @project %>
+	<div class="page_header">
+		<div id="inner_page_header" class="inner_page_header">
+			<div class="page_header_links">    
+				<a id="report_link" class="admin" onclick="TimeHandler.toggleReport(); return false;" href="#">Create another report</a>
+				|
+				<%= link_to "Back", project_time_entries_path(@project) %>
+			</div>
+			<div id="original_title" style="">
+				<h1>Time tracking report</h1>
+			</div>
+			<%= render :partial => "report_form" %>
 		</div>
-		<div id="original_title" style="">
-			<h1>Time tracking report</h1>
+	</div>        
+<% else %>	
+	<div class="page_header">
+		<div id="inner_page_header" class="inner_page_header">
+			<div id="report_link_block" class="page_header_links">
+				<a id="report_link" class="admin" onclick="TimeHandler.toggleReport(); return false;" href="#">Create a report</a>
+			</div>
+			<%= render :partial => "report_form" %>
+			<div id="original_title" style="display: block;">
+				<h1>Time tracking</h1>
+			</div>  
 		</div>
-		<%= render :partial => "report_form" %>
 	</div>
-</div>
+<% end -%>
+
+<% project_name = ((@project_name == "所有项目") ? @project_name : "<a href='/projects/#{Project.find_by_name(@project_name).id}'>#{@project_name}</a>") %>                                               
+
 <div class="innercol">                                          
-	<h1 id="reporttitle"><%= @user_name %> 从<%= @start_date %>到<%= @end_date %>时间记录 </h1>
+	<h1 id="reporttitle">
+		<%= @user_name %> 从<%= @start_date %>到<%= @end_date %><%= "在#{project_name}" if !@project %>的时间记录 
+	</h1>
 
 	<!-- <form id="entry_adder" onsubmit="return TimeHandler.submit()"> -->
 		<table id="entries" class="TimeTrack">
@@ -21,6 +41,7 @@
 				<th class="date">Date</th>
 				<th id="person_column" class="person">Person</th>
 				<th class="hours">Hours</th>
+				<th class="hours">Project</th>
 				<th class="desc">Description</th>
 				<th class="action"> </th>
 			</tr>

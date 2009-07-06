@@ -12,7 +12,7 @@ class TimeEntry < ActiveRecord::Base
   
   private
     def set_project       
-      if todo      
+      if todo     
         self.project_id = todo.todo_list.project_id
       end  
     end

@@ -8,6 +8,7 @@
 		<%= entry.receiver.login %>
 	</td>
 	<td class="hours"><%= entry.hours %></td>
+	<td class="hours"><%= entry.project.try(:name) %></td>
 	<td class="desc">
 		<% if entry.todo %>
 			<img src="/images/todo_bug.gif" alt="Todo_bug"/>

@@ -26,7 +26,10 @@ class TimeEntriesController < ApplicationController
   create.wants.js                                         
   
   update.wants.js
-  destroy.wants.js
+  destroy.wants.js                         
+  
+  update.flash nil
+  destroy.flash nil
   
   def report
     set_search
@@ -45,6 +48,7 @@ class TimeEntriesController < ApplicationController
     @start_date =   7.days.ago.to_date
     @end_date = Time.now.tomorrow.to_date
     @user_name = "所有人"
+    @project_name = "所有项目"
     if params[:date]
       @start_date = Date.civil(params[:date][:"start_date(1i)"].to_i,params[:date][:"start_date(2i)"].to_i,params[:date][:"start_date(3i)"].to_i)
       @end_date = Date.civil(params[:date][:"end_date(1i)"].to_i,params[:date][:"end_date(2i)"].to_i,params[:date][:"end_date(3i)"].to_i)
@@ -54,6 +58,7 @@ class TimeEntriesController < ApplicationController
     if params[:search]
       @conditions = params[:search].merge(date_conditions)
       @user_name = User.find_by_id(params[:search][:creator_id_equals]).try(:login) || "所有人"
+      @project_name = Project.find_by_id(params[:search][:project_id_equals]).try(:name) || "所有项目"
     else
       @conditions = date_conditions
     end

@@ -7,7 +7,14 @@
 					<th>Show</th>
 					<td> <%= f.select :creator_id_equals, User.all.collect {|user|[user.login, user.id]}, :include_blank => "所有人" %>
 					</td>           
-				</tr>
+				</tr>                        
+				<% if !@project %>
+				<tr>   
+					<th>Project</th>
+					<td> <%= f.select :project_id_equals, Project.all.collect {|project|[project.name, project.id]}, :include_blank => "所有项目" %>
+					</td>
+				</tr>   
+				<% end -%>
 				<tr>   
 					<th>From</th>
 					<td><%= date_select "date", "start_date", :default => 7.days.ago %></td>

@@ -1,15 +1,15 @@
 class Project < ActiveRecord::Base
-  has_many :milestones
-  has_many :messages
-  has_many :todo_lists
-  has_many :assets
-  has_many :timeline_events
-  has_many :time_entries
-  has_many :project_users
+  has_many :milestones, :dependent => :destroy 
+  has_many :messages, :dependent => :destroy
+  has_many :todo_lists, :dependent => :destroy
+  has_many :assets, :dependent => :destroy
+  has_many :timeline_events, :dependent => :destroy
+  has_many :time_entries, :dependent => :destroy
+  has_many :project_users, :dependent => :destroy
   has_many :users,  :through => :project_users
-  has_many :categories
-  has_many :forms
-  has_many :roles
+  has_many :categories, :dependent => :destroy
+  has_many :forms, :dependent => :destroy
+  has_many :roles, :dependent => :destroy
   
   accepts_nested_attributes_for :project_users
   
