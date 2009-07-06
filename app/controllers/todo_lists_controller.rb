@@ -1,6 +1,8 @@
 class TodoListsController < ApplicationController
   resource_controller           
-  belongs_to :project
+  belongs_to :project                            
+  
+  after_filter :set_current_project
   
   index.before do
     if params[:responsible_party]  && !params[:responsible_party].blank?                     
@@ -40,5 +42,6 @@ class TodoListsController < ApplicationController
   def set_body_class
     @body_class = "todos nubbins"
   end
+ 
   
 end

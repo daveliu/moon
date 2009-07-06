@@ -77,19 +77,25 @@ class ProjectsController < ApplicationController
     end
   end
   
-  def search
-    milestones = Milestone.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
-    todo_lists = TodoList.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
-    messages = Message.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
+  def search     
+    if current_project
+      milestones = current_project.milestones.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
+      todo_lists = current_project.todo_lists.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
+      messages = current_project.messages.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
+    else   
+      milestones = Milestone.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
+      todo_lists = TodoList.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
+      messages = Message.all(:conditions => ["title LIKE ?", "%#{params[:q]}%"])
+    end  
     
     @results = messages.inject([]) do |ary, message|
-      ary << {:title => message.title, :url => "#{message_path(message)}", :type => "message"}
+      ary << {:title => message.title, :url => "#{message_path(message, :project_id => message.project.id)}", :type => "message"}
     end       
     @results += milestones.inject([]) do |ary, milestone|
-      ary << {:title => milestone.title, :url => "#{milestone_path(milestone)}", :type => "milestone"}
+      ary << {:title => milestone.title, :url => "#{milestone_path(milestone, :project_id => milestone.project.id)}", :type => "milestone"}
     end                                                                                             
     @results += todo_lists.inject([]) do |ary, todo_list|
-      ary << {:title => todo_list.title, :url => "#{todo_list_path(todo_list)}", :type => "todo_list"}
+      ary << {:title => todo_list.title, :url => "#{todo_list_path(todo_list, :project_id => todo_list.project.id)}", :type => "todo_list"}
     end
     
     respond_to do |wants| 

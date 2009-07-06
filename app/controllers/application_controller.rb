@@ -7,10 +7,15 @@ class ApplicationController < ActionController::Base
                 :render_to_string, :controller_name, :action_name, :current_project  
   filter_parameter_logging :password, :password_confirmation
   
-  before_filter :require_user, :set_body_class                             
+  before_filter :require_user, :set_body_class, :set_current_project
   
   
-  private       
+  private                                                               
+    #-----------maybe better way????
+    def set_current_project
+      session[:project_id] ||= params[:project_id] if params[:project_id]
+    end
+  
     def current_project            
       return @current_project if defined?(@current_project)
       @current_project = Project.find_by_id(session[:project_id])  #||  Project.first
