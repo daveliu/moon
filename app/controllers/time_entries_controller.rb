@@ -58,7 +58,7 @@ class TimeEntriesController < ApplicationController
     
     if params[:search]
       @conditions = params[:search].merge(date_conditions)
-      @user_name = User.find_by_id(params[:search][:creator_id_equals]).try(:login) || "所有人"
+      @user_name = User.find_by_id(params[:search][:receiver_id_equals]).try(:login) || "所有人"
       @project_name = Project.find_by_id(params[:search][:project_id_equals]).try(:name) || "所有项目"
     else
       @conditions = date_conditions

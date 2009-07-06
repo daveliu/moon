@@ -5,7 +5,7 @@
 			<table>
 				<tr>
 					<th>Show</th>
-					<td> <%= f.select :creator_id_equals, User.all.collect {|user|[user.login, user.id]}, :include_blank => "所有人" %>
+					<td> <%= f.select :receiver_id_equals, User.all.collect {|user|[user.login, user.id]}, :include_blank => "所有人" %>
 					</td>           
 				</tr>                        
 				<% if !@project %>
