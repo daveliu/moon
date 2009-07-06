@@ -32,7 +32,8 @@ class Milestone < ActiveRecord::Base
   
   named_scope :by_state, lambda {|state| {:conditions => ["state = ?", state]}}
   
-  before_save :set_due  # 00:00 to 23:59     
+  before_save :set_due  # 00:00 to 23:59 
+  
   
   def self.set_late
     update_all("state = 'late'", "due < '#{Time.now}' AND state = 'upcoming'")
@@ -49,7 +50,9 @@ class Milestone < ActiveRecord::Base
   
   private                               
   def set_due
-    self.due = due + 23.hours + 59.minutes
+    self.due = due + 23.hours + 59.minutes     
+    self.state = "upcoming" if due > Time.now && !completed?
   end
+
 
 end
