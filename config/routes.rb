@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'time_entries/report', :controller => "time_entries", :action => "report" 
 
   map.resources :projects, :has_many => [:messages, :assets, :time_entries, :todo_lists, :categories, :forms], 
-   :collection => {:project_users => :get}, 
+   :collection => {:project_users => :get, :search => :get}, 
    :member => {:add_user => :any, :create_project_user => :post, :update_project_user => :post},
    :shallow => true 
    

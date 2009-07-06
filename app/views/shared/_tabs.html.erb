@@ -8,5 +8,5 @@
 	
 	<% if current_user.admin? || current_user.manager? %>                    
 		<%= tab_fu("用户管理", "/projects/project_users", action_name == "project_users", true) %>
-	<% end -%>	
+	<% end -%>	                                                                            
 <% end -%>

@@ -9,7 +9,7 @@
     <%= stylesheet_link_tag 'reset', :media => "screen" %>        
 	  <!--[if IE]><link href="http://asset2.projectpath.com/stylesheets/ie/base.css?1245383866" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
 
-    <%= javascript_include_tag 'jquery', 'application' %>
+    <%= javascript_include_tag 'jquery', 'application', "jquery-autocomplete", "jquery-plugin" %>
 
   	<%= yield :head %> 
   </head>
@@ -24,8 +24,15 @@
 					<%= link_to "退出", '/logout' %>
 				</span>                         
 				<a href="<%= projects_path %>">全部项目</a>
-			</h3>
-			<h1><%= current_project ? current_project.name : "全部项目" %></h1>
+			</h3>             
+			<h1 style="float:left"><%= current_project ? current_project.name : "全部项目" %></h1>
+			<div id="search_module">
+				<form id="search_form" method="post" action="/projects/search">
+					<input id="search" class="labelify" title="Search" type="text" value="" name="search" label="Search" autocomplete="off" style="color: rgb(153, 153, 153);"/>
+					<input class="button" type="image" title="search" src="/images/search_button.gif"/>
+				</form>
+			</div>               
+			<div style="clear:both;"></div>
 			<div id="Tabs">
 				<ul id="MainTabs">
 					<%= yield(:tab) || render(:partial => 'shared/tabs') %> 

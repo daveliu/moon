@@ -51,8 +51,31 @@ $(document).ready(function(){
 				});   
 			}	
 			return false;
-	 })
+	 }) 
+	               
 
+	$("input#search").autocomplete("/projects/search", {
+	   multiple: true,
+		 dataType: "json",
+		 parse: function(data) {
+		 	return $.map(data, function(row) {
+		 		return {
+		 			data: row,
+		 			value: row.title,
+		 			result: row.title
+		 		}
+		 	});
+		 },        
+		 formatItem: function(item) {
+			 log(item);
+		   	return item.title + "<span style='color:#999'>(" + item.type + ")</span>"
+		 } 
+	}).result(function(event, item){
+		location.href = item.url
+		return false
+	}) 
+	$("input.labelify").labelify()
+	
 })                     
 
 
