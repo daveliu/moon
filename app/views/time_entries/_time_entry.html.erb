@@ -1,4 +1,5 @@
 <tr id="time_entry_<%= entry.id %>" class="entry">
+	<td class="date"><%= entry.project.try(:name) %></td>
 	<td class="date">
 		<!-- <a title="See all hours on this date" href="/projects/3391997/time_entries/report?from=20090625"></a> -->
 		<%= entry.done_date.to_date %>
@@ -8,7 +9,6 @@
 		<%= entry.receiver.login %>
 	</td>
 	<td class="hours"><%= entry.hours %></td>
-	<td class="hours"><%= entry.project.try(:name) %></td>
 	<td class="desc">
 		<% if entry.todo %>
 			<img src="/images/todo_bug.gif" alt="Todo_bug"/>

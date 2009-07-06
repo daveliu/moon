@@ -1,4 +1,7 @@
 <td class="date"> 
+	<%= current_project.try(:name) %>
+</td>
+<td class="date"> 
 	<%= date_select :time_entry, :done_date %>
 </td>
 <td class="person">                      

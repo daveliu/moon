@@ -27,7 +27,8 @@ class TimeEntriesController < ApplicationController
   
   update.wants.js
   destroy.wants.js                         
-  
+
+  create.flash nil
   update.flash nil
   destroy.flash nil
   
@@ -53,7 +54,7 @@ class TimeEntriesController < ApplicationController
       @start_date = Date.civil(params[:date][:"start_date(1i)"].to_i,params[:date][:"start_date(2i)"].to_i,params[:date][:"start_date(3i)"].to_i)
       @end_date = Date.civil(params[:date][:"end_date(1i)"].to_i,params[:date][:"end_date(2i)"].to_i,params[:date][:"end_date(3i)"].to_i)
     end                                                                                     
-    date_conditions = {:created_at_greater_than => @start_date, :created_at_less_than => @end_date}
+    date_conditions = {:created_at_greater_than => @start_date, :created_at_less_than => @end_date + 1.day}
     
     if params[:search]
       @conditions = params[:search].merge(date_conditions)
