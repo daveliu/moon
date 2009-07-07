@@ -1,0 +1,43 @@
+<% content_for :head do  %>
+  <%= javascript_include_tag "swfobject.js" %>
+<% end -%>
+
+
+<div class="page_header">
+	<div id="inner_page_header" class="inner_page_header">
+		<div id="report_link_block" class="page_header_links">
+			<a id="report_link" class="admin" onclick="TimeHandler.toggleReport(); return false;" href="#">Create a report</a>
+		</div>
+		<%= render :partial => "report_form" %>  
+	</div>
+</div>
+
+<div class="innercol">   
+	<h1 id="reporttitle">
+		<%= @user_name %> 从<%= @start_date %>到<%= @end_date %><%= "在#{@project_name}" %>的时间记录 
+	</h1>
+	       
+	<% url = {}; url.merge!(:project_id => @project.id) if @project; url.merge!(:receiver_id => @receiver.id) if @receiver  %>
+	
+	<%=
+	ambling_chart(:column,  :swf_path => "/amflash", 
+											 :data_file => url_for({:action => 'column_data', :search => {:created_at_greater_than => @start_date, :created_at_less_than => @end_date}.merge(url), :escape => true}),
+	                        :id => 'column_data', :width => 590, :height => 400,
+	                        :chart_settings => Ambling::Column::Settings.new({
+	                          :column => {
+	                            :type => "bar", :width => 20, :spacing => 0, 
+													 		:grow_effect => "elastic",
+															:grow_time => 2,
+	                            :balloon_text => cdata_section("{value} hours")
+	                          },                                              
+	                          :labels => {
+	                           :label => [
+	                             {:x => -20, :y => 30, :text => "Hours", :align => "center", :width 	=> 180, :text_size => 12}
+	                           ]
+	                          },
+														:legend => {:enabled => false}
+	                       }).to_xml) do
+	                   content_tag('p', "To see this page properly, you need to upgrade your Flash Player")
+	end
+	%>                                    
+</div>

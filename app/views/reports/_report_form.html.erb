@@ -1,0 +1,30 @@
+<div id="new_time_report" class="new_time_report">
+	<h1>项目报表</h1>
+	<% form_for @search do |f| %>
+		<div class="box_with_fields">
+			<table>
+				<tr>
+					<th>Show</th>
+					<td> <%= f.select :receiver_id_equals, User.all.collect {|user|[user.login, user.id]}, :include_blank => "所有人" %>
+					</td>           
+				</tr>                        
+				<tr>   
+					<th>Project</th>
+					<td> <%= f.select :project_id_equals, Project.all.collect {|project|[project.name, project.id]}, :include_blank => "所有项目" %>
+					</td>
+				</tr>   
+				<tr>   
+					<th>From</th>
+					<td><%= date_select "date", "start_date", :default => 1.month.ago %></td>
+				</tr>
+				<tr>                         
+					<th>To</th>
+					<td><%= date_select "date", "end_date" %></td>                  
+				</tr>
+			</table>
+		</div>
+		<p class="submit">
+			<input type="submit" value="Create report" name="commit"/>
+		</p>
+	<% end -%>
+</div>
