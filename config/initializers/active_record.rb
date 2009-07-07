@@ -19,7 +19,5 @@ ActiveRecord::Base.send :include, TimelineFu::Fires
 require "permission"
 
 
-#http://github.com/cldwalker/hirb/tree/master
-require 'hirb'
-Hirb.enable
+
 
