@@ -6,7 +6,8 @@
 <div class="page_header">
 	<div id="inner_page_header" class="inner_page_header">
 		<div id="report_link_block" class="page_header_links">
-			<a id="report_link" class="admin" onclick="TimeHandler.toggleReport(); return false;" href="#">Create a report</a>
+			<%= link_to "Time", "/reports" %> | 
+			<%= link_to "Milestone", "/reports/milestone" %>
 		</div>
 		<%= render :partial => "report_form" %>  
 	</div>

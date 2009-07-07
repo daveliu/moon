@@ -1,0 +1,60 @@
+<% content_for :head do  %>
+  <%= javascript_include_tag "swfobject.js" %>
+<% end -%>
+
+<div class="page_header">
+	<div id="inner_page_header" class="inner_page_header">
+		<div id="report_link_block" class="page_header_links">
+			<%= link_to "Time", "/reports" %> | 
+			<%= link_to "Milestone", "/reports/milestone" %>
+		</div>
+		<div id="new_time_report" class="new_time_report">
+			<h1>项目报表</h1>
+			<div class="box_with_fields">
+				<table>
+					<tr>
+						<th>Show</th>
+						<td> <%= select_tag "milestone_id", options_for_select(Milestone.all.collect {|milestone|[milestone.title, milestone.id]}), :onchange => "location.href='/reports/milestone?milestone_id='+$(this).val()" %>
+						</td>           
+					</tr>                        
+				</table>
+			</div>
+		</div>	
+	</div>
+</div>
+
+<div class="innercol">   
+	<%=
+	ambling_chart(:pie,  :swf_path => "/amflash", 
+											 		:data_file => url_for({:action => 'pie_data', :milestone_id => @milestone.id, :escape => true}),
+	                        :id => 'pie_data', :width => 390, :height => 300,
+	                        :chart_settings => Ambling::Pie::Settings.new({
+	                          :pie => {
+                              :x => 170,
+                              :y => 130,
+                              :radius => 80,
+                              :colors => '#B40000,#F7941D,#0265AC',
+                              :outline_color => '#000000',
+                              :outline_alpha => 50
+	                          },                                              
+										        :labels => {
+	                             :label =>
+	                               {:x => 40, :y => 25, :text => cdata_section("<b>Milestone #{@milestone.title}, 总时间#{@milestone.total_hours} hours</b>"),
+	                                 :text_size => 16, :text_color => '#0265AC'},
+	                           },
+														 :animation => {
+															 :sequenced => true,         
+															 :pull_out_time => 1,
+															 :pull_out_effect => "Bounce" 
+														 },
+														 :data_labels => {
+															 :show => cdata_section("{title}: {percents}" + "％"), 
+															 :show_lines => true
+														 }
+	                       }).to_xml) do
+	                   content_tag('p', "To see this page properly, you need to upgrade your Flash Player")
+	end
+	%>                                    
+</div>
+
+<%= render :partial => "projects/tab" %>

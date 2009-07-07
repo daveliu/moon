@@ -45,6 +45,14 @@ class Milestone < ActiveRecord::Base
   
   def time_ago                              
       "超过了#{Time.now.to_date - due.to_date}天"
+  end                   
+  
+  def total_hours
+    hours = 0.0                           
+    todo_lists.each do |todo_list|
+      hours += todo_list.todos.inject(0.0) {|sum, todo| sum += todo.total_hours}
+    end    
+    hours 
   end
   
   

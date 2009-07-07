@@ -10,13 +10,11 @@ class ReportsController < ApplicationController
     @search  = TimeEntry.search(@conditions)
   end
   
+  def milestone
+    @milestone = Milestone.find_by_id(params[:milestone_id]) || Milestone.first
+  end
+  
   def column_data      
-    # start_date =   Time.parse params[:start_date]
-    # end_date = Time.parse params[:end_date]  
-    # ary = TimeEntry.find(:all, 
-    #      :conditions => ["receiver_id = ? AND project_id = ? AND created_at BETWEEN ? AND ?", 
-    #                     params[:receiver_id], params[:project_id], start_date, end_date],
-    #      :order => "created_at ASC")                             
     @search = TimeEntry.search(params[:search])                
     ary = @search.all
     hash = ary.group_by(&:day)   
@@ -35,7 +33,25 @@ class ReportsController < ApplicationController
       chart.graphs.last << Ambling::Data::Value.new(hour, {:xid => index})
     end
     render :xml => chart.to_xml
-   end
+   end          
+
+   def pie_data         
+     milestone = Milestone.find params[:milestone_id]
+     
+     ary = milestone.todo_lists.group_by(&:creator).collect do |user, lists|
+       hours = 0.0
+       lists.each do |todo_list|
+         hours += todo_list.todos.inject(0.0) {|sum, todo| sum += todo.total_hours}
+       end     
+       [user.login, hours]
+     end                                   
+     chart = Ambling::Data::Pie.new
+     ary.each do |data|
+       chart.slices << Ambling::Data::Slice.new(data.last, :title => data.first)
+     end
+     render :xml => chart.to_xml
+   end         
+
 
   private
    def set_body_class
