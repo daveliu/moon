@@ -1,5 +1,5 @@
 class TimelineEvent < ActiveRecord::Base
-  default_scope :order => 'created_at DESC'
+  default_scope :order => 'timeline_events.created_at DESC'
   
   belongs_to :actor,              :polymorphic => true
   belongs_to :subject,            :polymorphic => true
