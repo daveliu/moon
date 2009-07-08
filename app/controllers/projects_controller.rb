@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   show.before do
     @lates = @project.milestones.by_state("late")
     @upcomings = @project.milestones.by_state("upcoming")
-    @events = @project.timeline_events
+    @events = @project.timeline_events.past(Time.now + 5.days)
 
     @body_class = "overview"
     session[:project_id] = @project.id

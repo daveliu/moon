@@ -1,0 +1,20 @@
+<div class="page_header">
+	<div id="inner_page_header" class="inner_page_header">
+		<div id="report_link_block" class="page_header_links">
+			<%= link_to "Time", "/reports" %> | 
+			<%= link_to "Milestone", "/reports/milestones" %>
+		</div>
+		<div id="new_time_report" class="new_time_report">
+			<h1>项目报表</h1>
+			<div class="box_with_fields">
+				<table>
+					<tr>
+						<th>Show</th>
+						<td> <%= select_tag "milestone_id", options_for_select(Milestone.all.collect {|milestone|[milestone.title, milestone.id]}), :onchange => "location.href='/reports/milestone?milestone_id='+$(this).val()" %>
+						</td>           
+					</tr>                        
+				</table>
+			</div>
+		</div>	
+	</div>
+</div>

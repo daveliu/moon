@@ -1,0 +1,62 @@
+<% content_for :head do  %>
+  <%= javascript_include_tag "swfobject.js" %>
+<% end -%>
+
+<%= render :partial => "milestone_form" %>
+
+<div class="innercol">   
+	
+	<%=
+	ambling_chart(:column,  :swf_path => "/amflash", 
+								:data_file => url_for({:action => 'column_data_for_milestones', :escape => true}), 	   :id => 'column_data1', :width => 590, :height => 400,
+								:chart_settings => Ambling::Column::Settings.new({
+										:type => "column",
+                    :column => {
+                      :width => 20, :spacing => 0, 
+						 					:grow_effect => "elastic",
+											:grow_time => 2,
+											:balloon_text => cdata_section("{value} hours")
+										},
+                    :labels => {
+                     :label => 
+                       {:x => -20, :y => 30, :text => "Hours", :align => "center", :width 	=> 180, :text_size => 12},
+                     :label =>
+                        {:x => 40, :y => 25, :text => cdata_section("<b>Milestone完成的实际小时数</b>"), :text_size => 16, :text_color => '#0265AC'}
+                    },
+										:legend => {:enabled => false}
+								}).to_xml) do
+	                   content_tag('p', "To see this page properly, you need to upgrade your Flash Player")
+	end
+	%>                      
+	
+	<%=
+	ambling_chart(:column,  :swf_path => "/amflash", 
+								:data_file => url_for({:action => 'line_data_for_milestones', :escape => true}), 	   :id => 'column_data2', :width => 590, :height => 400,
+								:chart_settings => Ambling::Column::Settings.new({
+										:type => "column",
+                    :column => {
+                      :type => "stacked", :width => 20, :spacing => 0
+										},                          
+										:line => {
+											:balloon_text => cdata_section("{value} days")
+										},
+                    :labels => {
+                      :label => 
+                       {:x => -20, :y => 30, :text => "Days", :align => "center", :width 	=> 180, :text_size => 12},
+										  :label =>
+                        {:x => 40, :y => 25, :text => cdata_section("<b>Milestone完成的天数</b>"), :text_size => 16, :text_color => '#0265AC'}
+                    },                  
+										:legend => {:enabled => false},
+  							    :graphs => {
+                      :graph => [
+                        {:type => 'line', :gid => 1, :width => 3, :bullet => "round" }
+                      ]
+                    }
+								}).to_xml) do
+	                   content_tag('p', "To see this page properly, you need to upgrade your Flash Player")
+	end
+	%>
+	              
+</div>
+
+<%= render :partial => "projects/tab" %>

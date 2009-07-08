@@ -10,6 +10,10 @@ class ReportsController < ApplicationController
     @search  = TimeEntry.search(@conditions)
   end
   
+  def milestones
+    @milestone = Milestone.find_by_id(params[:milestone_id]) || Milestone.first
+  end           
+  
   def milestone
     @milestone = Milestone.find_by_id(params[:milestone_id]) || Milestone.first
   end
@@ -33,12 +37,46 @@ class ReportsController < ApplicationController
       chart.graphs.last << Ambling::Data::Value.new(hour, {:xid => index})
     end
     render :xml => chart.to_xml
-   end          
+   end  
+   
+   def column_data_for_milestones      
+     @milestones = Milestone.all
+     ary = @milestones.collect {|milestone| [milestone.title, milestone.total_hours]} 
+
+     chart = Ambling::Data::ColumnChart.new               
+     ary.each_with_index do |data, index|
+       chart.series << Ambling::Data::Value.new(data.first, :xid => index, :show => true)
+     end                                               
+     
+     #for the column
+     chart.graphs << Ambling::Data::ColumnGraph.new([], :gid => 1)
+     ary.each_with_index do |data, index|
+       chart.graphs.last << Ambling::Data::Value.new(data.last, {:xid => index})
+     end                                                            
+     render :xml => chart.to_xml
+    end        
+    
+    def line_data_for_milestones      
+      @milestones = Milestone.all
+      ary = @milestones.collect {|milestone| [milestone.title, milestone.spent_time]}
+      
+      chart = Ambling::Data::ColumnChart.new               
+      ary.each_with_index do |data, index|
+        chart.series << Ambling::Data::Value.new(data.first, :xid => index, :show => true)
+      end
+
+      chart.graphs << Ambling::Data::ColumnGraph.new([], :gid => 1)
+      ary.each_with_index do |data, index|
+        chart.graphs.last << Ambling::Data::Value.new(data.last, {:xid => index})
+      end   
+      render :xml => chart.to_xml   
+    end
 
    def pie_data         
      milestone = Milestone.find params[:milestone_id]
      
-     ary = milestone.todo_lists.group_by(&:creator).collect do |user, lists|
+     ary = milestone.todo_lists.group_by(&:receiver).collect do |user, lists|
+       next if user.nil?
        hours = 0.0
        lists.each do |todo_list|
          hours += todo_list.todos.inject(0.0) {|sum, todo| sum += todo.total_hours}
@@ -51,6 +89,22 @@ class ReportsController < ApplicationController
      end
      render :xml => chart.to_xml
    end         
+   
+   def pie_data_for_todo_lists         
+     milestone = Milestone.find params[:milestone_id]
+     
+     ary = milestone.todo_lists.group_by(&:receiver).collect do |user, lists|
+       next if user.nil?
+       [user.login, lists.size]
+     end                      
+     puts "------------------------#{ary.inspect}"
+                  
+     chart = Ambling::Data::Pie.new
+     ary.compact.each do |data|
+       chart.slices << Ambling::Data::Slice.new(data.last, :title => data.first)
+     end
+     render :xml => chart.to_xml
+   end
 
 
   private

@@ -10,7 +10,7 @@
 			</p>                                                       
 			<p>
 				Who's responsible?<br/>
-				<%= todo_form.select :receiver_id, User.all.collect {|u| [u.login, u.id]}, { :include_blank => '任何人' } %>
+				<%= todo_form.select :receiver_id, User.all.collect {|u| [u.login, u.id]}, { :include_blank => '任何人', :selected => list.receiver.try(:id) } %>
 			</p>   
 			<p class="submit">
 				<input type="submit" value="Add this item"/>

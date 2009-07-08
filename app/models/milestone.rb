@@ -55,6 +55,11 @@ class Milestone < ActiveRecord::Base
     hours 
   end
   
+  def spent_time
+    #should be finished_at
+    due.to_date - created_at.to_date
+  end
+  
   
   private                               
   def set_due
