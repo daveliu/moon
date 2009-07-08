@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   show.before do
     @lates = @project.milestones.by_state("late")
     @upcomings = @project.milestones.by_state("upcoming")
-    @events = @project.timeline_events.find(:all, :conditions => ["created_at > ?", Time.now - 8.days])
+    @events = @project.timeline_events.find(:all, :conditions => ["created_at > ?", Time.now - 5.days])
 
     @body_class = "overview"
     session[:project_id] = @project.id

@@ -84,7 +84,7 @@ class ReportsController < ApplicationController
        [user.login, hours]
      end                                   
      chart = Ambling::Data::Pie.new
-     ary.each do |data|
+     ary.compact.each do |data|
        chart.slices << Ambling::Data::Slice.new(data.last, :title => data.first)
      end
      render :xml => chart.to_xml
@@ -97,7 +97,6 @@ class ReportsController < ApplicationController
        next if user.nil?
        [user.login, lists.size]
      end                      
-     puts "------------------------#{ary.inspect}"
                   
      chart = Ambling::Data::Pie.new
      ary.compact.each do |data|

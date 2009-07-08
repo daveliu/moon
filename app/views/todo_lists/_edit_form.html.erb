@@ -13,7 +13,12 @@
 			<p class="attach_milestone">
 				 和某个milestone关联吗?
   			 <br/>
-				 <%= f.select :milestone_id, Milestone.all.collect {|milestone|[milestone.title, milestone.id]}, :include_blank => "没有" %>                
+				 <%= f.select :milestone_id, current_project.milestones.collect {|milestone|[milestone.title, milestone.id]}, :include_blank => "没有" %>                
+			</p>                          
+			<p class="attach_milestone">
+				Who's responsible?
+				<br />
+				<%= f.select :receiver_id, current_project.users.collect {|u| [u.login, u.id]} %>
 			</p>
 			<p class="submit"> 
 				<input type="submit" value="Save changes"/>
