@@ -7,10 +7,7 @@ class TodoListsController < ApplicationController
   index.before do
     if params[:responsible_party]  && !params[:responsible_party].blank?                     
       @user = User.find(params[:responsible_party])
-      @todo_lists = current_project.todo_lists.find(:all, :joins => :todos, 
-                    :conditions => ["todos.receiver_id = ?", params[:responsible_party]],
-                    :group => "todo_lists.id"
-                    )
+      @todo_lists = current_project.todo_lists.find(:all,:conditions => ["receiver_id = ?", params[:responsible_party]])
     else
       @todo_lists = current_project.todo_lists
     end    

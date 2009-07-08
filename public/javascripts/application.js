@@ -52,6 +52,21 @@ $(document).ready(function(){
 			}	
 			return false;
 	 }) 
+	
+	//for delete todo
+	$("div.wrapper  a.delete_link").live('click', function(){    
+	    if(confirm('确定删除?')){
+				$(this).parents('div.item_wrapper').slideUp('slow').remove()
+		    var url = $(this).attr('href') + '.js'
+				$.ajax({ 
+				  type: "DELETE", 
+				  url: url, 
+				  dataType: "script",
+					data: "_method: DELETE"
+				});   
+			}	
+			return false;
+	 })
 	               
 
 	$("input#search").autocomplete("/projects/search", {

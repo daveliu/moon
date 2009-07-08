@@ -19,6 +19,8 @@ class TodosController < ApplicationController
       @todo_list = @todo.todo_list
     end  
     
+    destroy.flash nil
+    
     
     def complete
       @todo = Todo.find(params[:id])

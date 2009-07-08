@@ -40,11 +40,11 @@
 		<div class="indent">    
 			<h2>Current to-do lists</h2>
 			<ul id="menu_list">
-				<li id="menu_list_6347262">
-				</li>
-				<li id="menu_list_6347244">
-				<a id="menu_list_name_6347244" href="#list_6347244">about test</a>
-				</li> 
+				<% @todo_lists.each do |list| %> 
+					<li>
+						<a id="menu_list_name_6347244" href="#<%= "list_#{list.id}" %>"><%= list.title %></a>
+					</li> 
+				<% end -%>	
 			</ul>
 		</div>	
 	</div>	

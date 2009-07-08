@@ -25,7 +25,7 @@
 				</p>
 				<h2>Who's responsible?</h2>
 				<p>
-					<%= f.select :receiver_id, User.all.collect {|u| [u.login, u.id]} %>
+					<%= f.select :receiver_id, current_project.users.collect {|u| [u.login, u.id]} %>
 				</p>
 				<div class="submit">   
 					<p>

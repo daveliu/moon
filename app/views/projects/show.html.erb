@@ -64,7 +64,9 @@
 	<h2><%= @project.name %></h2>
 	<% @project.users.each do |user| %>
 		<p>       
-			<%= user.login %>
+			<%= user.login %>                     
+			<br/>
+			<small> 最后活动时间： <%= time_ago_in_words user.updated_at %></small>
 		</p>      
 	<% end -%>
 	</div>	                  

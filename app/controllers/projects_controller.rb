@@ -7,9 +7,9 @@ class ProjectsController < ApplicationController
     session[:project_id] = nil
     @body_class = "projects dashboard unprintable has_flash_support"
     
-    @lates = Milestone.by_state("late")
-    @upcomings = Milestone.by_state("upcoming")
-    @events = TimelineEvent.all
+    @lates = Milestone.by_state("late").limited(5)
+    @upcomings = Milestone.by_state("upcoming").limited(5)
+    @events = TimelineEvent.limited(15)
     
     @projects = current_user.projects
   end

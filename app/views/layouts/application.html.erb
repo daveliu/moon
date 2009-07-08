@@ -23,7 +23,10 @@
 					<span class="pipe">|</span>
 					<%= link_to "退出", '/logout' %>
 				</span>                         
-				<a href="<%= projects_path %>">全部项目</a>
+				<a href="<%= projects_path %>">Dashboard</a>
+				<% if current_project %>
+           <%= render :partial => "shared/switch_project" %>
+				<% end -%>
 			</h3>             
 			<h1 style="float:left"><%= current_project ? current_project.name : "全部项目" %></h1>
 			<div id="search_module">

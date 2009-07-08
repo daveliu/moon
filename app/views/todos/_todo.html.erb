@@ -3,6 +3,11 @@
 		<div id="item_<%= todo.id %>_nubbin" class="nubbin hover_target">
 			<div class="wrapper">
 				<ul>
+					<li class="delete">
+						<a class="image delete_link" href="<%= todo_path(todo) %>">
+							<img src="/images/trash.gif" alt="Trash"/>
+						</a> 
+					</li>
 					<li class="edit">
 						<a onclick="$(this).parents('.nubbin').addClass('busy'); 
 						$.ajax({

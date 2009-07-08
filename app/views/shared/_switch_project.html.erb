@@ -1,0 +1,39 @@
+<span class="switcher_links">
+	<span class="pipe">|</span>
+	<span id="project_switcher" class="switch hover_container" style="position: relative;">
+		<a id="project_switcher_link" onmousedown="$('#project_switcher').addClass('hover'); return false;" href="">Switch to a different project</a>
+ 		
+		<div class="menu hover_target">
+			<div class="shadow">
+				<span class="menu_header" onclick="$('#project_switcher').removeClass('hover'); return false;">
+					<span class="inner">Switch to a different project</span>
+				</span>
+				<div class="projects">
+					<div class="inner">
+						<div class="most_recent">
+							<h2>Your projects</h2>   
+							<% current_user.projects.each do |project| %>
+								<a onmouseup="window.location = this.href; return false;" onmouseover="$(this).addClass('hover')" onmouseout="$(this).removeClass('hover')" href="<%= project_path(project) %>" class="">
+									<%= project.name %>
+								</a>                                     
+							<% end -%>
+						</div>                                                                            
+					</div>                                                
+				</div>                                                                             
+			</div>
+			<div class="bottom_shadow"> </div>
+		</div>
+	</span>
+</span>    
+
+
+<script type="text/javascript">
+
+ function selectProject(selector) {
+ 	if (selector.options[selector.selectedIndex].value != "") {
+ 		window.location.href = selector.options[selector.selectedIndex].value ;
+ 	}
+ }
+
+ var projectSelectorObserver = new HoverObserver('project_switcher', { activationDelay: 0.25 });
+</script>
