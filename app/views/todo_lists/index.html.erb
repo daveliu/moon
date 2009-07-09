@@ -1,8 +1,9 @@
 <div class="page_header">
 	<div class="page_header_links">
-		<span id="normal_list_controls" style="">
-		<a id="reorder_lists_link" class="admin" href="#">Reorder lists</a>
+		<span id="normal_list_controls">       
+			<a id="reorder_lists_link" class="admin" onclick="$('#widgets').addClass('reordering'); $('#done_reordering_lists_link').show(); $('#normal_list_controls').hide(); return false;" href="#">Reorder lists</a>
 		</span>
+		<a id="done_reordering_lists_link" class="admin donelink" style="display: none;" onclick="$('#widgets').removeClass('reordering'); $('#normal_list_controls').show(); $(this).hide(); return false;" href="#">Done reordering lists</a>
 	</div>
 	<h1>To-do lists</h1>
 </div>

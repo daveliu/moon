@@ -17,6 +17,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :responses, :path_prefix => "/forms/:form_id", :shallow => true
   map.complete_todo 'todos/:id/complete', :controller => "todos", :action => "complete"
   map.reopen_todo 'todos/:id/reopen', :controller => "todos", :action => "reopen"
+  
+  map.complete_todo_list 'todo_lists/:id/complete', :controller => "todo_lists", :action => "complete"
+  map.reopen_todo_list 'todo_lists/:id/reopen', :controller => "todo_lists", :action => "reopen"
   map.resources :milestones, :path_prefix => '/projects/:project_id', :shallow => true, :member => {:complete => :post, :reopen => :post}                                                                
   
   map.resources :invitations

@@ -34,6 +34,23 @@ class TodoListsController < ApplicationController
   destroy.wants.html { redirect_to project_todo_lists_path(@todo_list.project) }   
   destroy.flash nil       
   
+  def complete
+    @todo_list = TodoList.find(params[:id])
+    @todo_list.complete!
+    respond_to do |wants|
+      wants.js
+    end
+  end         
+  
+  
+  def reopen
+    @todo_list = TodoList.find(params[:id])
+    @todo_list.reopen!
+    respond_to do |wants|
+      wants.js
+    end
+  end
+  
   
   private
   def set_body_class
