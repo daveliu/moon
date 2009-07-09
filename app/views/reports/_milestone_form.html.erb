@@ -10,7 +10,13 @@
 				<table>
 					<tr>
 						<th>Show</th>
-						<td> <%= select_tag "milestone_id", options_for_select(Milestone.all.collect {|milestone|[milestone.title, milestone.id]}), :onchange => "location.href='/reports/milestone?milestone_id='+$(this).val()" %>
+						<td>
+							<select id="milestone_id"  onchange="if($(this).val() != ''){location.href='/reports/milestone?milestone_id='+$(this).val()}" name="milestone_id">
+								<option value="" <%= "selected='selected'" if params[:milestone_id].nil? %>>选择milestone</option>
+								<% @milestones.each do |milestone| %>
+									<option value="<%= milestone.id %>" <%= "selected='selected'" if params[:milestone_id] == milestone.id.to_s %>><%= milestone.title %></option>
+								<% end -%>
+							</selected>	
 						</td>           
 					</tr>                        
 				</table>

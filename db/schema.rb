@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090708035025) do
+ActiveRecord::Schema.define(:version => 20090709013533) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20090708035025) do
     t.datetime "updated_at"
     t.integer  "comments_count"
     t.integer  "project_id"
+    t.datetime "finished_at"
   end
 
   create_table "notifies", :force => true do |t|

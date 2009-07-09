@@ -28,6 +28,7 @@ class MilestonesController < ApplicationController
     
     def complete
       @milestone = Milestone.find(params[:id])
+      @milestone.finished_at = Time.now     # should go to model
       @milestone.complete!
       get_milestones
       respond_to do |wants|

@@ -11,11 +11,12 @@ class ReportsController < ApplicationController
   end
   
   def milestones
-    @milestone = Milestone.find_by_id(params[:milestone_id]) || Milestone.first
+    @milestones = Milestone.by_state('completed')
   end           
   
   def milestone
-    @milestone = Milestone.find_by_id(params[:milestone_id]) || Milestone.first
+    @milestone = Milestone.find_by_id(params[:milestone_id])
+    @milestones = Milestone.by_state('completed')
   end
   
   def column_data      
@@ -57,7 +58,7 @@ class ReportsController < ApplicationController
     end        
     
     def line_data_for_milestones      
-      @milestones = Milestone.all
+      @milestones = Milestone.by_state('completed')
       ary = @milestones.collect {|milestone| [milestone.title, milestone.spent_time]}
       
       chart = Ambling::Data::ColumnChart.new               

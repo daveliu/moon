@@ -15,7 +15,7 @@ class Milestone < ActiveRecord::Base
                         :actor              => :creator                      
   
   state_machine :initial => :upcoming do
-    after_transition :on => :complete, :do => :fire_complete
+    after_transition any => :complete, :do => [:fire_complete]
 
     event :out_date do
       transition  all => :late
@@ -57,7 +57,7 @@ class Milestone < ActiveRecord::Base
   
   def spent_time
     #should be finished_at
-    due.to_date - created_at.to_date
+    due.to_date - finished_at.to_date
   end
   
   
