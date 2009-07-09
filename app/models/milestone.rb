@@ -56,8 +56,7 @@ class Milestone < ActiveRecord::Base
   end
   
   def spent_time
-    #should be finished_at
-    due.to_date - finished_at.to_date
+    (finished_at || due).to_date - created_at.to_date
   end
   
   
