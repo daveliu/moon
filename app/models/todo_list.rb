@@ -8,10 +8,10 @@ class TodoList < ActiveRecord::Base
   
   has_many :todos, :dependent => :destroy, :order => 'created_at ASC'
   
-  fires :new_todo,      :on                 => :create,
-                        :actor              => :creator
-  fires_manually        :complete,      
-                        :actor              => :creator
+  # fires :new_todo,      :on                 => :create,
+  #                       :actor              => :creator
+  # fires_manually        :complete,      
+  #                       :actor              => :creator
   
   state_machine :initial => :pending do
     after_transition :on => :complete, :do => :fire_complete              

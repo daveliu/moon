@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  
   def index 
     if params[:search]
       @project = Project.find_by_id(params[:search][:project_id_equals])  
@@ -104,6 +105,17 @@ class ReportsController < ApplicationController
        chart.slices << Ambling::Data::Slice.new(data.last, :title => data.first)
      end
      render :xml => chart.to_xml
+   end
+   
+   def week_report                 
+     @week = Time.now
+     @todo_lists = TodoList.by_week
+     
+     respond_to do |wants|
+       wants.html
+#       wants.pdf { prawnto :inline=>true }hreos_pdf
+       wants.pdf  { send_data(IFPDF.heros_pdf, :type => 'application/pdf', :filename => "zz.pdf") }
+     end
    end
 
 
