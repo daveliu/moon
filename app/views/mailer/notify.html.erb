@@ -3,7 +3,7 @@
 发送人： <%= @notify.notifiable.creator.login %>
 
 
-<% if @notify.notifiable == "Message" %>
+<% if @notify.notifiable_type == "Message" %>
 	内容： <%= @notify.notifiable.body %>
 <% elsif @notify.notifiable == "Form" %>	
 	这是一个新的表单，请大家按时填写。

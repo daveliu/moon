@@ -72,13 +72,6 @@ class IFPDF < FPDF
   end
   
   def self.heros_pdf
-    #     pdf = IFPDF.new("zh")  
-    #     pdf.SetTitle("发")   
-    #     pdf.AddPage
-    #     # pdf.AddBig5Font
-    #     # pdf.SetFont('Big5','',18)      
-    # pdf.Write(5, '我们')
-    #     pdf.Output      
     pdf = IFPDF.new("zh")
     pdf.SetTitle("zzz")
     pdf.AliasNbPages
@@ -110,7 +103,6 @@ class IFPDF < FPDF
     month_f = "6" #gantt.date_from
     left = subject_width
     height = header_heigth
-
 
     pdf.SetY(y_start)
     pdf.SetX(15)

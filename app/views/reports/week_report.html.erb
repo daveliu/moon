@@ -1,0 +1,27 @@
+<div class="page_header">
+	<div id="inner_page_header" class="inner_page_header">
+		周报
+	</div>
+</div>
+
+<div class="innercol">   
+	<table>
+		<th>姓名</th>
+		<th>描述</th>
+		<th>状态</th>
+		<th>完成度</th>
+		<th></th>
+		<th></th>		
+		<% @todo_lists.group_by(&:receiver).each do |receiver, lists| %>
+			<% lists.each do |list| %>
+				<tr>  
+					<td><%= receiver.try(:login) %></td>
+					<td><%= list.title %></td>
+					<td><%= list.state %></td>
+				</tr>
+			<% end -%>
+		<% end -%>		
+	</table>
+</div>
+
+<%= render :partial => "projects/tab" %>

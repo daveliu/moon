@@ -48,3 +48,4 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+$LOAD_PATH << "/Library/Ruby/Gems/1.8/gems/prawn-core-0.5.0.1/data/fonts/"

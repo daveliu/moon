@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+
   
   def index 
     if params[:search]
@@ -108,13 +109,33 @@ class ReportsController < ApplicationController
    end
    
    def week_report                 
+     
      @week = Time.now
      @todo_lists = TodoList.by_week
      
+     ary = []
+     @todo_lists.group_by(&:receiver).each do |receiver, lists|
+       lists.each do |list|
+          ary << [receiver.try(:login), list.title, list.state]     
+       end
+     end
+                                 
+     name = "xx.pdf"
+     Prawn::Document.generate(name) do                 
+     	font "#{Prawn::BASEDIR}/data/fonts/simfang.ttf"  
+#     	text "fsfsd"
+      text "任务周"  #, :size => 30, :style => :bold
+      
+      table ary, :border_style => :grid,
+        :widths => { 0 => 300, 1 => 300, 2 => 300}, 
+        :row_colors => ["FFFFFF","DDDDDD"],
+        :headers => ["Name", "Task", "Status"],
+        :align => { 0 => :left, 1 => :right, 2 => :right, 3 => :right }
+     end
+     
      respond_to do |wants|
        wants.html
-#       wants.pdf { prawnto :inline=>true }hreos_pdf
-       wants.pdf  { send_data(IFPDF.heros_pdf, :type => 'application/pdf', :filename => "zz.pdf") }
+       wants.pdf  { send_file(File.join(Rails.root, name), :type => 'application/pdf', :disposition => 'inline') }
      end
    end
 
