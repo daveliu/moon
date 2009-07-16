@@ -22,4 +22,4 @@ ActionMailer::Base.smtp_settings = {
 SITE_MAIL="dave.liu@beibeigan.com"
 
 
-SITE_DOMAIN = "58.30.227.14:3001" 
+SITE_DOMAIN = "intranet.beibeigan.com" 

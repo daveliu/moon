@@ -1,4 +1,5 @@
-#内网系统应用的名称和部署域
+#内网系统应用的名称和部署域         
+#intranet.beibeigan.com
 set :application, "intranet"
 set :domain, "www.pro.beibeigan.com"
 #==========================
