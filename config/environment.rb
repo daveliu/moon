@@ -22,7 +22,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "state_machine"
   config.gem "giraffesoft-timeline_fu", :lib => "timeline_fu",
-     :source => "http://gems.github.com"     
+             :source => "http://gems.github.com"     
   config.gem "chronic"   
   config.gem "searchlogic"
   config.gem "be9-acl9", :source => "http://gems.github.com", :lib => "acl9" 
@@ -48,4 +48,4 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
-$LOAD_PATH << "/Library/Ruby/Gems/1.8/gems/prawn-core-0.5.0.1/data/fonts/"
+#  $LOAD_PATH << "/Library/Ruby/Gems/1.8/gems/prawn-core-0.5.0.1/data/fonts/"
