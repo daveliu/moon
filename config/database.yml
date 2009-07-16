@@ -19,8 +19,8 @@ test:
 production:
   adapter: mysql
   database: heros_production
-  username: root
-  password:  
+  username: deploy
+  password: deploy.linode 
   host: localhost 
   encoding: utf8 
 
