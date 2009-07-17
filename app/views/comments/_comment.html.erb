@@ -18,7 +18,7 @@
 				</h3>
 			</div>
 			<div class="formatted_text_body">
-				<%= simple_format comment.body %>
+				<%= simple_format(sanitize(auto_link(comment.body, :all, :target => '_blank')))  %>
 			</div>
 			<div class="uploaded_images">                     
 				<% comment.assets.images.each do |asset| %>

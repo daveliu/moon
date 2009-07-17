@@ -44,7 +44,7 @@ class Milestone < ActiveRecord::Base
   end       
   
   def time_ago                              
-      "超过了#{Time.now.to_date - due.to_date}天"
+    "超过了#{Time.now.to_date - due.to_date}天"
   end                   
   
   def total_hours

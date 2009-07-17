@@ -31,7 +31,11 @@
 	</div>
 	<div id="OriginalPost" class="message">
 		<div class="formatted_text_body">
-			<%= simple_format @message.body %>
+			<% if @message.code? %>
+				 <%= CodeRay.scan(@message.body, :ruby).div(:line_numbers => :table) %>
+		  <% else %>			
+				<%= simple_format(sanitize(auto_link(@message.body, :all, :target => '_blank')))  %>
+			<% end -%>	
 		</div>  
 		<div class="uploaded_images">                     
 			<% @message.assets.images.each do |asset| %>

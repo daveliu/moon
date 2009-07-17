@@ -28,4 +28,9 @@ class Message < ActiveRecord::Base
   def last_comment
     comments.last
   end
+                                                         
+  #hard code!!!
+  def code?
+    category && category.name == "code"
+  end
 end

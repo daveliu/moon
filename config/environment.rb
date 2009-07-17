@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   config.gem "chronic"   
   config.gem "searchlogic"
   config.gem "be9-acl9", :source => "http://gems.github.com", :lib => "acl9" 
+  config.gem "coderay"
 #  config.gem "prawn"
   
   # Only load the plugins named here, in the order given (default is alphabetical).
