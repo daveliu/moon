@@ -21,6 +21,6 @@ class User < ActiveRecord::Base
   end   
   
   def manager?
-    has_role?("manager")
+    has_role?("manager") 
   end
 end

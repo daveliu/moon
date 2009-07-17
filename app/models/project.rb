@@ -17,8 +17,6 @@ class Project < ActiveRecord::Base
   
   after_save :add_admin
   
-
-  
   
   private
   def add_admin
